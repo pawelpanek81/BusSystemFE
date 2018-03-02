@@ -1,13 +1,21 @@
 <template>
   <div id="app">
+    <site-navbar></site-navbar>
     <img src="./assets/logo.png">
     <router-view/>
+    <site-footer></site-footer>
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    siteFooter: Footer,
+    siteNavbar: Navbar
+  }
 }
 </script>
 
