@@ -39,7 +39,7 @@
           </div>
 
           <div class="col-xl-6 col-lg- 6 col-md-6 col-sm-6 col-xs-12">
-            Hand-crafted with <icon name="heart" class="heart-ico" style="color: red;"></icon> by SSEA
+            Hand-crafted by SSEA
           </div>
         </div>
       </div>
@@ -49,34 +49,4 @@
 </template>
 
 <style scoped>
-  #footer {
-    background-color: #2b313e;
-    display: block;
-    bottom: 0;
-    width: 100%;
-    color: #bbbbbb;
-    font-size: 13px;
-    z-index: 1;
-  }
-
-  .footer-sidebar {
-    padding: 60px 0;
-  }
-
-  .footer-sidebar h3.widget-title {
-    border-bottom: 1px solid #4e566c;
-    color: #ddd;
-    font-size: 17px;
-    letter-spacing: 1px;
-    padding-bottom: 15px;
-    font-weight: 600;
-  }
-
-  .footer-siteinfo {
-    background: #252b38 none repeat scroll 0 0;
-    padding: 20px 0;
-    color: #acb1b4;
-    font-size: 13px;
-  }
-
 </style>
