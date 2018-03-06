@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <site-navbar></site-navbar>
-    <img src="./assets/logo.png">
     <router-view/>
     <site-footer></site-footer>
   </div>
@@ -20,6 +19,7 @@ export default {
 </script>
 
 <style>
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
