@@ -1,7 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-faded">
     <a class="navbar-brand" href="#">BusSystem</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbarNav">
@@ -24,5 +25,4 @@
 </template>
 
 <style scoped>
-
 </style>
