@@ -8,7 +8,7 @@
     <div class="navbar-collapse collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Rezerwacja <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Kup bilet <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"> Przystanki </a>
@@ -17,7 +17,10 @@
           <a class="nav-link" href="#"> Rozkłady jazdy </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"> Logowanie </a>
+          <a class="nav-link" href="#"> <router-link to="/login">Logowanie</router-link> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> Rejestracja </a>
         </li>
       </ul>
     </div>
