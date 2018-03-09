@@ -23,7 +23,7 @@
           <a class="nav-link" href="#"> Rejestracja </a>
         </li>
         <li v-if="isLogged" class="nav-item">
-          <a class="nav-link" v-on:click="logout"> Wyloguj </a>
+          <a class="nav-link" v-on:click="logout"> Wyloguj [{{username}}] </a>
         </li>
       </ul>
     </div>
@@ -34,12 +34,20 @@
 </style>
 
 <script>
+import jwtDecoder from 'jwt-decode'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
-  computed: mapGetters([
-    'isLogged'
-  ]),
+  computed: {
+    ...mapGetters(['isLogged']),
+    username: function () {
+      let authToken = localStorage.getItem('token')
+      if (authToken) {
+        return jwtDecoder(authToken).sub
+      }
+      return ''
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('logout')
