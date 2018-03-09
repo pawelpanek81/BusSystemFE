@@ -7,6 +7,7 @@ import Registration from './registration'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     HomeRoutes,
     LoginRoutes,

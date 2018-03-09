@@ -16,14 +16,14 @@
         <li class="nav-item">
           <a class="nav-link" href="#"> Rozkłady jazdy </a>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLogged" class="nav-item">
           <a class="nav-link" href="#"> <router-link to="/login">Logowanie</router-link> </a>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLogged" class="nav-item">
           <a class="nav-link" href="#"><router-link to="/registration">Rejestracja</router-link> </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" v-if="isLogged" v-on:click="logout"> Wyloguj </a>
+        <li v-if="isLogged" class="nav-item">
+          <a class="nav-link" v-on:click="logout"> Wyloguj [{{username}}] </a>
         </li>
       </ul>
     </div>
@@ -34,12 +34,20 @@
 </style>
 
 <script>
+import jwtDecoder from 'jwt-decode'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
-  computed: mapGetters([
-    'isLogged'
-  ]),
+  computed: {
+    ...mapGetters(['isLogged']),
+    username: function () {
+      let authToken = localStorage.getItem('token')
+      if (authToken) {
+        return jwtDecoder(authToken).sub
+      }
+      return ''
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('logout')
