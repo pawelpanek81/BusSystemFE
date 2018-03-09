@@ -26,7 +26,7 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
-/* eslint-disale no-new */
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   store,
