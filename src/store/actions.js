@@ -20,6 +20,7 @@ export default {
   logout ({commit}) {
     localStorage.removeItem('token')
     commit(MUTATION_TYPES.LOGOUT)
+    router.push({path: '/'})
   }
 
 }
