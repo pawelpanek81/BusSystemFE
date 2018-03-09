@@ -2,9 +2,9 @@ import MUTATION_TYPES from './mutation-types'
 
 export default {
   [MUTATION_TYPES.LOGIN] (state) {
-    state.logged = 1
+    state.logged = true
   },
   [MUTATION_TYPES.LOGOUT] (state) {
-    state.logged = 0
+    state.logged = false
   }
 }

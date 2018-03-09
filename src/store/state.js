@@ -1,5 +1,3 @@
 export default {
-  state: {
-    logged: localStorage.getItem('token')
-  }
+  logged: localStorage.getItem('token')
 }

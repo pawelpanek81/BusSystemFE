@@ -16,14 +16,14 @@
         <li class="nav-item">
           <a class="nav-link" href="#"> Rozkłady jazdy </a>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLogged" class="nav-item">
           <a class="nav-link" href="#"> <router-link to="/login">Logowanie</router-link> </a>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLogged" class="nav-item">
           <a class="nav-link" href="#"> Rejestracja </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" v-if="isLogged" v-on:click="logout"> Wyloguj </a>
+        <li v-if="isLogged" class="nav-item">
+          <a class="nav-link" v-on:click="logout"> Wyloguj </a>
         </li>
       </ul>
     </div>
