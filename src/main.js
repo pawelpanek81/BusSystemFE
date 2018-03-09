@@ -4,7 +4,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vuex from 'vuex'
+import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'bootstrap'
@@ -12,14 +12,24 @@ import 'bootstrap/js/dist/util'
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/dist/css/bootstrap.css'
 
-Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+axios.interceptors.request.use((config) => {
+  var authToken = localStorage.getItem('token')
+  if (authToken) {
+    config.headers['Authorization'] = authToken
+  }
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
+
+/* eslint-disale no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'

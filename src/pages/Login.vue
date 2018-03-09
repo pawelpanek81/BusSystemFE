@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import CFG from '../config'
 export default {
   data () {
     return {
@@ -21,14 +20,7 @@ export default {
   },
   methods: {
     login () {
-      this.$http.post(`${CFG.API_BASE_URL}/login`, this.credential)
-        .then(response => {
-          if (response.status === 200) {
-            console.log(response)
-          } else if (response.status === 401) {
-            console.log('bledne dane')
-          }
-        })
+      this.$store.dispatch('login', this.credential)
     }
   }
 }

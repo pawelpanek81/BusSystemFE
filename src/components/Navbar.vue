@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#"> Rejestracja </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" v-if="isLogged" v-on:click="logout"> Wyloguj </a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -29,3 +32,18 @@
 
 <style scoped>
 </style>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'Navbar',
+  computed: mapGetters([
+    'isLogged'
+  ]),
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>
