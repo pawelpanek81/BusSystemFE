@@ -2,7 +2,7 @@
   <div class="jumbotron jumbotron-fluid">
     <h2>Zarejestruj się</h2>
     <div class="container">
-      <form >
+      <form>
         <div class="form-group">
           <label for="name">Imię <span class="required">*</span></label>
           <input type="text" class="form-control" id="name" placeholder="" name="name">
@@ -25,8 +25,15 @@
         </div>
         <div class="form-group">
           <label for="telNr">Numer telefonu </label>
-          <input type="tel" class="form-control" id="telNr" placeholder="" name="telNr">
-        </div>
+            <input v-validate="'required|digits'" :class="{'form-control': true, 'is-invalid': errors.has('Telefon')}" id="telNr" name="Telefon" type="tel">
+            <span v-show="errors.has('Telefon')" class="invalid-feedback">{{ errors.first('Telefon') }}</span>
+          </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+            <input v-validate="'required|email'" :class="{'form-control': true, 'is-invalid': errors.has('email') }"
+                   name="email" type="text" placeholder="Email">
+            <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
+         </div>
         <button class="btn btn-primary">Zarejestruj</button>
       </form>
     </div>
@@ -42,18 +49,20 @@
     padding: 5% 10% 2% 10%;
   }
 
-  .container{
+  .container {
     text-align: left;
   }
 
-  button{
+  button {
     display: table;
     margin: 0 auto;
     width: 150px;
   }
 
-  .required{
+  .required {
     color: red;
   }
 
 </style>
+
+

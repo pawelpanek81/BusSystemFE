@@ -11,10 +11,30 @@ import 'bootstrap'
 import 'bootstrap/js/dist/util'
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/dist/css/bootstrap.css'
+import VeeValidate from 'vee-validate'
 
+Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+
+const dictionary = {
+  pl: {
+    messages: {
+      confirmed: function () {
+        return 'Your password is not confirmed'
+      },
+      email: function () {
+        return 'Wpisz poprawny adres email'
+      },
+      required: function () {
+        return 'Pole wymagane'
+      }
+    }
+  }
+}
+VeeValidate.Validator.localize(dictionary)
+VeeValidate.Validator.localize('pl')
 
 axios.interceptors.request.use((config) => {
   var authToken = localStorage.getItem('token')
