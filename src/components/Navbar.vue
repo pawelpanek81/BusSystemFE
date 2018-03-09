@@ -20,7 +20,7 @@
           <a class="nav-link" href="#"> <router-link to="/login">Logowanie</router-link> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"> Rejestracja </a>
+          <a class="nav-link" href="#"><router-link to="/registration">Rejestracja</router-link> </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" v-if="isLogged" v-on:click="logout"> Wyloguj </a>
