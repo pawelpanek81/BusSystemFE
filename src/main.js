@@ -21,14 +21,14 @@ Vue.config.productionTip = false
 const dictionary = {
   pl: {
     messages: {
-      confirmed: function () {
-        return 'Your password is not confirmed'
-      },
       email: function () {
         return 'Wpisz poprawny adres email'
       },
       required: function () {
         return 'Pole wymagane'
+      },
+      confirmed: function () {
+        return 'Hasła muszą być zgodne'
       }
     }
   }

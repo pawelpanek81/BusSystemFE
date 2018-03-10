@@ -5,35 +5,37 @@
       <form>
         <div class="form-group">
           <label for="name">Imię <span class="required">*</span></label>
-          <input type="text" class="form-control" id="name" placeholder="" name="name">
+            <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('name')}" id="name" name="name" type="text">
+            <span v-show="errors.has('name')" class="invalid-feedback">{{ errors.first('name') }}</span>
         </div>
         <div class="form-group">
           <label for="surname">Nazwisko <span class="required">*</span></label>
-          <input type="text" class="form-control" id="surname" placeholder="" name="surname">
+            <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('surname')}" id="surname" name="surname" type="text">
+            <span v-show="errors.has('surname')" class="invalid-feedback">{{ errors.first('surname') }}</span>
         </div>
         <div class="form-group">
           <label for="email">Email <span class="required">*</span></label>
-          <input type="email" class="form-control" id="email" placeholder="imienazwisko@wp.pl" name="email">
+          <input v-validate="'required|email'" :class="{'form-control': true, 'is-invalid': errors.has('email') }"
+                 name="email" id="email" type="text">
+          <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
         </div>
         <div class="form-group">
-          <label for="name">Hasło <span class="required">*</span></label>
-          <input type="password" class="form-control" id="login" placeholder="" name="login">
+          <label for="password1">Hasło <span class="required">*</span></label>
+          <input v-validate="'required'" :class="{'form-control':true, 'is-invalid': errors.has('password1') }" type="password"
+                name="password1" id="password1">
+          <span v-show="errors.has('password1')" class="invalid-feedback">{{ errors.first('password1') }}</span>
         </div>
         <div class="form-group">
-          <label for="pwd">Powtórz hasło <span class="required">*</span></label>
-          <input type="password" class="form-control" id="pwd" placeholder="" name="pswd">
+          <label for="password2">Powtórz hasło <span class="required">*</span></label>
+          <input v-validate="'required|confirmed:password1'" :class="{'form-control':true, 'is-invalid': errors.has('password2') }" type="password"
+                 name="password2" id="password2">
+          <span v-show="errors.has('password2')" class="invalid-feedback">{{ errors.first('password2') }}</span>
         </div>
         <div class="form-group">
           <label for="telNr">Numer telefonu </label>
-            <input v-validate="'required|digits'" :class="{'form-control': true, 'is-invalid': errors.has('Telefon')}" id="telNr" name="Telefon" type="tel">
-            <span v-show="errors.has('Telefon')" class="invalid-feedback">{{ errors.first('Telefon') }}</span>
-          </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-            <input v-validate="'required|email'" :class="{'form-control': true, 'is-invalid': errors.has('email') }"
-                   name="email" type="text" placeholder="Email">
-            <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
-         </div>
+            <input class="form-control" id="telNr" name="telNr" type="tel">
+        </div>
+
         <button class="btn btn-primary">Zarejestruj</button>
       </form>
     </div>
@@ -44,11 +46,13 @@
   .jumbotron {
     margin-top: 120px;
     margin-bottom: 40px;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding: 5% 10% 2% 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 5% 15% 2% 15%;
   }
-
+  h2 {
+    text-align: center;
+  }
   .container {
     text-align: left;
   }
@@ -64,5 +68,3 @@
   }
 
 </style>
-
-
