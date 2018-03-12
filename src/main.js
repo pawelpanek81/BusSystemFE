@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
@@ -24,11 +25,11 @@ const dictionary = {
       email: function () {
         return 'Wpisz poprawny adres email'
       },
-      required: function () {
-        return 'Pole wymagane'
+      required: function (field1) {
+        return 'Wpisz  ' + field1
       },
-      confirmed: function () {
-        return 'Hasła muszą być zgodne'
+      confirmed: function (field1, field2) {
+        return 'Pola "' + field2 + '" oraz "' + field1 + '" muszą być zgodne'
       }
     }
   }
