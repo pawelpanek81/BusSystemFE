@@ -2,7 +2,7 @@
   <div class="jumbotron jumbotron-fluid">
     <h2>Zarejestruj się</h2>
     <div class="container">
-      <form>
+      <form @submit.prevent="validateBeforeSubmit">
         <div class="form-group">
           <label for="name">Imię <span class="required">*</span></label>
             <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('name')}"
@@ -38,11 +38,61 @@
             <input class="form-control" id="telNr" name="telNr" type="tel">
         </div>
 
-        <button class="btn btn-primary">Zarejestruj</button>
+        <button class="btn btn-primary" type="submit">Zarejestruj</button>
       </form>
     </div>
   </div>
 </template>
+
+<script>
+/* eslint-disable no-unused-vars */
+
+import axios from 'axios'
+import CFG from '../config'
+
+export default {
+  data () {
+    return {
+      registrationData: {
+        name: document.getElementById('name') ? document.getElementById('name') : ' ',
+        surname: document.getElementById('surname') ? document.getElementById('surname').value : ' ',
+        email: document.getElementById('email') ? document.getElementById('email').value : ' ',
+        password: document.getElementById('password1') ? document.getElementById('password1').value : ' ',
+        phoneNr: document.getElementById('telNr') ? document.getElementById('telNr').value : ' '
+      }
+    }
+  },
+  postRegistrationForm () {
+    axios.post(`${CFG.API_BASE_URL}/registration`, {registrationData: this.registrationData})
+      .then(function (response) {
+        if (response.status === 200) {
+          console.log('Przeslano formularz', this.registrationData)
+        } else {
+          console.log('Cos poszlo nie tak')
+          return response
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error)
+      })
+  },
+  methods: {
+    validateBeforeSubmit: function (e) {
+      e.preventDefault()
+
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.postRegistrationForm()
+          return
+        }
+        if (!result) {
+          console.log('Oops!')
+        }
+      })
+    }
+  }
+}
+</script>
 
 <style scoped>
   .jumbotron {
