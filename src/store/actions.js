@@ -21,6 +21,20 @@ export default {
     localStorage.removeItem('token')
     commit(MUTATION_TYPES.LOGOUT)
     router.push({path: '/'})
+  },
+  signUp (registrationData) {
+    axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
+      .then(function (response) {
+        if (response.status === 200) {
+          console.log('Przeslano formularz', registrationData)
+        } else {
+          console.log('Cos poszlo nie tak')
+          return response
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error)
+      })
   }
 
 }

@@ -2,7 +2,7 @@
   <div class="jumbotron jumbotron-fluid">
     <h2>Zarejestruj się</h2>
     <div class="container">
-      <form @submit.prevent="validateBeforeSubmit">
+      <form >
         <div class="form-group">
           <label for="name">Imię <span class="required">*</span></label>
             <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('name')}"
@@ -22,6 +22,12 @@
           <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
         </div>
         <div class="form-group">
+          <label for="username">Nazwa użytkownika <span class="required">*</span></label>
+          <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('username')}"
+                 id="username" name="username" type="text" data-vv-as="nazwę użytkownika">
+          <span v-show="errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</span>
+        </div>
+        <div class="form-group">
           <label for="password1">Hasło <span class="required">*</span></label>
           <input v-validate="'required'" :class="{'form-control':true, 'is-invalid': errors.has('password1') }" type="password"
                 name="password1" id="password1" data-vv-as="hasło">
@@ -38,17 +44,13 @@
             <input class="form-control" id="telNr" name="telNr" type="tel">
         </div>
 
-        <button class="btn btn-primary" type="submit">Zarejestruj</button>
+        <button class="btn btn-primary" @click="validateBeforeSubmit" >Zarejestruj</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
-
-import axios from 'axios'
-import CFG from '../config'
 
 export default {
   data () {
@@ -58,31 +60,20 @@ export default {
         surname: document.getElementById('surname') ? document.getElementById('surname').value : ' ',
         email: document.getElementById('email') ? document.getElementById('email').value : ' ',
         password: document.getElementById('password1') ? document.getElementById('password1').value : ' ',
-        phoneNr: document.getElementById('telNr') ? document.getElementById('telNr').value : ' '
+        phone: document.getElementById('telNr') ? document.getElementById('telNr').value : ' ',
+        username: document.getElementById('username') ? document.getElementById('username').value : ' '
       }
     }
   },
-  postRegistrationForm () {
-    axios.post(`${CFG.API_BASE_URL}/registration`, {registrationData: this.registrationData})
-      .then(function (response) {
-        if (response.status === 200) {
-          console.log('Przeslano formularz', this.registrationData)
-        } else {
-          console.log('Cos poszlo nie tak')
-          return response
-        }
-      })
-      .catch(function (error) {
-        console.log('Error: ', error)
-      })
-  },
   methods: {
+    register: function () {
+      this.$store.dispatch('signUp', this.registrationData)
+    },
     validateBeforeSubmit: function (e) {
       e.preventDefault()
-
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.postRegistrationForm()
+          this.register()
           return
         }
         if (!result) {

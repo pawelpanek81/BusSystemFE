@@ -26,10 +26,10 @@ const dictionary = {
         return 'Wpisz poprawny adres email'
       },
       required: function (field1) {
-        return 'Wpisz  ' + field1
+        return `Wpisz ${field1}`
       },
       confirmed: function (field1, field2) {
-        return 'Pola "' + field2 + '" oraz "' + field1 + '" muszą być zgodne'
+        return `Pola ${field2} oraz ${field1} muszą być zgodne`
       }
     }
   }
