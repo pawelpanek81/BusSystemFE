@@ -92,6 +92,7 @@
                 </div>
               </div>
             </div>
+            <registration-congrats></registration-congrats>
           </div>
         </div>
       </div>
@@ -100,6 +101,7 @@
 </template>
 
 <script>
+import RegistrationCongrats from './RegistrationCongrats'
 export default {
   data () {
     return {
@@ -125,6 +127,9 @@ export default {
     register (data) {
       this.$store.dispatch('signUp', data)
     }
+  },
+  components: {
+    RegistrationCongrats
   }
 }
 </script>
