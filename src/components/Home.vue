@@ -26,3 +26,20 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    playCarousel: function () {
+      $('.carousel').carousel({
+        interval: 3000,
+        cycle: true
+      })
+    }
+  },
+  mounted () {
+    this.playCarousel()
+  }
+}
+
+</script>
