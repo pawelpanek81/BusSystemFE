@@ -18,7 +18,7 @@
                              v-validate="'required'"
                              :class="{'is-invalid': errors.has('inputLogin')}"
                              v-model="credential.username"
-                             data-vv-as="Login">
+                             data-vv-as="login">
                       <span v-show="errors.has('inputLogin')"
                             class="invalid-feedback">{{ errors.first('inputLogin') }}</span>
                     </div>
@@ -29,7 +29,7 @@
                              v-validate="'required'"
                              :class="{'is-invalid': errors.has('inputPassword')}"
                              v-model="credential.password"
-                             data-vv-as="Hasło">
+                             data-vv-as="hasło">
                       <span v-show="errors.has('inputPassword')" class="invalid-feedback">{{ errors.first('inputPassword') }}</span>
                     </div>
                   </div>
@@ -77,4 +77,7 @@ export default {
 </script>
 
 <style scoped>
+  .required {
+    color: red;
+  }
 </style>

@@ -3,13 +3,13 @@ export default {
     pl: {
       messages: {
         email: function (field1) {
-          return `Pole "${field1}" musi być poprwnym adresem email`
+          return `Wpisz poprawny adres email.`
         },
         required: function (field1) {
-          return `Pole "${field1}" jest wymagane`
+          return `Wpisz ${field1}.`
         },
-        confirmed: function (field1, field2) {
-          return `Pola "${field2}" oraz ${field1} muszą być zgodne`
+        confirmed: function () {
+          return `Hasła muszą być zgodne.`
         }
       }
     }
