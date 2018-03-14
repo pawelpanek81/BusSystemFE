@@ -1,3 +1,4 @@
 export default {
-  logged: localStorage.getItem('token')
+  logged: localStorage.getItem('token'),
+  message: ''
 }

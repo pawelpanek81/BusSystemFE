@@ -1,3 +1,4 @@
 export default {
-  isLogged: state => state.logged
+  isLogged: state => state.logged,
+  getMessage: state => state.message
 }

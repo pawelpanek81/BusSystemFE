@@ -6,5 +6,11 @@ export default {
   },
   [MUTATION_TYPES.LOGOUT] (state) {
     state.logged = false
+  },
+  [MUTATION_TYPES.SHOWMESSAGE] (state, message) {
+    state.message = message
+  },
+  [MUTATION_TYPES.CLEARMESSAGE] (state) {
+    state.message = ''
   }
 }
