@@ -2,7 +2,9 @@
   <div id="app">
     <site-navbar></site-navbar>
     <site-messages></site-messages>
-    <router-view/>
+    <transition name="fade">
+      <router-view/>
+    </transition>
     <hr />
     <site-footer></site-footer>
   </div>
@@ -25,5 +27,17 @@ export default {
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
+}
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 </style>
