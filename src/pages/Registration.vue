@@ -17,7 +17,7 @@
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputName')}"
                            v-model="registerDTO.name"
-                           data-vv-as="Imię">
+                           data-vv-as="imię">
                     <span v-show="errors.has('inputName')"
                           class="invalid-feedback">{{ errors.first('inputName') }}</span>
                   </div>
@@ -28,7 +28,7 @@
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputSurname')}"
                            v-model="registerDTO.surname"
-                           data-vv-as="Nazwisko">
+                           data-vv-as="nazwisko">
                     <span v-show="errors.has('inputSurname')" class="invalid-feedback">{{ errors.first('inputSurname') }}</span>
                   </div>
                 </div>
@@ -40,7 +40,7 @@
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputUsername')}"
                            v-model="registerDTO.username"
-                           data-vv-as="Nazwa użytkownika">
+                           data-vv-as="nazwę użytkownika">
                     <span v-show="errors.has('inputUsername')" class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
                   </div>
                   <div class="form-group col-md-6">
@@ -50,7 +50,7 @@
                            v-validate="'required|email'"
                            :class="{'is-invalid': errors.has('inputEmail')}"
                            v-model="registerDTO.email"
-                           data-vv-as="Email">
+                           data-vv-as="email">
                     <span v-show="errors.has('inputEmail')"
                           class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
                   </div>
@@ -60,19 +60,19 @@
                     <label for="inputPassword">Hasło <span class="required">*</span></label>
                     <input type="password" class="form-control" id="inputPassword" placeholder="*********"
                            name="inputPassword"
-                           v-validate="'required|confirmed:inputVerifyPassword'"
+                           v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputPassword')}"
                            v-model="registerDTO.password"
-                           data-vv-as="Hasło">
+                           data-vv-as="hasło">
                     <span v-show="errors.has('inputPassword')" class="invalid-feedback">{{ errors.first('inputPassword') }}</span>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputVerifyPassword">Powtórz hasło <span class="required">*</span></label>
                     <input type="password" class="form-control" id="inputVerifyPassword" placeholder="*********"
                            name="inputVerifyPassword"
-                           v-validate="'required|confirmed:inputVerifyPassword'"
+                           v-validate="'required|confirmed:inputPassword'"
                            :class="{'is-invalid': errors.has('inputVerifyPassword')}"
-                           data-vv-as="Powtórz hasło">
+                           data-vv-as="hasło ponownie">
                     <span v-show="errors.has('inputVerifyPassword')" class="invalid-feedback">{{ errors.first('inputVerifyPassword') }}</span>
                   </div>
                 </div>
