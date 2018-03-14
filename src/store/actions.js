@@ -4,37 +4,42 @@ import axios from 'axios'
 import router from '../router'
 
 export default {
-  login ({commit}, credentail) {
+  login ({dispatch, commit}, credentail) {
     axios.post(`${CFG.API_BASE_URL}/login`, credentail)
       .then(response => {
         if (response.status === 200) {
           localStorage.setItem('token', response.headers.authorization)
           commit(MUTATION_TYPES.LOGIN)
+          dispatch('setMessage', 'Zostałeś zalogowany')
           router.push({path: '/'})
-        } else if (response.status === 401) {
-          console.log('bledne dane')
-          return response
-        }
-      })
-  },
-  logout ({commit}) {
-    localStorage.removeItem('token')
-    commit(MUTATION_TYPES.LOGOUT)
-    router.push({path: '/'})
-  },
-  signUp (registrationData) {
-    axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
-      .then(function (response) {
-        if (response.status === 200) {
-          console.log('Przeslano formularz', registrationData)
-        } else {
-          console.log('Cos poszlo nie tak')
-          return response
         }
       })
       .catch(function (error) {
         console.log('Error: ', error)
       })
+  },
+  logout ({dispatch, commit}) {
+    localStorage.removeItem('token')
+    commit(MUTATION_TYPES.LOGOUT)
+    dispatch('setMessage', 'Zostałeś wylogowany')
+    router.push({path: '/'})
+  },
+  signUp ({dispatch, commit}, registrationData) {
+    axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
+      .then(function (response) {
+        if (response.status === 200) {
+          router.push({path: '/'})
+          dispatch('setMessage', 'Zostałeś zarejestrowany')
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error)
+      })
+  },
+  setMessage ({commit}, message) {
+    commit(MUTATION_TYPES.SHOWMESSAGE, message)
+  },
+  clearMessage ({commit}) {
+    commit(MUTATION_TYPES.CLEARMESSAGE)
   }
-
 }

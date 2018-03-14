@@ -1,4 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
@@ -13,28 +12,14 @@ import 'bootstrap/js/dist/util'
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/dist/css/bootstrap.css'
 import VeeValidate from 'vee-validate'
+import language from './language/dictionary'
 
 Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-const dictionary = {
-  pl: {
-    messages: {
-      email: function () {
-        return 'Wpisz poprawny adres email'
-      },
-      required: function (field1) {
-        return `Wpisz ${field1}`
-      },
-      confirmed: function (field1, field2) {
-        return `Pola ${field2} oraz ${field1} muszą być zgodne`
-      }
-    }
-  }
-}
-VeeValidate.Validator.localize(dictionary)
+VeeValidate.Validator.localize(language.dictionary)
 VeeValidate.Validator.localize('pl')
 
 axios.interceptors.request.use((config) => {

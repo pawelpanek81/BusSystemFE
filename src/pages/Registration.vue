@@ -1,113 +1,136 @@
 <template>
-  <div class="jumbotron jumbotron-fluid">
-    <h2>Zarejestruj się</h2>
-    <div class="container">
-      <form >
-        <div class="form-group">
-          <label for="name">Imię <span class="required">*</span></label>
-            <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('name')}"
-                   id="name" name="name" type="text" data-vv-as="imię">
-            <span v-show="errors.has('name')" class="invalid-feedback">{{ errors.first('name') }}</span>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div class="card border-secondary">
+              <div class="card-header">
+                <h3 class="mb-0 my-2">Rejestracja</h3>
+              </div>
+              <div class="form" role="form">
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    <label for="inputName">Imię <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Jan"
+                           name="inputName"
+                           v-validate="'required'"
+                           :class="{'is-invalid': errors.has('inputName')}"
+                           v-model="registerDTO.name"
+                           data-vv-as="Imię">
+                    <span v-show="errors.has('inputName')"
+                          class="invalid-feedback">{{ errors.first('inputName') }}</span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputSurname">Nazwisko <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="inputSurname" placeholder="Kowalski"
+                           name="inputSurname"
+                           v-validate="'required'"
+                           :class="{'is-invalid': errors.has('inputSurname')}"
+                           v-model="registerDTO.surname"
+                           data-vv-as="Nazwisko">
+                    <span v-show="errors.has('inputSurname')" class="invalid-feedback">{{ errors.first('inputSurname') }}</span>
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    <label for="inputUsername">Nazwa użytkownika <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="janko"
+                           name="inputUsername"
+                           v-validate="'required'"
+                           :class="{'is-invalid': errors.has('inputUsername')}"
+                           v-model="registerDTO.username"
+                           data-vv-as="Nazwa użytkownika">
+                    <span v-show="errors.has('inputUsername')" class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail">Email <span class="required">*</span></label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="janko@walski.pl"
+                           name="inputEmail"
+                           v-validate="'required|email'"
+                           :class="{'is-invalid': errors.has('inputEmail')}"
+                           v-model="registerDTO.email"
+                           data-vv-as="Email">
+                    <span v-show="errors.has('inputEmail')"
+                          class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword">Hasło <span class="required">*</span></label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="*********"
+                           name="inputPassword"
+                           v-validate="'required|confirmed:inputVerifyPassword'"
+                           :class="{'is-invalid': errors.has('inputPassword')}"
+                           v-model="registerDTO.password"
+                           data-vv-as="Hasło">
+                    <span v-show="errors.has('inputPassword')" class="invalid-feedback">{{ errors.first('inputPassword') }}</span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputVerifyPassword">Powtórz hasło <span class="required">*</span></label>
+                    <input type="password" class="form-control" id="inputVerifyPassword" placeholder="*********"
+                           name="inputVerifyPassword"
+                           v-validate="'required|confirmed:inputVerifyPassword'"
+                           :class="{'is-invalid': errors.has('inputVerifyPassword')}"
+                           data-vv-as="Powtórz hasło">
+                    <span v-show="errors.has('inputVerifyPassword')" class="invalid-feedback">{{ errors.first('inputVerifyPassword') }}</span>
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    <label for="inputPhone">Numer telefonu</label>
+                    <input type="text" class="form-control" id="inputPhone"
+                           v-model="registerDTO.phone">
+                  </div>
+                </div>
+              </div>
+              <div class="row card-body">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <button @click="validateForm" class="btn btn-success btn-lg">Rejestruj</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="surname">Nazwisko <span class="required">*</span></label>
-            <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('surname')}"
-                   id="surname" name="surname" type="text" data-vv-as="nazwisko">
-            <span v-show="errors.has('surname')" class="invalid-feedback">{{ errors.first('surname') }}</span>
-        </div>
-        <div class="form-group">
-          <label for="email">Email <span class="required">*</span></label>
-          <input v-validate="'required|email'" :class="{'form-control': true, 'is-invalid': errors.has('email') }"
-                 name="email" id="email" type="text" data-vv-as="adres e-mail">
-          <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
-        </div>
-        <div class="form-group">
-          <label for="username">Nazwa użytkownika <span class="required">*</span></label>
-          <input v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('username')}"
-                 id="username" name="username" type="text" data-vv-as="nazwę użytkownika">
-          <span v-show="errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</span>
-        </div>
-        <div class="form-group">
-          <label for="password1">Hasło <span class="required">*</span></label>
-          <input v-validate="'required'" :class="{'form-control':true, 'is-invalid': errors.has('password1') }" type="password"
-                name="password1" id="password1" data-vv-as="hasło">
-          <span v-show="errors.has('password1')" class="invalid-feedback">{{ errors.first('password1') }}</span>
-        </div>
-        <div class="form-group">
-          <label for="password2">Powtórz hasło <span class="required">*</span></label>
-          <input v-validate="'required|confirmed:password1'" :class="{'form-control':true, 'is-invalid': errors.has('password2') }" type="password"
-                 name="password2" id="password2" data-vv-as="hasło ponownie">
-          <span v-show="errors.has('password2')" class="invalid-feedback">{{ errors.first('password2') }}</span>
-        </div>
-        <div class="form-group">
-          <label for="telNr">Numer telefonu </label>
-            <input class="form-control" id="telNr" name="telNr" type="tel">
-        </div>
-
-        <button class="btn btn-primary" @click="validateBeforeSubmit" >Zarejestruj</button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data () {
     return {
-      registrationData: {
-        name: document.getElementById('name') ? document.getElementById('name') : ' ',
-        surname: document.getElementById('surname') ? document.getElementById('surname').value : ' ',
-        email: document.getElementById('email') ? document.getElementById('email').value : ' ',
-        password: document.getElementById('password1') ? document.getElementById('password1').value : ' ',
-        phone: document.getElementById('telNr') ? document.getElementById('telNr').value : ' ',
-        username: document.getElementById('username') ? document.getElementById('username').value : ' '
+      registerDTO: {
+        username: '',
+        name: '',
+        surname: '',
+        password: '',
+        email: '',
+        phone: ''
       }
     }
   },
   methods: {
-    register: function () {
-      this.$store.dispatch('signUp', this.registrationData)
+    validateForm () {
+      this.$validator.validateAll()
+        .then((result) => {
+          if (result) {
+            this.register(this.registerDTO)
+          }
+        })
     },
-    validateBeforeSubmit: function (e) {
-      e.preventDefault()
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.register()
-          return
-        }
-        if (!result) {
-          console.log('Oops!')
-        }
-      })
+    register (data) {
+      this.$store.dispatch('signUp', data)
     }
   }
 }
 </script>
 
 <style scoped>
-  .jumbotron {
-    margin-top: 120px;
-    margin-bottom: 40px;
-    margin-left: 25%;
-    margin-right: 25%;
-    padding: 5% 5% 2% 5%;
-  }
-  h2 {
-    text-align: center;
-  }
-  .container {
-    text-align: left;
-  }
-
-  button {
-    display: table;
-    margin: 0 auto;
-    width: 150px;
-  }
-
   .required {
     color: red;
   }
-
 </style>
