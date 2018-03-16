@@ -1,15 +1,15 @@
 <template>
-  <nav class="navbar navbar-light navbar-expand-lg">
+  <nav class="navbar navbar-light navbar-expand-lg mt-2">
     <div class="container">
-        <router-link class="navbar-brand" to="/">BusSystem</router-link>
+      <router-link class="navbar-brand" to="/"><h3>BusSystem</h3></router-link>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse" id="navbarNav">
+      <div class="navbar-collapse collapse" id="navbarNav" >
         <ul class="navbar-nav">
           <li class="nav-item active">
-              <router-link class="nav-link" to="/buy-ticket">Kup bilet</router-link>
+            <router-link class="nav-link" to="/buy-ticket">Kup bilet</router-link>
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
@@ -28,11 +28,30 @@
             <a class="nav-link" v-on:click="logout"> Wyloguj [{{username}}] </a>
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto dropdown" >
+          <div class="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user userIcon"></i>
+          </div>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Bilety</a>
+            <a class="dropdown-item" href="#">Ustawienia</a>
+            <a class="dropdown-item" href="#">Wyloguj</a>
+          </div>
+        </ul>
       </div>
     </div>
   </nav>
 </template>
-
+<style>
+  .userIcon {
+    font-size: 2em;
+    cursor: pointer;
+    color: grey
+  }
+  .dropdown-item.active, .dropdown-item:active {
+    background-color: green;
+  }
+</style>
 <script>
 import jwtDecoder from 'jwt-decode'
 import {mapGetters} from 'vuex'
