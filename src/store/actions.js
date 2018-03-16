@@ -14,8 +14,8 @@ export default {
           router.push({path: '/'})
         }
       })
-      .catch(function (error) {
-        console.log('Error: ', error)
+      .catch(function () {
+        dispatch('setLoginError')
       })
   },
   logout ({dispatch, commit}) {
@@ -28,7 +28,7 @@ export default {
     axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
       .then(function (response) {
         if (response.status === 200) {
-          commit(MUTATION_TYPES.SETREGISTERED)
+          commit(MUTATION_TYPES.SET_REGISTERED)
         }
       })
       .catch(function (error) {
@@ -36,12 +36,18 @@ export default {
       })
   },
   unsetRegisteredFlag ({commit}) {
-    commit(MUTATION_TYPES.UNSETREGISTERED)
+    commit(MUTATION_TYPES.UNSET_REGISTERED)
   },
   setMessage ({commit}, message) {
-    commit(MUTATION_TYPES.SHOWMESSAGE, message)
+    commit(MUTATION_TYPES.SHOW_MESSAGE, message)
   },
   clearMessage ({commit}) {
-    commit(MUTATION_TYPES.CLEARMESSAGE)
+    commit(MUTATION_TYPES.CLEAR_MESSAGE)
+  },
+  setLoginError ({commit}) {
+    commit(MUTATION_TYPES.SET_LOGIN_ERROR)
+  },
+  unsetLoginError ({commit}) {
+    commit(MUTATION_TYPES.UNSET_LOGIN_ERROR)
   }
 }

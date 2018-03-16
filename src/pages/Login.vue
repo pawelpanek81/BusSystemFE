@@ -8,6 +8,17 @@
               <div class="card-header">
                 <h3 class="mb-0 my-2">Logowanie</h3>
               </div>
+              <transition name="fade">
+                <div @click="hideError"
+                     v-if="getLoginError"
+                     class="row card-body pb-0">
+                  <div class="col-md-12">
+                    <div id="errorMessageAlert" class="alert alert-danger mb-0" role="alert">
+                      Błędny login lub hasło!
+                    </div>
+                  </div>
+                </div>
+              </transition>
               <div class="row card-body">
                 <div class="col-md-12">
                   <div class="form" role="form">
@@ -55,17 +66,21 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   data () {
     return {
       credential: {
         username: '',
         password: ''
-      }
+      },
+      loginError: true
     }
   },
   methods: {
     validateForm () {
+      this.loginError = !this.loginError
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
@@ -75,7 +90,16 @@ export default {
     },
     login (data) {
       this.$store.dispatch('login', data)
+    },
+    hideError () {
+      this.$store.dispatch('unsetLoginError')
     }
+  },
+  computed: {
+    ...mapGetters(['getLoginError'])
+  },
+  beforeDestroy () {
+    this.$store.dispatch('unsetLoginError')
   }
 }
 </script>
