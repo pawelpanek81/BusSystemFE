@@ -8,13 +8,17 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'bootstrap'
-import 'bootstrap/js/dist/util'
-import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/dist/css/bootstrap.css'
+import VeeValidate from 'vee-validate'
+import language from './language/dictionary'
 
+Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+
+VeeValidate.Validator.localize(language.dictionary)
+VeeValidate.Validator.localize('pl')
 
 axios.interceptors.request.use((config) => {
   var authToken = localStorage.getItem('token')
@@ -26,7 +30,7 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
-/* eslint-disale no-new */
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   store,
