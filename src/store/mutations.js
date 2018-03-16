@@ -12,5 +12,11 @@ export default {
   },
   [MUTATION_TYPES.CLEARMESSAGE] (state) {
     state.message = ''
+  },
+  [MUTATION_TYPES.SETREGISTERED] (state) {
+    state.registeredFlag = true
+  },
+  [MUTATION_TYPES.UNSETREGISTERED] (state) {
+    state.registeredFlag = false
   }
 }

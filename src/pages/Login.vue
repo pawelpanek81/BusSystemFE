@@ -19,8 +19,10 @@
                              :class="{'is-invalid': errors.has('inputLogin')}"
                              v-model="credential.username"
                              data-vv-as="login">
-                      <span v-show="errors.has('inputLogin')"
-                            class="invalid-feedback">{{ errors.first('inputLogin') }}</span>
+                      <transition enter-active-class="animated fadeIn">
+                        <span v-show="errors.has('inputLogin')"
+                              class="invalid-feedback">{{ errors.first('inputLogin') }}</span>
+                      </transition>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword">Hasło <span class="required">*</span></label>
@@ -30,7 +32,9 @@
                              :class="{'is-invalid': errors.has('inputPassword')}"
                              v-model="credential.password"
                              data-vv-as="hasło">
-                      <span v-show="errors.has('inputPassword')" class="invalid-feedback">{{ errors.first('inputPassword') }}</span>
+                      <transition enter-active-class="animated fadeIn">
+                        <span v-show="errors.has('inputPassword')" class="invalid-feedback">{{ errors.first('inputPassword') }}</span>
+                      </transition>
                     </div>
                   </div>
                 </div>

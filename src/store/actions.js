@@ -28,13 +28,15 @@ export default {
     axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
       .then(function (response) {
         if (response.status === 200) {
-          router.push({path: '/'})
-          dispatch('setMessage', 'Zostałeś zarejestrowany')
+          commit(MUTATION_TYPES.SETREGISTERED)
         }
       })
       .catch(function (error) {
         console.log('Error: ', error)
       })
+  },
+  unsetRegisteredFlag ({commit}) {
+    commit(MUTATION_TYPES.UNSETREGISTERED)
   },
   setMessage ({commit}, message) {
     commit(MUTATION_TYPES.SHOWMESSAGE, message)

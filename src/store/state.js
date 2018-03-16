@@ -1,4 +1,5 @@
 export default {
   logged: localStorage.getItem('token'),
-  message: ''
+  message: '',
+  registeredFlag: false
 }
