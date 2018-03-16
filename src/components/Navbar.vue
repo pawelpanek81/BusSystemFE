@@ -24,18 +24,16 @@
           <li v-if="!isLogged" class="nav-item">
               <router-link class="nav-link" to="/registration">Rejestracja</router-link>
           </li>
-          <li v-if="isLogged" class="nav-item">
-            <a class="nav-link" v-on:click="logout"> Wyloguj [{{username}}] </a>
-          </li>
         </ul>
-        <ul class="navbar-nav ml-auto dropdown" >
+        <ul class="navbar-nav ml-auto dropdown" v-if="isLogged">
           <div class="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user userIcon"></i>
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Bilety</a>
-            <a class="dropdown-item" href="#">Ustawienia</a>
-            <a class="dropdown-item" href="#">Wyloguj</a>
+            <router-link class="dropdown-item" to="/user/tickets">Bilety</router-link>
+            <a class="dropdown-item" href="#">Konto</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
         </ul>
       </div>

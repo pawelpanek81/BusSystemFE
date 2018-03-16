@@ -4,6 +4,7 @@ import Busstops from '@/pages/Busstops'
 import Timetables from '@/pages/Timetables'
 import Registration from '@/pages/Registration'
 import Login from '@/pages/Login'
+import Tickets from '@/pages/Tickets'
 
 export default {
   HOME: {
@@ -35,5 +36,10 @@ export default {
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  TICKETS: {
+    path: '/user/tickets',
+    name: 'Tickets',
+    component: Tickets
   }
 }

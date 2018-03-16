@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <site-navbar></site-navbar>
-    <site-messages :message="getMessage"
+    <site-messages
+      :message="getMessage"
       v-if="showGlobalMessage"></site-messages>
     <transition name="fade">
       <router-view/>
