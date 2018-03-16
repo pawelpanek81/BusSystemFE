@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5">
+  <div class="container py-5" v-on:keyup.enter="validateForm">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     validateForm () {
+      this.hideError()
       this.loginError = !this.loginError
       this.$validator.validateAll()
         .then((result) => {

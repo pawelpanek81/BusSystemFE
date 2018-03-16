@@ -44,7 +44,7 @@
 </template>
 <style>
   .userIcon {
-    font-size: 2em;
+    font-size: 200%;
     cursor: pointer;
     color: grey
   }

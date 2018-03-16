@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <site-navbar></site-navbar>
-    <site-messages></site-messages>
+    <site-messages :message="getMessage"
+      v-if="showGlobalMessage"></site-messages>
     <transition name="fade">
       <router-view/>
     </transition>
@@ -14,12 +15,20 @@
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import SiteMessages from './components/Sitemessages'
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'App',
   components: {
     siteFooter: Footer,
     siteNavbar: Navbar,
     siteMessages: SiteMessages
+  },
+  computed: {
+    ...mapGetters(['getMessage']),
+    showGlobalMessage: function () {
+      return !!this.getMessage
+    }
   }
 }
 </script>
