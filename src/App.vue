@@ -9,6 +9,7 @@
     </transition>
     <hr />
     <site-footer></site-footer>
+    <spinner-component :showLoader="getLoadingSpinner"></spinner-component>
   </div>
 </template>
 
@@ -16,17 +17,20 @@
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import SiteMessages from './components/Sitemessages'
+import SpinnerComponent from './components/Spinner'
 import {mapGetters} from 'vuex'
+import './assets/spinner.css'
 
 export default {
   name: 'App',
   components: {
     siteFooter: Footer,
     siteNavbar: Navbar,
-    siteMessages: SiteMessages
+    siteMessages: SiteMessages,
+    spinnerComponent: SpinnerComponent
   },
   computed: {
-    ...mapGetters(['getMessage']),
+    ...mapGetters(['getMessage', 'getLoadingSpinner']),
     showGlobalMessage: function () {
       return !!this.getMessage
     }
