@@ -17,8 +17,8 @@ export default {
         }
       })
       .catch(function () {
-        dispatch('setLoginError')
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        dispatch('setLoginError')
       })
   },
   logout ({dispatch, commit}) {
@@ -38,7 +38,6 @@ export default {
       })
       .catch(function () {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
-        console.log('jestem tutaj nie wiem czemu')
       })
   },
   unsetRegisteredFlag ({commit}) {
