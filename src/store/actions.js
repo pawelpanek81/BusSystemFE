@@ -5,16 +5,19 @@ import router from '../router'
 
 export default {
   login ({dispatch, commit}, credentail) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
     axios.post(`${CFG.API_BASE_URL}/login`, credentail)
       .then(response => {
         if (response.status === 200) {
           localStorage.setItem('token', response.headers.authorization)
           commit(MUTATION_TYPES.LOGIN)
+          commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
           dispatch('setMessage', 'Zostałeś zalogowany')
           router.push({path: '/'})
         }
       })
       .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         dispatch('setLoginError')
       })
   },
@@ -25,14 +28,16 @@ export default {
     router.push({path: '/'})
   },
   signUp ({dispatch, commit}, registrationData) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
     axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
       .then(function (response) {
         if (response.status === 200) {
           commit(MUTATION_TYPES.SET_REGISTERED)
+          commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         }
       })
-      .catch(function (error) {
-        console.log('Error: ', error)
+      .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
   },
   unsetRegisteredFlag ({commit}) {

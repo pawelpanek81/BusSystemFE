@@ -1,6 +1,12 @@
 import MUTATION_TYPES from './mutation-types'
 
 export default {
+  [MUTATION_TYPES.SET_LOADING_SPINNER] (state) {
+    state.showLoader = true
+  },
+  [MUTATION_TYPES.UNSET_LOADING_SPINNER] (state) {
+    state.showLoader = false
+  },
   [MUTATION_TYPES.LOGIN] (state) {
     state.logged = true
   },
