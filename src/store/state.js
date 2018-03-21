@@ -3,5 +3,7 @@ export default {
   logged: localStorage.getItem('token'),
   message: '',
   registeredFlag: false,
-  loginError: false
+  loginError: false,
+  signUpErrorEmailExists: false,
+  signUpErrorUsernameTaken: false
 }

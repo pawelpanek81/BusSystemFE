@@ -8,6 +8,26 @@
               <div class="card-header">
                 <h3 class="mb-0 my-2">Rejestracja</h3>
               </div>
+              <transition name="fade">
+                <div @click="hideError"
+                     v-if="getSignUpErrorEmailExists"
+                     class="row card-body pb-0">
+                  <div class="col-md-12">
+                    <div id="errorMessageAlert1" class="alert alert-danger mb-0" role="alert">
+                      Istnieje już użytkownik o podanym adresie e-mail! Przejdź do zakladki logowania
+                    </div>
+                  </div>
+                </div>
+                <div @click="hideError"
+                     v-if="getSignUpErrorUsernameTaken"
+                     class="row card-body pb-0">
+                  <div class="col-md-12">
+                    <div id="errorMessageAlert2" class="alert alert-danger mb-0" role="alert">
+                      Podana nazwa użytkownika jest zajęta
+                    </div>
+                  </div>
+                </div>
+              </transition>
               <div class="form" role="form">
                 <div class="row card-body pb-0">
                   <div class="form-group col-md-6">
@@ -116,6 +136,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -131,6 +152,9 @@ export default {
   },
   methods: {
     validateForm () {
+      this.hideError()
+      this.signUpErrorEmailExists = !this.signUpErrorEmailExists
+      this.signUpErrorUsernameTaken = !this.signUpErrorUsernameTaken
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
@@ -140,7 +164,19 @@ export default {
     },
     register (data) {
       this.$store.dispatch('signUp', data)
+    },
+    hideError () {
+      this.$store.dispatch('unsetSignUpErrorEmailExists')
+      this.$store.dispatch('unsetSignUpErrorUsernameTaken')
     }
+  },
+  computed: {
+    ...mapGetters(['getSignUpErrorUsernameTaken']),
+    ...mapGetters(['getSignUpErrorEmailExists'])
+  },
+  beforeDestroy () {
+    this.$store.dispatch('unsetSignUpErrorEmailExists')
+    this.$store.dispatch('unsetSignUpErrorUsernameTaken')
   }
 }
 </script>

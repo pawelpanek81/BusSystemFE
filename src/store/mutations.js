@@ -30,5 +30,17 @@ export default {
   },
   [MUTATION_TYPES.UNSET_LOGIN_ERROR] (state) {
     state.loginError = false
+  },
+  [MUTATION_TYPES.SET_SIGNUP_ERROR_EMAIL_EXISTS] (state) {
+    state.signUpErrorEmailExists = true
+  },
+  [MUTATION_TYPES.SET_SIGNUP_ERROR_USERNAME_TAKEN] (state) {
+    state.signUpErrorUsernameTaken = true
+  },
+  [MUTATION_TYPES.UNSET_SIGNUP_ERROR_EMAIL_EXISTS] (state) {
+    state.signUpErrorEmailExists = false
+  },
+  [MUTATION_TYPES.UNSET_SIGNUP_ERROR_USERNAME_TAKEN] (state) {
+    state.signUpErrorUsernameTaken = false
   }
 }
