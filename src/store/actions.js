@@ -38,9 +38,9 @@ export default {
       })
       .catch(function (error) {
         if (error.response) {
-          if (error.response.status === 1) {
+          if (error.response.data.status === 1) {
             dispatch('setSignUpErrorEmailExists')
-          } else if (error.response.status === 3) {
+          } else if (error.response.data.status === 3) {
             dispatch('setSignUpErrorUsernameTaken')
           } else {
             console.log('problem', error)
