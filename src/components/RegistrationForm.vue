@@ -50,19 +50,16 @@
                 <div class="row card-body pb-0">
                   <div class="form-group col-md-6">
                     <label for="inputUsername">Nazwa użytkownika <span class="required">*</span></label>
-                    <input v-on:click="reShowUserPopup"
-                           type="text" class="form-control" id="inputUsername" placeholder="janko"
+                    <input type="text" class="form-control" id="inputUsername" placeholder="janko"
                            name="inputUsername"
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputUsername')}"
                            v-model="registerDTO.username"
-                           data-vv-as="nazwę użytkownika">
-                    <div class="popCustomPlace"
-                         id="usernamePopOver"
+                           data-vv-as="nazwę użytkownika"
                          data-container="body"
                          data-toggle="popover"
                          data-placement="right"
-                         data-content="Nazwa użytkownika jest zajęta."></div>
+                         data-content="Nazwa użytkownika jest zajęta.">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputUsername')"
                             class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
@@ -70,19 +67,16 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputEmail">Email <span class="required">*</span></label>
-                    <input v-on:click="reShowEmailPopup"
-                           type="email" class="form-control" id="inputEmail" placeholder="janko@walski.pl"
+                    <input type="email" class="form-control" id="inputEmail" placeholder="janko@walski.pl"
                            name="inputEmail"
                            v-validate="'required|email'"
                            :class="{'is-invalid': errors.has('inputEmail')}"
                            v-model="registerDTO.email"
-                           data-vv-as="email">
-                    <div class="popCustomPlace"
-                         id="emailPopOver"
+                           data-vv-as="email"
                          data-container="body"
                          data-toggle="popover"
                          data-placement="left"
-                         data-content="Email jest zajęty"></div>
+                         data-content="Email jest zajęty">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputEmail')"
                             class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
@@ -183,12 +177,12 @@ export default {
       let self = this
       this.$http.post(`${CFG.API_BASE_URL}/users/check-username-free`, {username: this.registerDTO.username})
         .then(() => {
-          $('#usernamePopOver').popover('dispose')
+          $('#inputUsername').popover('dispose')
           self.usernameBackendFail = false
         })
         .catch((error) => {
           if (error.response && error.response.data.status === 1) {
-            $('#usernamePopOver').popover('show')
+            $('#inputUsername').popover('show')
             self.usernameBackendFail = true
           }
         })
@@ -198,25 +192,15 @@ export default {
       let self = this
       this.$http.post(`${CFG.API_BASE_URL}/users/check-email-free`, { email: this.registerDTO.email })
         .then(() => {
-          $('#emailPopOver').popover('dispose')
+          $('#inputEmail').popover('dispose')
           self.emailBackendFail = false
         })
         .catch((error) => {
           if (error.response && error.response.data.status === 2) {
-            $('#emailPopOver').popover('show')
+            $('#inputEmail').popover('show')
             self.emailBackendFail = true
           }
         })
-    },
-    reShowUserPopup: function () {
-      if (this.usernameBackendFail) {
-        $('#usernamePopOver').popover('show')
-      }
-    },
-    reShowEmailPopup: function () {
-      if (this.emailBackendFail) {
-        $('#emailPopOver').popover('show')
-      }
     }
   },
   mounted () {
@@ -230,8 +214,8 @@ export default {
   },
   beforeDestroy () {
     this.$store.dispatch('unsetSignUpServerError')
-    $('#usernamePopOver').popover('dispose')
-    $('#emailPopOver').popover('dispose')
+    $('#inputUsername').popover('dispose')
+    $('#inputEmail').popover('dispose')
   }
 }
 </script>
