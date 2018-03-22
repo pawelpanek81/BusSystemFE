@@ -6,7 +6,7 @@ import router from '../router'
 export default {
   login ({dispatch, commit}, credentail) {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    axios.post(`${CFG.API_BASE_URL}/login`, credentail)
+    axios.post(`${CFG.API_LOGIN_BASE_URL}/login`, credentail)
       .then(response => {
         if (response.status === 200) {
           localStorage.setItem('token', response.headers.authorization)
