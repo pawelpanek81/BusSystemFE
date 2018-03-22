@@ -58,8 +58,9 @@
                            data-vv-as="nazwę użytkownika"
                          data-container="body"
                          data-toggle="popover"
-                         data-placement="right"
-                         data-content="Nazwa użytkownika jest zajęta.">
+                         data-placement="bottom"
+                         data-content="Nazwa użytkownika jest zajęta."
+                         data-trigger="manual">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputUsername')"
                             class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
@@ -75,8 +76,9 @@
                            data-vv-as="email"
                          data-container="body"
                          data-toggle="popover"
-                         data-placement="left"
-                         data-content="Email jest zajęty">
+                         data-placement="bottom"
+                         data-content="Email jest zajęty"
+                         data-trigger="manual">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputEmail')"
                             class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
@@ -149,8 +151,6 @@ export default {
         email: '',
         phone: ''
       },
-      usernameBackendFail: false,
-      emailBackendFail: false
     }
   },
   computed: {
@@ -173,32 +173,24 @@ export default {
       this.$store.dispatch('unsetSignUpServerError')
     },
     checkUserNamePopUp: function () {
-      if (this.emailBackendFail) return
-      let self = this
       this.$http.post(`${CFG.API_BASE_URL}/users/check-username-free`, {username: this.registerDTO.username})
         .then(() => {
           $('#inputUsername').popover('dispose')
-          self.usernameBackendFail = false
         })
         .catch((error) => {
           if (error.response && error.response.data.status === 1) {
             $('#inputUsername').popover('show')
-            self.usernameBackendFail = true
           }
         })
     },
     checkEmailPopUp: function () {
-      if (this.usernameBackendFail) return
-      let self = this
       this.$http.post(`${CFG.API_BASE_URL}/users/check-email-free`, { email: this.registerDTO.email })
         .then(() => {
           $('#inputEmail').popover('dispose')
-          self.emailBackendFail = false
         })
         .catch((error) => {
           if (error.response && error.response.data.status === 2) {
             $('#inputEmail').popover('show')
-            self.emailBackendFail = true
           }
         })
     }
@@ -223,10 +215,6 @@ export default {
 <style scoped>
   .required {
     color: red;
-  }
-  .popCustomPlace {
-    position: relative;
-    bottom: 18px;
   }
 </style>
 
