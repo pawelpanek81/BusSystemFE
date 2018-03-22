@@ -40,16 +40,15 @@ export default {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
   },
-  getNews ({dispatch, commit}) {
-    axios.get(`${CFG.API_BASE_URL}/getNews?page=0&size=3&sort=dateTime,DESC`)
+  getNews ({dispatch, commit}, settings) {
+    axios.get(`${CFG.API_BASE_URL}/getNews?page=${settings.pageNr}&size=${settings.sizeOfNews}&sort=dateTime,DESC`)
       .then(function (response) {
         if (response.status === 200) {
-          console.log(response.data)
+          commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)
+          commit(MUTATION_TYPES.SET_NEWS_LOADED)
         }
       })
-      .catch(function (error) {
-        console.log('Error: ', error)
-      })
+      .catch(() => {})
   },
   unsetRegisteredFlag ({commit}) {
     commit(MUTATION_TYPES.UNSET_REGISTERED)
@@ -65,5 +64,14 @@ export default {
   },
   unsetLoginError ({commit}) {
     commit(MUTATION_TYPES.UNSET_LOGIN_ERROR)
+  },
+  loadNews ({commit}, data) {
+    commit(MUTATION_TYPES.LOAD_NEWS, data)
+  },
+  setNewsLoaded ({commit}) {
+    commit(MUTATION_TYPES.SET_NEWS_LOADED)
+  },
+  unSetNewsLoaded ({commit}) {
+    commit(MUTATION_TYPES.UNSET_NEWS_LOADED)
   }
 }
