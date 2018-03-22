@@ -6,7 +6,7 @@ import router from '../router'
 export default {
   login ({dispatch, commit}, credentail) {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    axios.post(`${CFG.API_BASE_URL}/login`, credentail)
+    axios.post(`${CFG.API_LOGIN_BASE_URL}/login`, credentail)
       .then(response => {
         if (response.status === 200) {
           localStorage.setItem('token', response.headers.authorization)
@@ -54,5 +54,17 @@ export default {
   },
   unsetLoginError ({commit}) {
     commit(MUTATION_TYPES.UNSET_LOGIN_ERROR)
+  },
+  addNews ({dispatch, commit}, newsData) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
+    axios.post(`${CFG.API_BASE_URL}/auth/addNews`, newsData)
+      .then(function (response) {
+        dispatch('setMessage', 'News Dodany')
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        router.push({path: '/'}) // TODO zmienić na panel administracyjny
+      })
+      .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
   }
 }
