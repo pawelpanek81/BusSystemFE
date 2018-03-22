@@ -35,6 +35,17 @@ export default {
         console.log('Error: ', error)
       })
   },
+  getNews ({dispatch, commit}) {
+    axios.get(`${CFG.API_BASE_URL}/getNews?page=0&size=3&sort=dateTime,DESC`)
+      .then(function (response) {
+        if (response.status === 200) {
+          console.log(response.data)
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error)
+      })
+  },
   unsetRegisteredFlag ({commit}) {
     commit(MUTATION_TYPES.UNSET_REGISTERED)
   },
