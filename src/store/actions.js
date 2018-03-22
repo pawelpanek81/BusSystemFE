@@ -36,7 +36,10 @@ export default {
           commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         }
       })
-      .catch(function () {
+      .catch(function (error) {
+        if (error.response && error.response.data.status === 3) {
+          dispatch('setSignUpServerError')
+        }
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
   },
@@ -73,5 +76,11 @@ export default {
   },
   unSetNewsLoaded ({commit}) {
     commit(MUTATION_TYPES.UNSET_NEWS_LOADED)
+  },
+  setSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.SET_SIGNUP_SERVER_ERROR)
+  },
+  unsetSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
   }
 }

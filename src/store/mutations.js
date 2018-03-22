@@ -39,5 +39,11 @@ export default {
   },
   [MUTATION_TYPES.UNSET_NEWS_LOADED] (state) {
     state.newsLoaded = false
+  },
+  [MUTATION_TYPES.SET_SIGNUP_SERVER_ERROR] (state) {
+    state.signUpServerError = true
+  },
+  [MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR] (state) {
+    state.signUpServerError = false
   }
 }

@@ -5,5 +5,6 @@ export default {
   getLoginError: state => state.loginError,
   getLoadingSpinner: state => state.showLoader,
   news: state => state.news,
-  newsLoaded: state => state.newsLoaded
+  newsLoaded: state => state.newsLoaded,
+  getSignUpServerError: state => state.signUpServerError
 }

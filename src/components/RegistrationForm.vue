@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5" v-on:keyup.enter="validateForm">
+  <div class="container py-5 " v-on:keyup.enter="validateForm" v-on:click="hideError">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
@@ -8,6 +8,16 @@
               <div class="card-header">
                 <h3 class="mb-0 my-2">Rejestracja</h3>
               </div>
+              <transition name="fade">
+                <div v-if="getSignUpServerError"
+                     class="row card-body pb-0">
+                  <div class="col-md-12">
+                    <div id="errorMessageAlert1" class="alert alert-danger mb-0" role="alert">
+                      Nazwa użytkownika, bądź email jest zajęty!
+                    </div>
+                  </div>
+                </div>
+              </transition>
               <div class="form" role="form">
                 <div class="row card-body pb-0">
                   <div class="form-group col-md-6">
@@ -45,7 +55,12 @@
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputUsername')}"
                            v-model="registerDTO.username"
-                           data-vv-as="nazwę użytkownika">
+                           data-vv-as="nazwę użytkownika"
+                         data-container="body"
+                         data-toggle="popover"
+                         data-placement="bottom"
+                         data-content="Nazwa użytkownika jest zajęta."
+                         data-trigger="manual">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputUsername')"
                             class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
@@ -58,7 +73,12 @@
                            v-validate="'required|email'"
                            :class="{'is-invalid': errors.has('inputEmail')}"
                            v-model="registerDTO.email"
-                           data-vv-as="email">
+                           data-vv-as="email"
+                         data-container="body"
+                         data-toggle="popover"
+                         data-placement="bottom"
+                         data-content="Email jest zajęty"
+                         data-trigger="manual">
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputEmail')"
                             class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
@@ -116,6 +136,10 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+import '../assets/donetyping'
+import CFG from '../config'
+
 export default {
   data () {
     return {
@@ -126,11 +150,15 @@ export default {
         password: '',
         email: '',
         phone: ''
-      }
+      },
     }
+  },
+  computed: {
+    ...mapGetters(['getSignUpServerError'])
   },
   methods: {
     validateForm () {
+      this.hideError()
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
@@ -140,13 +168,61 @@ export default {
     },
     register (data) {
       this.$store.dispatch('signUp', data)
+    },
+    hideError () {
+      this.$store.dispatch('unsetSignUpServerError')
+    },
+    checkUserNamePopUp: function () {
+      this.$http.post(`${CFG.API_BASE_URL}/users/check-username-free`, {username: this.registerDTO.username})
+        .then(() => {
+          $('#inputUsername').popover('dispose')
+        })
+        .catch((error) => {
+          if (error.response && error.response.data.status === 1) {
+            $('#inputUsername').popover('show')
+          }
+        })
+    },
+    checkEmailPopUp: function () {
+      this.$http.post(`${CFG.API_BASE_URL}/users/check-email-free`, { email: this.registerDTO.email })
+        .then(() => {
+          $('#inputEmail').popover('dispose')
+        })
+        .catch((error) => {
+          if (error.response && error.response.data.status === 2) {
+            $('#inputEmail').popover('show')
+          }
+        })
     }
+  },
+  mounted () {
+    let self = this
+    $('#inputUsername').donetyping(function () {
+      self.checkUserNamePopUp()
+    }, 1500)
+    $('#inputEmail').donetyping(function () {
+      self.checkEmailPopUp()
+    }, 1500)
+  },
+  beforeDestroy () {
+    this.$store.dispatch('unsetSignUpServerError')
+    $('#inputUsername').popover('dispose')
+    $('#inputEmail').popover('dispose')
   }
 }
 </script>
 
 <style scoped>
   .required {
+    color: red;
+  }
+</style>
+
+<style>
+  .popover {
+    border: 1px solid rgba(255, 0, 0, 0.6);
+  }
+  .popover-body {
     color: red;
   }
 </style>

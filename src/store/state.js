@@ -5,5 +5,6 @@ export default {
   registeredFlag: false,
   loginError: false,
   news: [],
-  newsLoaded: false
+  newsLoaded: false,
+  signUpServerError: false
 }
