@@ -4,5 +4,7 @@ export default {
   message: '',
   registeredFlag: false,
   loginError: false,
+  news: [],
+  newsLoaded: false,
   signUpServerError: false
 }
