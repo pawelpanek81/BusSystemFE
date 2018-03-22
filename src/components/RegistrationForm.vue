@@ -150,7 +150,7 @@ export default {
         password: '',
         email: '',
         phone: ''
-      },
+      }
     }
   },
   computed: {
