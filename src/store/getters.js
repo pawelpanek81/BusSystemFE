@@ -4,6 +4,5 @@ export default {
   getRegisteredFlag: state => state.registeredFlag,
   getLoginError: state => state.loginError,
   getLoadingSpinner: state => state.showLoader,
-  getSignUpErrorEmailExists: state => state.signUpErrorEmailExists,
-  getSignUpErrorUsernameTaken: state => state.signUpErrorUsernameTaken
+  getSignUpServerError: state => state.signUpServerError
 }

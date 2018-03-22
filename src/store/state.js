@@ -4,6 +4,5 @@ export default {
   message: '',
   registeredFlag: false,
   loginError: false,
-  signUpErrorEmailExists: false,
-  signUpErrorUsernameTaken: false
+  signUpServerError: false
 }
