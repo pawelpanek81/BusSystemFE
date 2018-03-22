@@ -36,9 +36,22 @@ export default {
           commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         }
       })
-      .catch(function () {
+      .catch(function (error) {
+        if (error.response && error.response.data.status === 3) {
+          dispatch('setSignUpServerError')
+        }
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
+  },
+  getNews ({dispatch, commit}, settings) {
+    axios.get(`${CFG.API_BASE_URL}/getNews?page=${settings.pageNr}&size=${settings.sizeOfNews}&sort=dateTime,DESC`)
+      .then(function (response) {
+        if (response.status === 200) {
+          commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)
+          commit(MUTATION_TYPES.SET_NEWS_LOADED)
+        }
+      })
+      .catch(() => {})
   },
   unsetRegisteredFlag ({commit}) {
     commit(MUTATION_TYPES.UNSET_REGISTERED)
@@ -66,5 +79,20 @@ export default {
       .catch(function () {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
+  },
+  loadNews ({commit}, data) {
+    commit(MUTATION_TYPES.LOAD_NEWS, data)
+  },
+  setNewsLoaded ({commit}) {
+    commit(MUTATION_TYPES.SET_NEWS_LOADED)
+  },
+  unSetNewsLoaded ({commit}) {
+    commit(MUTATION_TYPES.UNSET_NEWS_LOADED)
+  },
+  setSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.SET_SIGNUP_SERVER_ERROR)
+  },
+  unsetSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
   }
 }

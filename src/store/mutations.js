@@ -30,5 +30,20 @@ export default {
   },
   [MUTATION_TYPES.UNSET_LOGIN_ERROR] (state) {
     state.loginError = false
+  },
+  [MUTATION_TYPES.LOAD_NEWS] (state, data) {
+    state.news = data
+  },
+  [MUTATION_TYPES.SET_NEWS_LOADED] (state) {
+    state.newsLoaded = true
+  },
+  [MUTATION_TYPES.UNSET_NEWS_LOADED] (state) {
+    state.newsLoaded = false
+  },
+  [MUTATION_TYPES.SET_SIGNUP_SERVER_ERROR] (state) {
+    state.signUpServerError = true
+  },
+  [MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR] (state) {
+    state.signUpServerError = false
   }
 }
