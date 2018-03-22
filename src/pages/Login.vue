@@ -9,8 +9,7 @@
                 <h3 class="mb-0 my-2">Logowanie</h3>
               </div>
               <transition name="fade">
-                <div @click="hideError"
-                     v-if="getLoginError"
+                <div v-if="getLoginError"
                      class="row card-body pb-0">
                   <div class="col-md-12">
                     <div id="errorMessageAlert" class="alert alert-danger mb-0" role="alert">
@@ -74,14 +73,12 @@ export default {
       credential: {
         username: '',
         password: ''
-      },
-      loginError: true
+      }
     }
   },
   methods: {
     validateForm () {
       this.hideError()
-      this.loginError = !this.loginError
       this.$validator.validateAll()
         .then((result) => {
           if (result) {

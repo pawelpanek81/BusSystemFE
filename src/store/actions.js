@@ -37,22 +37,8 @@ export default {
         }
       })
       .catch(function (error) {
-        if (error.response) {
-          if (error.response.data.status === 1) {
-            dispatch('setSignUpErrorEmailExists')
-          } else if (error.response.data.status === 3) {
-            dispatch('setSignUpErrorUsernameTaken')
-          } else {
-            console.log('problem', error)
-          }
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request)
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message)
+        if (error.response && error.response.data.status === 3) {
+          dispatch('setSignUpServerError')
         }
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
@@ -72,16 +58,10 @@ export default {
   unsetLoginError ({commit}) {
     commit(MUTATION_TYPES.UNSET_LOGIN_ERROR)
   },
-  setSignUpErrorEmailExists ({commit}) {
-    commit(MUTATION_TYPES.SET_SIGNUP_ERROR_EMAIL_EXISTS)
+  setSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.SET_SIGNUP_SERVER_ERROR)
   },
-  setSignUpErrorUsernameTaken ({commit}) {
-    commit(MUTATION_TYPES.SET_SIGNUP_ERROR_USERNAME_TAKEN)
-  },
-  unsetSignUpErrorEmailExists ({commit}) {
-    commit(MUTATION_TYPES.UNSET_SIGNUP_ERROR_EMAIL_EXISTS)
-  },
-  unsetSignUpErrorUsernameTaken ({commit}) {
-    commit(MUTATION_TYPES.UNSET_SIGNUP_ERROR_USERNAME_TAKEN)
+  unsetSignUpServerError ({commit}) {
+    commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
   }
 }

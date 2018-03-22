@@ -9,21 +9,11 @@
                 <h3 class="mb-0 my-2">Rejestracja</h3>
               </div>
               <transition name="fade">
-                <div @click="hideError"
-                     v-if="getSignUpErrorEmailExists"
+                <div v-if="getSignUpServerError"
                      class="row card-body pb-0">
                   <div class="col-md-12">
                     <div id="errorMessageAlert1" class="alert alert-danger mb-0" role="alert">
-                      Istnieje już użytkownik o podanym adresie e-mail! Przejdź do zakladki logowania
-                    </div>
-                  </div>
-                </div>
-                <div @click="hideError"
-                     v-if="getSignUpErrorUsernameTaken"
-                     class="row card-body pb-0">
-                  <div class="col-md-12">
-                    <div id="errorMessageAlert2" class="alert alert-danger mb-0" role="alert">
-                      Podana nazwa użytkownika jest zajęta
+                      Nazwa użytkownika, bądź email jest zajęty!
                     </div>
                   </div>
                 </div>
@@ -60,12 +50,19 @@
                 <div class="row card-body pb-0">
                   <div class="form-group col-md-6">
                     <label for="inputUsername">Nazwa użytkownika <span class="required">*</span></label>
-                    <input type="text" class="form-control" id="inputUsername" placeholder="janko"
+                    <input v-on:click="reShowUserPopup"
+                           type="text" class="form-control" id="inputUsername" placeholder="janko"
                            name="inputUsername"
                            v-validate="'required'"
                            :class="{'is-invalid': errors.has('inputUsername')}"
                            v-model="registerDTO.username"
                            data-vv-as="nazwę użytkownika">
+                    <div class="popCustomPlace"
+                         id="usernamePopOver"
+                         data-container="body"
+                         data-toggle="popover"
+                         data-placement="right"
+                         data-content="Nazwa użytkownika jest zajęta."></div>
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputUsername')"
                             class="invalid-feedback">{{ errors.first('inputUsername') }}</span>
@@ -73,12 +70,19 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputEmail">Email <span class="required">*</span></label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="janko@walski.pl"
+                    <input v-on:click="reShowEmailPopup"
+                           type="email" class="form-control" id="inputEmail" placeholder="janko@walski.pl"
                            name="inputEmail"
                            v-validate="'required|email'"
                            :class="{'is-invalid': errors.has('inputEmail')}"
                            v-model="registerDTO.email"
                            data-vv-as="email">
+                    <div class="popCustomPlace"
+                         id="emailPopOver"
+                         data-container="body"
+                         data-toggle="popover"
+                         data-placement="left"
+                         data-content="Email jest zajęty"></div>
                     <transition enter-active-class="animated fadeIn">
                       <span v-show="errors.has('inputEmail')"
                             class="invalid-feedback">{{ errors.first('inputEmail') }}</span>
@@ -137,6 +141,9 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import '../assets/donetyping'
+import CFG from '../config'
+
 export default {
   data () {
     return {
@@ -147,14 +154,17 @@ export default {
         password: '',
         email: '',
         phone: ''
-      }
+      },
+      usernameBackendFail: false,
+      emailBackendFail: false
     }
+  },
+  computed: {
+    ...mapGetters(['getSignUpServerError'])
   },
   methods: {
     validateForm () {
       this.hideError()
-      this.signUpErrorEmailExists = !this.signUpErrorEmailExists
-      this.signUpErrorUsernameTaken = !this.signUpErrorUsernameTaken
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
@@ -166,23 +176,81 @@ export default {
       this.$store.dispatch('signUp', data)
     },
     hideError () {
-      this.$store.dispatch('unsetSignUpErrorEmailExists')
-      this.$store.dispatch('unsetSignUpErrorUsernameTaken')
+      this.$store.dispatch('unsetSignUpServerError')
+    },
+    checkUserNamePopUp: function () {
+      if (this.emailBackendFail) return
+      let self = this
+      this.$http.post(`${CFG.API_BASE_URL}/users/check-username-free`, {username: this.registerDTO.username})
+        .then(() => {
+          $('#usernamePopOver').popover('dispose')
+          self.usernameBackendFail = false
+        })
+        .catch((error) => {
+          if (error.response && error.response.data.status === 1) {
+            $('#usernamePopOver').popover('show')
+            self.usernameBackendFail = true
+          }
+        })
+    },
+    checkEmailPopUp: function () {
+      if (this.usernameBackendFail) return
+      let self = this
+      this.$http.post(`${CFG.API_BASE_URL}/users/check-email-free`, { email: this.registerDTO.email })
+        .then(() => {
+          $('#emailPopOver').popover('dispose')
+          self.emailBackendFail = false
+        })
+        .catch((error) => {
+          if (error.response && error.response.data.status === 2) {
+            $('#emailPopOver').popover('show')
+            self.emailBackendFail = true
+          }
+        })
+    },
+    reShowUserPopup: function () {
+      if (this.usernameBackendFail) {
+        $('#usernamePopOver').popover('show')
+      }
+    },
+    reShowEmailPopup: function () {
+      if (this.emailBackendFail) {
+        $('#emailPopOver').popover('show')
+      }
     }
   },
-  computed: {
-    ...mapGetters(['getSignUpErrorUsernameTaken']),
-    ...mapGetters(['getSignUpErrorEmailExists'])
+  mounted () {
+    let self = this
+    $('#inputUsername').donetyping(function () {
+      self.checkUserNamePopUp()
+    }, 1500)
+    $('#inputEmail').donetyping(function () {
+      self.checkEmailPopUp()
+    }, 1500)
   },
   beforeDestroy () {
-    this.$store.dispatch('unsetSignUpErrorEmailExists')
-    this.$store.dispatch('unsetSignUpErrorUsernameTaken')
+    this.$store.dispatch('unsetSignUpServerError')
+    $('#usernamePopOver').popover('dispose')
+    $('#emailPopOver').popover('dispose')
   }
 }
 </script>
 
 <style scoped>
   .required {
+    color: red;
+  }
+  .popCustomPlace {
+    position: relative;
+    bottom: 18px;
+  }
+</style>
+
+<style>
+  .popover {
+    border: 1px solid rgba(255, 0, 0, 0.6);
+  }
+  .popover-body {
     color: red;
   }
 </style>
