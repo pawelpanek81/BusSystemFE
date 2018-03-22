@@ -3,5 +3,6 @@ export default {
   getMessage: state => state.message,
   getRegisteredFlag: state => state.registeredFlag,
   getLoginError: state => state.loginError,
-  getLoadingSpinner: state => state.showLoader
+  getLoadingSpinner: state => state.showLoader,
+  getSignUpServerError: state => state.signUpServerError
 }
