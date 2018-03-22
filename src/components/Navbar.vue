@@ -24,6 +24,9 @@
           <li v-if="!isLogged" class="nav-item">
               <router-link class="nav-link" to="/registration">Rejestracja</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/administration-panel">Panel administracyjny</router-link>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto dropdown" v-if="isLogged">
           <div class="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

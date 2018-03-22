@@ -13,6 +13,7 @@ export default new Router({
     Navbar.TIMETABLES,
     Navbar.LOGIN,
     Navbar.REGISTER,
-    Navbar.TICKETS
+    Navbar.TICKETS,
+    Navbar.ADMINISTRATIONPANEL
   ]
 })
