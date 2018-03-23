@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <site-navbar></site-navbar>
-    <site-messages
-      :message="getMessage"
-      v-if="showGlobalMessage"></site-messages>
-    <transition name="fade">
-      <router-view/>
-    </transition>
+    <div class="component-height">
+      <site-navbar></site-navbar>
+      <site-messages
+        :message="getMessage"
+        v-if="showGlobalMessage"></site-messages>
+      <transition name="fade">
+        <router-view/>
+      </transition>
+    </div>
     <hr />
     <site-footer></site-footer>
     <spinner-component :showLoader="getLoadingSpinner"></spinner-component>
@@ -53,5 +55,8 @@ export default {
 
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+.component-height {
+  min-height: 95vh;
 }
 </style>

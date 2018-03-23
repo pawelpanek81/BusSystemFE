@@ -44,7 +44,7 @@ export default {
     component: Tickets
   },
   ADMINISTRATIONPANEL: {
-    path: '/administration-panel',
+    path: '/admin/administration-panel',
     name: 'Administration panel',
     component: AdministrationPanel
   }

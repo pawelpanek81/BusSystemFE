@@ -25,7 +25,7 @@
               <router-link class="nav-link" to="/registration">Rejestracja</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/administration-panel">Panel administracyjny</router-link>
+            <router-link class="nav-link" to="/admin/administration-panel">Panel administracyjny</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto dropdown" v-if="isLogged">
