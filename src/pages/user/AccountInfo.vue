@@ -14,8 +14,7 @@
                     Nazwa użytkownika:
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" />
-                    <span> {{ this.userData.username}}</span>
+                    <input type="text" disabled="disabled" v-model="this.userData.username" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -23,7 +22,7 @@
                     Imię
                   </div>
                   <div class="form-group col-md-6">
-                    a
+                    <input type="text" disabled="disabled" v-model="this.userData.name" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -31,7 +30,7 @@
                     Nazwisko
                   </div>
                   <div class="form-group col-md-6">
-                    a
+                    <input type="text" disabled="disabled" v-model="this.userData.surname" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -39,7 +38,7 @@
                     Email
                   </div>
                   <div class="form-group col-md-6">
-                    a
+                    <input type="text" disabled="disabled" v-model="this.userData.email" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -47,7 +46,7 @@
                     Telefon
                   </div>
                   <div class="form-group col-md-6">
-                    a
+                    <input type="text" disabled="disabled" v-model="this.userData.phone" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -55,7 +54,7 @@
                     Zdjęcie profilowe
                   </div>
                   <div class="form-group col-md-6">
-                    a
+                    <input type="text" disabled="disabled" v-model="this.userData.photo" />
                   </div>
                 </div>
               </div>
