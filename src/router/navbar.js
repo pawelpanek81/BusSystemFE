@@ -1,6 +1,6 @@
 import Home from '@/components/Home'
 import Buyticket from '@/pages/Buyticket'
-import Busstops from '@/pages/Busstops'
+import Busstops from '@/pages/BusStops'
 import Timetables from '@/pages/Timetables'
 import Registration from '@/pages/Registration'
 import Login from '@/pages/Login'
