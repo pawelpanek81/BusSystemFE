@@ -18,7 +18,7 @@ export default {
     }
   },
   mounted () {
-    setTimeout(this.closeMessage, 30000)
+    setTimeout(this.closeMessage, 3000)
   },
   beforeDestroy () {
     this.$store.dispatch('clearMessage')

@@ -74,24 +74,22 @@ export default {
   data () {
     return {
       userData: {
-        username: '',
         name: '',
         surname: '',
+        username: '',
         email: '',
         phone: '',
-        photo: '',
-        active: true,
-        id: 11
+        photo: ''
       }
     }
   },
   mounted () {
     this.$http.get(`${CFG.API_BASE_URL}/users/userData`)
-      .then(function (response) {
+      .then((response) => {
         this.userData = response.data
-        console.log(response)
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         this.$store.dispatch('setMessage', {text: 'Błąd ładowania danych', type: 'alert-danger'})
       })
   }
