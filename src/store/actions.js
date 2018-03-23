@@ -12,7 +12,7 @@ export default {
           localStorage.setItem('token', response.headers.authorization)
           commit(MUTATION_TYPES.LOGIN)
           commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
-          dispatch('setMessage', 'Zostałeś zalogowany')
+          dispatch('setMessage', {text: 'Zostałeś zalogowany', type: 'alert-success'})
           router.push({path: '/'})
         }
       })
@@ -24,7 +24,7 @@ export default {
   logout ({dispatch, commit}) {
     localStorage.removeItem('token')
     commit(MUTATION_TYPES.LOGOUT)
-    dispatch('setMessage', 'Zostałeś wylogowany')
+    dispatch('setMessage', {text: 'Zostałeś wylogowany', type: 'alert-success'})
     router.push({path: '/'})
   },
   signUp ({dispatch, commit}, registrationData) {
@@ -56,11 +56,13 @@ export default {
   unsetRegisteredFlag ({commit}) {
     commit(MUTATION_TYPES.UNSET_REGISTERED)
   },
-  setMessage ({commit}, message) {
-    commit(MUTATION_TYPES.SHOW_MESSAGE, message)
+  setMessage ({commit}, {text, type}) {
+    commit(MUTATION_TYPES.SHOW_MESSAGE, text)
+    commit(MUTATION_TYPES.SET_MESSAGE_TYPE, type)
   },
   clearMessage ({commit}) {
     commit(MUTATION_TYPES.CLEAR_MESSAGE)
+    commit(MUTATION_TYPES.SET_MESSAGE_TYPE, '')
   },
   setLoginError ({commit}) {
     commit(MUTATION_TYPES.SET_LOGIN_ERROR)
@@ -72,7 +74,7 @@ export default {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
     axios.post(`${CFG.API_BASE_URL}/auth/addNews`, newsData)
       .then(function (response) {
-        dispatch('setMessage', 'News Dodany')
+        dispatch('setMessage', {text: 'News Dodany', type: 'alert-success'})
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         router.push({path: '/'}) // TODO zmienić na panel administracyjny
       })

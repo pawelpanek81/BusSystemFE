@@ -1,7 +1,7 @@
 import AddNews from '@/pages/AddNews'
 
 export default {
-  ADDNEWS: {
+  ACCOUNT_INFO: {
     path: '/admin/addNews',
     name: 'AddNews',
     component: AddNews

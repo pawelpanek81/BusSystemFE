@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Navbar from './navbar'
-import AdminPanel from './admin-panel'
+import AdminPane from './admin-pane'
+import UserPane from './user-pane'
 
 Vue.use(Router)
 
@@ -15,6 +16,7 @@ export default new Router({
     Navbar.LOGIN,
     Navbar.REGISTER,
     Navbar.TICKETS,
-    AdminPanel.ADDNEWS
+    AdminPane.ACCOUNT_INFO,
+    UserPane.ACCOUNT_INFO
   ]
 })

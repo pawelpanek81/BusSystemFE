@@ -3,6 +3,7 @@
     <site-navbar></site-navbar>
     <site-messages
       :message="getMessage"
+      :type="getMessageType"
       v-if="showGlobalMessage"></site-messages>
     <transition name="fade">
       <router-view/>
@@ -30,7 +31,7 @@ export default {
     spinnerComponent: SpinnerComponent
   },
   computed: {
-    ...mapGetters(['getMessage', 'getLoadingSpinner']),
+    ...mapGetters(['getMessage', 'getMessageType', 'getLoadingSpinner']),
     showGlobalMessage: function () {
       return !!this.getMessage
     }

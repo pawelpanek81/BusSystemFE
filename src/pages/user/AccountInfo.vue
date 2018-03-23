@@ -1,0 +1,102 @@
+<template>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <div class="card border-secondary">
+              <div class="card-header">
+                <h3 class="mb-0 my-2">Twoje dane</h3>
+              </div>
+              <div class="form" role="form">
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Nazwa użytkownika:
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="text" disabled="disabled" />
+                    <span> {{ this.userData.username}}</span>
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Imię
+                  </div>
+                  <div class="form-group col-md-6">
+                    a
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Nazwisko
+                  </div>
+                  <div class="form-group col-md-6">
+                    a
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Email
+                  </div>
+                  <div class="form-group col-md-6">
+                    a
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Telefon
+                  </div>
+                  <div class="form-group col-md-6">
+                    a
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="form-group col-md-6">
+                    Zdjęcie profilowe
+                  </div>
+                  <div class="form-group col-md-6">
+                    a
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import CFG from '../../config'
+
+export default {
+  data () {
+    return {
+      userData: {
+        username: '',
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        photo: '',
+        active: true,
+        id: 11
+      }
+    }
+  },
+  mounted () {
+    this.$http.get(`${CFG.API_BASE_URL}/users/userData`)
+      .then(function (response) {
+        this.userData = response.data
+        console.log(response)
+      })
+      .catch(() => {
+        this.$store.dispatch('setMessage', {text: 'Błąd ładowania danych', type: 'alert-danger'})
+      })
+  }
+}
+</script>
+
+<style scoped>
+</style>

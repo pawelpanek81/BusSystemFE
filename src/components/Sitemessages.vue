@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div class="container">
-      <div id="message" class="alert alert-success fade show" role="alert"
+      <div id="message" class="alert fade show" :class="type" role="alert"
            @click="closeMessage">
         {{ this.message }}
       </div>
@@ -11,14 +11,14 @@
 
 <script>
 export default {
-  props: ['message'],
+  props: ['message', 'type'],
   methods: {
     closeMessage () {
       this.$store.dispatch('clearMessage')
     }
   },
   mounted () {
-    setTimeout(this.closeMessage, 3000)
+    setTimeout(this.closeMessage, 30000)
   },
   beforeDestroy () {
     this.$store.dispatch('clearMessage')

@@ -19,6 +19,9 @@ export default {
   [MUTATION_TYPES.CLEAR_MESSAGE] (state) {
     state.message = ''
   },
+  [MUTATION_TYPES.SET_MESSAGE_TYPE] (state, type) {
+    state.messageType = type
+  },
   [MUTATION_TYPES.SET_REGISTERED] (state) {
     state.registeredFlag = true
   },
