@@ -1,10 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container pl-0">
     <div class="card mb-3">
-      <img class="card-img-top" src="../../static/images/2.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title"> {{this.title}} </h5>
-        <p class="card-text"> {{this.newsBody}}</p>
+        <p class="card-text card-height"> {{this.newsBody}}</p>
         <p class="card-text"><small class="text-muted"> {{this.newsDateTime}}</small></p>
       </div>
     </div>
@@ -16,3 +15,9 @@ export default {
   props: ['title', 'newsBody', 'newsDateTime']
 }
 </script>
+
+<style>
+  .card-height {
+    min-height: 20vh;
+  }
+</style>

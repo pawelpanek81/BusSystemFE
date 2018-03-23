@@ -24,17 +24,18 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+        <connections-searcher class="p-0 my-3 "></connections-searcher>
+        <home-content></home-content>
+        <pagination-pane></pagination-pane>
       </div>
     </div>
-    <buy-ticket-component></buy-ticket-component>
-    <home-content></home-content>
-    <pagination-pane></pagination-pane>
   </div>
 </template>
 
 <script>
 import BuyTicket from '@/components/BuyTicketPane'
 import HomeContent from '@/components/HomeContent'
+import ConnectionsSearcher from './ConnectionsSearcher'
 import PaginationPane from '@/components/PaginationPane'
 
 export default {
@@ -50,6 +51,7 @@ export default {
     this.playCarousel()
   },
   components: {
+    ConnectionsSearcher,
     buyTicketComponent: BuyTicket,
     homeContent: HomeContent,
     paginationPane: PaginationPane
