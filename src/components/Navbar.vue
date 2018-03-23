@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg mt-2">
     <div class="container">
-      <router-link class="navbar-brand" to="/"><h3>BusSystem</h3></router-link>
+      <router-link class="navbar-brand" to="/"><h3>JanuszPol <i class="fas fa-bus"></i></h3></router-link>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
