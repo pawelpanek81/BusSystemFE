@@ -1,4 +1,4 @@
-import Home from '@/components/Home'
+import Home from '@/pages/Home'
 import Buyticket from '@/pages/Buyticket'
 import Busstops from '@/pages/Busstops'
 import Timetables from '@/pages/Timetables'

@@ -5,6 +5,8 @@ export default {
   registeredFlag: false,
   loginError: false,
   news: [],
+  totalNewsPages: 1,
   newsLoaded: false,
-  signUpServerError: false
+  signUpServerError: false,
+  userType: ''
 }

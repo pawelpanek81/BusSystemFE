@@ -1,13 +1,16 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-8 px-0">
-        <div  v-if="newsLoaded">
-        <news-component v-for="item in news" v-bind:key="item.id"
-          :title="item.title" :newsBody="item.body" :newsDateTime="item.dateTime"></news-component>
-        </div>
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 px-2">
+        <transition name="fade">
+          <div  v-if="newsLoaded">
+          <news-component v-for="item in news" v-bind:key="item.id"
+            :title="item.title" :newsBody="item.body" :newsDateTime="item.dateTime"></news-component>
+          </div>
+        </transition>
+        <pagination-component></pagination-component>
       </div>
-      <div class="col-4 mb-3 info-height">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 px-2">
         <info></info>
       </div>
     </div>
@@ -18,6 +21,7 @@
 import NewsComponent from './News'
 import Info from './Info'
 import {mapGetters} from 'vuex'
+import PaginationComponent from './PaginationPane'
 
 export default {
   data () {
@@ -26,10 +30,18 @@ export default {
   },
   components: {
     newsComponent: NewsComponent,
-    info: Info
+    info: Info,
+    paginationComponent: PaginationComponent
   },
   computed: {
-    ...mapGetters(['news', 'newsLoaded'])
+    ...mapGetters(['news', 'newsLoaded']),
+    actualPage: function () {
+      if (this.$route.params.id) {
+        return parseInt(this.$route.params.id)
+      } else {
+        return 1
+      }
+    }
   },
   created () {
     var settings = {
@@ -42,8 +54,4 @@ export default {
 </script>
 
 <style scoped>
-  .info-height {
-    overflow: hidden;
-    width: 100%;
-  }
 </style>

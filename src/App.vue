@@ -57,6 +57,6 @@ export default {
   opacity: 0
 }
 .component-height {
-  min-height: 95vh;
+  min-height: 73vh;
 }
 </style>

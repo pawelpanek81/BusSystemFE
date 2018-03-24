@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card card-size">
+  <div class="container my-3 px-2">
+    <div class="card ">
       <div class="card-body">
       </div>
     </div>

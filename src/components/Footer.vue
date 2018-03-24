@@ -3,31 +3,41 @@
     <div class="container">
       <div class="row footer-sidebar">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
-          <h3 class="widget-title">Podróż</h3>
-          <div>
-            Алексей Федорович Карамазов был в гимназии он глядел на себя и он и капусту едят. И оно совершится. И вот,
-            однако же, разом, все святы, и наставления. Видя это, противники старцев
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
           <h3 class="widget-title">Obsługa klienta</h3>
           <div>
-            Видя это, противники старцев и права не тринадцати лет, но из особ женского рода, курочек, индюшечек,
-            телушечек… Федор Павлович, ограда и очень скоро, чуть не сдерживая себя, потому что чуть не стоят. Трех
+            <ul>
+              <li>Infolinia: +48 777 888 999</li>
+              <li>Newsletter</li>
+            </ul>
           </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
           <h3 class="widget-title">Rozkład jazdy</h3>
           <div>
-            может быть, оскорбительных вот эти с третьего года, здесь надо? Всем ясно, что гонениям, как уж всем
-            монастыре. И это, быстро затыкает уши
+            <ul>
+              <li>Rozkład jazdy</li>
+              <li>Linie autobusowe</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <h3 class="widget-title">Podróż</h3>
+          <div>
+            <ul>
+              <li>Mapa przystanków</li>
+              <li>FAQ</li>
+              <li>Regulamin</li>
+            </ul>
           </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
           <h3 class="widget-title">Kontakt</h3>
           <div>
-            пальцами, они были так сказать, Направником! Каким это, быстро и сравнительно прожил довольно глубокую и у
-            нас на Алешу каким-нибудь особенным свойством души старцу на
+            <ul>
+              <li>O Firmie</li>
+              <li>Kariera</li>
+              <li>Formularz kontaktowy</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -37,7 +47,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-6 col-lg- 6 col-md-6 col-sm-6 col-xs-12">
-            &copy; 2017 Bus-system
+            &copy; 2018 JanuszPol
           </div>
         </div>
       </div>

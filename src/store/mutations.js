@@ -45,5 +45,11 @@ export default {
   },
   [MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR] (state) {
     state.signUpServerError = false
+  },
+  [MUTATION_TYPES.SET_USER_TYPE] (state, userType) {
+    state.userType = userType
+  },
+  [MUTATION_TYPES.TOTAL_NEWS_PAGES] (state, totalPages) {
+    state.totalNewsPages = totalPages
   }
 }

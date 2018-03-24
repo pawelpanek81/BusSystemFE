@@ -1,5 +1,5 @@
 <template>
-  <div class="container pl-0">
+  <div class="container px-0">
     <div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title"> {{this.title}} </h5>
@@ -18,6 +18,6 @@ export default {
 
 <style>
   .card-height {
-    min-height: 20vh;
+    min-height: 100px;
   }
 </style>

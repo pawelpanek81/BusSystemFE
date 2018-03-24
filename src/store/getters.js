@@ -6,5 +6,7 @@ export default {
   getLoadingSpinner: state => state.showLoader,
   news: state => state.news,
   newsLoaded: state => state.newsLoaded,
-  getSignUpServerError: state => state.signUpServerError
+  getSignUpServerError: state => state.signUpServerError,
+  getUserType: state => state.userType,
+  getTotalNewsPages: state => state.totalNewsPages
 }

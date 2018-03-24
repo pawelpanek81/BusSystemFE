@@ -2,6 +2,7 @@ import CFG from '../config'
 import MUTATION_TYPES from './mutation-types'
 import axios from 'axios'
 import router from '../router'
+import jwtDecoder from 'jwt-decode'
 
 export default {
   login ({dispatch, commit}, credentail) {
@@ -12,6 +13,8 @@ export default {
           localStorage.setItem('token', response.headers.authorization)
           commit(MUTATION_TYPES.LOGIN)
           commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+          const userType = jwtDecoder(response.headers.authorization).ut
+          commit(MUTATION_TYPES.SET_USER_TYPE, userType)
           dispatch('setMessage', 'Zostałeś zalogowany')
           router.push({path: '/'})
         }
@@ -24,6 +27,7 @@ export default {
   logout ({dispatch, commit}) {
     localStorage.removeItem('token')
     commit(MUTATION_TYPES.LOGOUT)
+    commit(MUTATION_TYPES.SET_USER_TYPE, '')
     dispatch('setMessage', 'Zostałeś wylogowany')
     router.push({path: '/'})
   },
@@ -48,10 +52,10 @@ export default {
       .then(function (response) {
         if (response.status === 200) {
           commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)
+          commit(MUTATION_TYPES.TOTAL_NEWS_PAGES, response.data.totalPages)
           commit(MUTATION_TYPES.SET_NEWS_LOADED)
         }
       })
-      .catch(() => {})
   },
   unsetRegisteredFlag ({commit}) {
     commit(MUTATION_TYPES.UNSET_REGISTERED)

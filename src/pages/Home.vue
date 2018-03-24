@@ -2,7 +2,7 @@
   <div>
     <div class="mt-4 mb-4">
       <div class="container">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide px-2" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -24,9 +24,8 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <connections-searcher class="p-0 my-3 "></connections-searcher>
+        <connections-searcher class="p-0 my-3"></connections-searcher>
         <home-content></home-content>
-        <pagination-pane></pagination-pane>
       </div>
     </div>
   </div>
@@ -35,14 +34,13 @@
 <script>
 import BuyTicket from '@/components/BuyTicketPane'
 import HomeContent from '@/components/HomeContent'
-import ConnectionsSearcher from './ConnectionsSearcher'
-import PaginationPane from '@/components/PaginationPane'
+import ConnectionsSearcher from '../components/ConnectionsSearcher'
 
 export default {
   methods: {
     playCarousel: function () {
       $('.carousel').carousel({
-        interval: 5000,
+        interval: 8000,
         cycle: true
       })
     }
@@ -53,8 +51,7 @@ export default {
   components: {
     ConnectionsSearcher,
     buyTicketComponent: BuyTicket,
-    homeContent: HomeContent,
-    paginationPane: PaginationPane
+    homeContent: HomeContent
   }
 }
 
