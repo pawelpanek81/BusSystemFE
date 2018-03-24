@@ -1,9 +1,9 @@
-import AddNews from '@/pages/AddNews'
+import AdminPanel from '@/pages/AdminPanel'
 
 export default {
-  ADDNEWS: {
-    path: '/admin/addNews',
-    name: 'AddNews',
-    component: AddNews
+  ADMINPANEL: {
+    path: '/admin',
+    name: 'AdminPanel',
+    component: AdminPanel
   }
 }

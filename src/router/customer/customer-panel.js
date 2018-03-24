@@ -2,7 +2,7 @@ import CustomerPanel from '@/pages/CustomerPanel'
 
 export default {
   CUSTOMERPANEL: {
-    path: '/customer/customerpanel',
+    path: '/customer',
     name: 'CustomerPanel',
     component: CustomerPanel
   }

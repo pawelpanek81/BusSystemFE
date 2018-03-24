@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container mt-4 mb-4">
+    <div class="container mt-4 col-md-3">
       <div v-if="$mq.resize && $mq.above('576px')">
         <div class="row">
           <div class="col-sm-4">
@@ -12,7 +12,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="col-sm-6 col-md-9"></div>
         </div>
       </div>
       <div v-else>

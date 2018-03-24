@@ -36,15 +36,15 @@
               class="dropdown-item" to="/user/account">Konto</router-link>
 
             <router-link
-                         class="dropdown-item" to="/driver/driver-panel">TODO Panel kierowcy</router-link>
+                         class="dropdown-item" to="/driver">TODO Panel kierowcy</router-link>
 
             <router-link
-                         class="dropdown-item" to="/bok/bok-panel">TODO Panel BOK</router-link>
+                         class="dropdown-item" to="/bok">TODO Panel BOK</router-link>
             <router-link
-              class="dropdown-item" to="/customer/customerpanel">Panel kienta</router-link>
+              class="dropdown-item" to="/customer">Panel kienta</router-link>
 
             <router-link v-if="getUserType === 'ADMIN'"
-                         class="dropdown-item" to="/admin/administration-panel">TODO Panel administracyjny</router-link>
+                         class="dropdown-item" to="/admin">TODO Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
