@@ -5,7 +5,7 @@ import Timetables from '@/pages/Timetables'
 import Registration from '@/pages/Registration'
 import Login from '@/pages/Login'
 import Tickets from '@/pages/Tickets'
-import AdministrationPanel from '@/pages/AdministrationPanel'
+import AdminPanel from '@/pages/AdminPanel'
 
 export default {
   HOME: {
@@ -44,8 +44,8 @@ export default {
     component: Tickets
   },
   ADMINISTRATIONPANEL: {
-    path: '/admin/administration-panel',
+    path: '/admin/administrationpanel',
     name: 'Administration panel',
-    component: AdministrationPanel
+    component: AdminPanel
   }
 }

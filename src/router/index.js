@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AdminPanel from './admin/admin-panel'
+import CustomerPanel from './customer/customer-panel'
 import Navbar from './navbar'
 import Pagination from './pagination'
 Vue.use(Router)
@@ -17,6 +18,7 @@ export default new Router({
     Navbar.TICKETS,
     Navbar.ADMINISTRATIONPANEL,
     AdminPanel.ADDNEWS,
+    CustomerPanel.CUSTOMERPANEL,
     Pagination.GO
   ]
 })

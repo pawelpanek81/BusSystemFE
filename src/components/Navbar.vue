@@ -40,6 +40,8 @@
 
             <router-link
                          class="dropdown-item" to="/bok/bok-panel">TODO Panel BOK</router-link>
+            <router-link
+              class="dropdown-item" to="/customer/customerpanel">Panel kienta</router-link>
 
             <router-link v-if="getUserType === 'ADMIN'"
                          class="dropdown-item" to="/admin/administration-panel">TODO Panel administracyjny</router-link>
