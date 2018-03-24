@@ -10,7 +10,7 @@ import VueAxios from 'vue-axios'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import VeeValidate from 'vee-validate'
-import language from './language/dictionary'
+import language from './language/vee-validate-messages-dictionary'
 
 Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)

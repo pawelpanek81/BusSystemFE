@@ -1,7 +1,7 @@
-import CFG from '../config'
-import MUTATION_TYPES from './mutation-types'
+import CFG from '../../config'
+import MUTATION_TYPES from '../mutation-types/mutation-types'
 import axios from 'axios'
-import router from '../router'
+import router from '../../router/index'
 import jwtDecoder from 'jwt-decode'
 
 export default {
@@ -52,7 +52,7 @@ export default {
       })
   },
   getNews ({dispatch, commit}, settings) {
-    axios.get(`${CFG.API_BASE_URL}/getNews?page=${settings.pageNr}&size=${settings.sizeOfNews}&sort=dateTime,DESC`)
+    axios.get(`${CFG.API_BASE_URL}/getNews?page=${settings.page}&size=${settings.size}&sort=dateTime,DESC`)
       .then(function (response) {
         if (response.status === 200) {
           commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)

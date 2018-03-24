@@ -77,7 +77,7 @@ export default {
   methods: {
     reloadNews: function (pageNumber) {
       this.$store.dispatch('unSetNewsLoaded')
-      this.$store.dispatch('getNews', { pageNr: pageNumber - 1, sizeOfNews: 3 })
+      this.$store.dispatch('getNews', { page: pageNumber - 1, size: 3 })
       this.actualPage = pageNumber
     }
   }

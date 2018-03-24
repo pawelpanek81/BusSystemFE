@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import Footer from './components/Footer'
+import Footer from './components/SiteFooter'
 import Navbar from './components/Navbar'
-import SiteMessages from './components/Sitemessages'
-import SpinnerComponent from './components/Spinner'
+import SiteMessages from './components/SiteGlobalMessages'
+import SpinnerComponent from './components/LoadingSpinner'
 import {mapGetters} from 'vuex'
 import './assets/spinner.css'
 

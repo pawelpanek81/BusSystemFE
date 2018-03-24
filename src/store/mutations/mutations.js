@@ -1,4 +1,4 @@
-import MUTATION_TYPES from './mutation-types'
+import MUTATION_TYPES from '../mutation-types/mutation-types'
 
 export default {
   [MUTATION_TYPES.SET_LOADING_SPINNER] (state) {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AdminPanel from './admin/admin-panel'
 import Navbar from './navbar'
-import AdminPanel from './admin-panel'
 import Pagination from './pagination'
 Vue.use(Router)
 
