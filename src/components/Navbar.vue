@@ -30,8 +30,19 @@
             <i class="fas fa-user userIcon"></i>
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <router-link class="dropdown-item" to="/user/tickets">Bilety</router-link>
-            <a class="dropdown-item" href="#">Konto</a>
+            <router-link v-if="getUserType === 'USER'"
+              class="dropdown-item" to="/user/tickets">Bilety</router-link>
+            <router-link v-if="getUserType === 'USER' || getUserType === 'DRIVER'"
+              class="dropdown-item" to="/user/account">Konto</router-link>
+
+            <router-link
+                         class="dropdown-item" to="/driver/driver-panel">TODO Panel kierowcy</router-link>
+
+            <router-link
+                         class="dropdown-item" to="/bok/bok-panel">TODO Panel BOK</router-link>
+
+            <router-link v-if="getUserType === 'ADMIN'"
+                         class="dropdown-item" to="/admin/administration-panel">TODO Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
@@ -51,17 +62,15 @@
   }
 </style>
 <script>
-import jwtDecoder from 'jwt-decode'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'Navbar',
   computed: {
-    ...mapGetters(['isLogged']),
+    ...mapGetters(['isLogged', 'getUserType', 'getUserName']),
     username: function () {
-      let authToken = localStorage.getItem('token')
-      if (authToken) {
-        return jwtDecoder(authToken).sub
+      if (this.isLogged) {
+        return this.getUserName
       }
       return ''
     }

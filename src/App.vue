@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <site-navbar></site-navbar>
-    <site-messages
-      :message="getMessage"
-      v-if="showGlobalMessage"></site-messages>
-    <transition name="fade">
-      <router-view/>
-    </transition>
+    <div class="component-height">
+      <site-navbar></site-navbar>
+      <site-messages
+        :message="getMessage"
+        v-if="showGlobalMessage"></site-messages>
+      <transition name="fade">
+        <router-view/>
+      </transition>
+    </div>
     <hr />
     <site-footer></site-footer>
     <spinner-component :showLoader="getLoadingSpinner"></spinner-component>
@@ -14,10 +16,10 @@
 </template>
 
 <script>
-import Footer from './components/Footer'
+import Footer from './components/SiteFooter'
 import Navbar from './components/Navbar'
-import SiteMessages from './components/Sitemessages'
-import SpinnerComponent from './components/Spinner'
+import SiteMessages from './components/SiteGlobalMessages'
+import SpinnerComponent from './components/LoadingSpinner'
 import {mapGetters} from 'vuex'
 import './assets/spinner.css'
 
@@ -53,5 +55,8 @@ export default {
 
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+.component-height {
+  min-height: 73vh;
 }
 </style>

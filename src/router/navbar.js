@@ -1,10 +1,11 @@
-import Home from '@/components/Home'
+import Home from '@/pages/Home'
 import Buyticket from '@/pages/Buyticket'
 import Busstops from '@/pages/BusStops'
 import Timetables from '@/pages/Timetables'
 import Registration from '@/pages/Registration'
 import Login from '@/pages/Login'
 import Tickets from '@/pages/Tickets'
+import AdministrationPanel from '@/pages/AdministrationPanel'
 
 export default {
   HOME: {
@@ -41,5 +42,10 @@ export default {
     path: '/user/tickets',
     name: 'Tickets',
     component: Tickets
+  },
+  ADMINISTRATIONPANEL: {
+    path: '/admin/administration-panel',
+    name: 'Administration panel',
+    component: AdministrationPanel
   }
 }
