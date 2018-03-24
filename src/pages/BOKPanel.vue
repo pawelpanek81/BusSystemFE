@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="container mt-4 mb-4">
-      <div v-if="$mq.resize && $mq.above('600px')">
+      <div v-if="$mq.resize && $mq.above('576px')">
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-sm-4">
             <div>
               <div class="vertical-menu" >
                 <a href="#" class="active">Rezerwuj bilet</a>
@@ -12,7 +12,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-9"></div>
+          <div class="col-sm-6"></div>
         </div>
       </div>
       <div v-else>
