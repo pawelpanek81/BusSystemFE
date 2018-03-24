@@ -21,7 +21,7 @@ VeeValidate.Validator.localize(language.dictionary)
 VeeValidate.Validator.localize('pl')
 
 axios.interceptors.request.use((config) => {
-  var authToken = localStorage.getItem('token')
+  let authToken = store.getters.getToken
   if (authToken) {
     config.headers['Authorization'] = authToken
   }

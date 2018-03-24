@@ -62,17 +62,15 @@
   }
 </style>
 <script>
-import jwtDecoder from 'jwt-decode'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'Navbar',
   computed: {
-    ...mapGetters(['isLogged', 'getUserType']),
+    ...mapGetters(['isLogged', 'getUserType', 'getUserName']),
     username: function () {
-      let authToken = localStorage.getItem('token')
-      if (authToken) {
-        return jwtDecoder(authToken).sub
+      if (this.isLogged) {
+        return this.getUserName
       }
       return ''
     }

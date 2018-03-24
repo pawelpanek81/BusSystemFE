@@ -11,10 +11,12 @@ export default {
       .then(response => {
         if (response.status === 200) {
           localStorage.setItem('token', response.headers.authorization)
-          commit(MUTATION_TYPES.LOGIN)
+          const authToken = jwtDecoder(response.headers.authorization)
+          commit(MUTATION_TYPES.SET_TOKEN, authToken)
+          commit(MUTATION_TYPES.SET_LOGGED)
+          commit(MUTATION_TYPES.SET_USERNAME, authToken.sub)
+          commit(MUTATION_TYPES.SET_USER_TYPE, authToken.ut)
           commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
-          const userType = jwtDecoder(response.headers.authorization).ut
-          commit(MUTATION_TYPES.SET_USER_TYPE, userType)
           dispatch('setMessage', 'Zostałeś zalogowany')
           router.push({path: '/'})
         }
@@ -26,8 +28,10 @@ export default {
   },
   logout ({dispatch, commit}) {
     localStorage.removeItem('token')
-    commit(MUTATION_TYPES.LOGOUT)
-    commit(MUTATION_TYPES.SET_USER_TYPE, '')
+    commit(MUTATION_TYPES.UNSET_LOGGED)
+    commit(MUTATION_TYPES.SET_TOKEN, null)
+    commit(MUTATION_TYPES.SET_USERNAME, null)
+    commit(MUTATION_TYPES.SET_USER_TYPE, null)
     dispatch('setMessage', 'Zostałeś wylogowany')
     router.push({path: '/'})
   },
