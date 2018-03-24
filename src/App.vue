@@ -21,7 +21,7 @@ import Navbar from './components/Navbar'
 import SiteMessages from './components/SiteGlobalMessages'
 import SpinnerComponent from './components/LoadingSpinner'
 import {mapGetters} from 'vuex'
-import './assets/spinner.css'
+import '../static/css/spinner.css'
 
 export default {
   name: 'App',
