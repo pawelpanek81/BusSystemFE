@@ -14,7 +14,7 @@
                     Nazwa użytkownika:
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.username" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.username" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -22,7 +22,7 @@
                     Imię
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.name" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.name" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -30,7 +30,7 @@
                     Nazwisko
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.surname" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.surname" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -38,7 +38,7 @@
                     Email
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.email" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.email" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -46,7 +46,7 @@
                     Telefon
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.phone" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.phone" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -54,7 +54,20 @@
                     Zdjęcie profilowe
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" disabled="disabled" v-model="this.userData.photo" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.photo" />
+                  </div>
+                </div>
+                <div class="row card-body pb-0">
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <button id="updateOrSendButton"
+                              @click="updateOrSendData" class="btn btn-success btn-lg">
+                        Aktualizuj dane
+                      </button>
+                      <router-link to="/">
+                        <button>Wróć</button>
+                      </router-link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -79,6 +92,26 @@ export default {
         email: '',
         phone: '',
         photo: ''
+      },
+      updateClicked: false
+    }
+  },
+  methods: {
+    updateOrSendData: function () {
+      if (this.updateClicked === false) {
+        this.updateClicked = true
+        $('#updateOrSendButton').text('Wyślij dane')
+      } else {
+        this.$http.put(`${CFG.API_BASE_URL}/users/updateData`, this.userData)
+          .then(() => {
+            this.$store.dispatch('logout').then(() => {
+              this.$store.dispatch('setMessage',
+                {text: 'Dane zostały zaktualizowane, zaloguj się ponownie', type: 'alert-success'})
+            })
+          })
+          .catch(() => {
+            this.$store.dispatch('setMessage', {text: 'Wystąpił błąd', type: 'alert-danger'})
+          })
       }
     }
   },
