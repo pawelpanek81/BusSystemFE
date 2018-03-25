@@ -24,7 +24,7 @@
           <h3 class="widget-title">Podróż</h3>
           <div>
             <ul>
-              <li>Mapa przystanków</li>
+              <li><router-link to="/map">Mapa przystanków</router-link></li>
               <li>FAQ</li>
               <li>Regulamin</li>
             </ul>
