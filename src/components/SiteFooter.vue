@@ -15,8 +15,9 @@
           <h3 class="widget-title">Rozkład jazdy</h3>
           <div>
             <ul>
-              <li>Rozkład jazdy</li>
+              <li>Przystanki</li>
               <li>Linie autobusowe</li>
+              <li>Rozkład jazdy</li>
             </ul>
           </div>
         </div>
