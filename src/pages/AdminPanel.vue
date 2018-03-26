@@ -27,7 +27,7 @@
             </button>
           </div>
           <div class="collapse vertical-menu" id="collapseExample">
-            <a href="#">Kierowcy</a>
+            <a href="#" class="active">Kierowcy</a>
             <a href="#">Przystanki</a>
             <a href="#">Trasy</a>
             <a href="#">Linie autobusowe</a>
@@ -66,10 +66,13 @@
   }
 </style>
 
-<script>
-$(document).ready(function () {
-  $('.vertical-menu a').on('click', function () {
-    $(this).addClass('active').siblings().removeClass('active')
-  })
-})
+<script scoped>
+export default {
+  updated () {
+    $('.vertical-menu a').on('click', function () {
+      $(this).addClass('active').siblings().removeClass('active')
+      $('#collapseExample').collapse('hide')
+    })
+  }
+}
 </script>
