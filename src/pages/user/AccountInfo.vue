@@ -147,17 +147,6 @@ export default {
 </script>
 
 <style scoped>
-  input:disabled {
-    color: grey;
-    background-color: white;
-  }
-  .input {
-    color: black;
-    outline: none;
-  }
-  input:enabled {
-    border-color: #606060;
-  }
   .input:focus {
     border-color: #12b31c;
     box-shadow: 0 0 10px #129f1c;
