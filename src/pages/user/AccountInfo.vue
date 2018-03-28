@@ -14,7 +14,8 @@
                     Nazwa użytkownika:
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" id="firstInput" :disabled="!updateClicked" v-model="userData.username" />
+                    <input type="text" id="firstInput" :disabled="!updateClicked" v-model="userData.username"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -22,7 +23,8 @@
                     Imię
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.name" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.name"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -30,7 +32,8 @@
                     Nazwisko
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.surname" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.surname"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -38,7 +41,8 @@
                     Email
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.email" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.email"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -46,7 +50,8 @@
                     Telefon
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.phone" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.phone"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
@@ -54,15 +59,16 @@
                     Zdjęcie profilowe
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.photo" />
+                    <input type="text" :disabled="!updateClicked" v-model="userData.photo"
+                           class="form-control" />
                   </div>
                 </div>
                 <div class="row card-body pb-0">
                   <div class="col-md-12 mb-3">
                     <div class="text-center">
                       <button id="updateOrSendButton"
-                              @click="updateOrSendData" class="btn btn-success btn-lg mx-2">
-                        Aktualizuj dane
+                              @click="updateOrSendData" class="btn btn-success mx-2">
+                        Edytuj dane
                       </button>
                       <router-link to="/">
                         <button class="btn btn-outline-success mx-2">Wróć</button>
@@ -81,6 +87,7 @@
 
 <script>
 import CFG from '../../config'
+import Vue from 'vue'
 
 export default {
   data () {
@@ -100,9 +107,11 @@ export default {
     updateOrSendData: function () {
       if (this.updateClicked === false) {
         this.updateClicked = true
-        $('#updateOrSendButton').text('Wyślij dane')
-        $('input').addClass('input-focus')
-        $('#firstInput').putCursorAtEnd()
+        $('#updateOrSendButton').text('Zapisz zmiany')
+        $('input').addClass('input')
+        Vue.nextTick(() => {
+          this.putCursorAtEnd($('#firstInput'))
+        })
       } else {
         this.$http.put(`${CFG.API_BASE_URL}/users/updateData`, this.userData)
           .then(() => {
@@ -115,6 +124,12 @@ export default {
             this.$store.dispatch('setMessage', {text: 'Wystąpił błąd', type: 'alert-danger'})
           })
       }
+    },
+    putCursorAtEnd (input) {
+      input.focus()
+      let tmpStr = input.val()
+      input.val('')
+      input.val(tmpStr)
     }
   },
   mounted () {
@@ -129,41 +144,21 @@ export default {
   }
 }
 
-jQuery.fn.putCursorAtEnd = function() {
-  return this.each(function () {
-    var $el = $(this),
-      el = this
-    if (!$el.is(':focus')) {
-      $el.focus()
-    }
-    if (el.setSelectionRange) {
-
-      var len = $el.val().length * 2
-      setTimeout(function () {
-        el.setSelectionRange(len, len)
-      }, 1)
-
-    } else {
-      $el.val($el.val())
-
-    }
-    this.scrollTop = 999999
-  })
-
-
-}
-
 </script>
 
 <style scoped>
-  input {
+  input:disabled {
+    color: grey;
     background-color: white;
-    border: none;
-    border-radius: 4px;
-    padding-left: 10px;
   }
-  .input-focus {
+  .input {
+    color: black;
     outline: none;
+  }
+  input:enabled {
+    border-color: #606060;
+  }
+  .input:focus {
     border-color: #12b31c;
     box-shadow: 0 0 10px #129f1c;
   }
