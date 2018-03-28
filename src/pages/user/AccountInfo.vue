@@ -59,8 +59,9 @@
                     Zdjęcie profilowe
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" :disabled="!updateClicked" v-model="userData.photo"
-                           class="form-control" />
+                    <!--v-model="userData.photo"-->
+                    <input type="file" :disabled="!updateClicked"
+                           class="form-control-file" id="photoFileInput">
                   </div>
                 </div>
                 <div class="row card-body pb-0">
