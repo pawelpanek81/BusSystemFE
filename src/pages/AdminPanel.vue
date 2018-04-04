@@ -16,7 +16,7 @@ export default {
       {name: 'Trasy', urlLink: '/admin/routes'},
       {name: 'Linie autobusowe', urlLink: '/admin/buslines'},
       {name: 'Rozkłady jazdy', urlLink: '/admin/timetables'},
-      {name: 'Pojazdy', urlLink: '/admin/busses'}
+      {name: 'Pojazdy', urlLink: '/admin/buses'}
     ]
     var panelName = 'AdministrationPanel'
     return {items, panelName}

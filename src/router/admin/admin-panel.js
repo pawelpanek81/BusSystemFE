@@ -12,7 +12,7 @@ export default {
     component: AdminPanel,
     children: [
       {
-        path: 'busses',
+        path: 'buses',
         component: Bus
       },
       {
