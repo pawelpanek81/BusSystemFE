@@ -13,7 +13,7 @@
               <div class="collapse navbar-collapse" id="verticalNavbar">
                 <div class="vertical-menu">
                   <router-link v-for="item in items" v-bind:key="item.name" :to="{path: item.urlLink}"
-                               ref="tab" :class="{active:item.name == selected}"
+                               ref="tab" :class="{active:item.name == selected} " v-on:click.native="selected = item.name"
                   exact-active-class="" active-class="">
                     {{item.name}}
                   </router-link>
