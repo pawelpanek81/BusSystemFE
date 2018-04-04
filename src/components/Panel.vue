@@ -12,7 +12,11 @@
               </button>
               <div class="collapse navbar-collapse" id="verticalNavbar">
                 <div class="vertical-menu">
-                  <a v-for="item in items" v-bind:key="item.name" ref="tab" :class="{active:item.name == selected}" @click="selected = item.name">{{item.name}}</a>
+                  <router-link v-for="item in items" v-bind:key="item.name" :to="{path: item.urlLink}"
+                               ref="tab" :class="{active:item.name == selected}"
+                  exact-active-class="" active-class="">
+                    {{item.name}}
+                  </router-link>
                 </div>
               </div>
             </nav>
@@ -21,6 +25,7 @@
         <div class="col-md-6 col-lg-9">
           <div class="m-2">
             <h5>{{panelName}}</h5>
+            <router-view></router-view>
           </div>
         </div>
       </div>
@@ -37,7 +42,7 @@ export default {
     }
   },
   mounted () {
-    this.selected = this.$refs.tab[0].innerHTML
+    this.selected = this.$refs.tab[0].$el.innerText
   }
 }
 </script>
