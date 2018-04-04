@@ -1,15 +1,47 @@
 <template>
-  <div v-if="busesLoaded" class="jumbotron-fluid justify-content-center mt-3 mx-5 mb-5">
-    <div class=" row p-5">
-      <div class="col-8">
-        <h3>Lista wszystkich pracowników</h3>
+  <div>
+    <h5>Dodaj nowy pojazd</h5>
+    <div class="row mt-4">
+      <div class="col-3">
+        <label for="busRegistrationNr">Numer rejestracyjny </label>
+        <input type="text" class="form-control form-control-sm" id="busRegistrationNr"
+               name="busRegistrationNr"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('busRegistrationNr')}"
+               v-model="bus.registrationNr"
+               data-vv-as="numer rejestracyjny">
+        <span v-show="errors.has('busRegistrationNr')"
+              class="invalid-feedback">{{ errors.first('busRegistrationNr') }}</span>
       </div>
-      <div class="col-4">
-        <router-link to="/admin/addbus"><button class="btn btn-outline-dark float-right">Dodaj nowy pojazd</button></router-link>
+      <div class="col-3">
+        <label for="busBrand">Marka pojazdu </label>
+        <input type="text" class="form-control form-control-sm" id="busBrand"
+               name="busBrand"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('busBrand')}"
+               v-model="bus.brand"
+               data-vv-as="markę pojazdu">
+        <span v-show="errors.has('busBrand')"
+              class="invalid-feedback">{{ errors.first('busBrand') }}</span>
+      </div>
+      <div class="col-3">
+        <label for="busModel">Model pojazdu </label>
+        <input type="text" class="form-control form-control-sm" id="busModel"
+               name="busModel"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('busModel')}"
+               v-model="bus.model"
+               data-vv-as="model pojazdu">
+        <span v-show="errors.has('busModel')"
+              class="invalid-feedback">{{ errors.first('busModel') }}</span>
+      </div>
+      <div class="col-3 mt-4">
+        <button type="button" id="registerBusButton" class="btn btn-outline-success" @click="validateForm">Dodaj pojazd</button>
       </div>
     </div>
     <v-dialog/>
-    <table class="table table-hover" id="allbuss">
+    <h5 class="mt-4">Wszystkie pojazdy</h5>
+    <table v-if="busesLoaded" class="table table-hover" id="allbuss">
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -26,13 +58,13 @@
         <td>{{bus.model}}</td>
         <td>
           <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus.registration_number
-          +' '+bus.brand+' '+bus.model, bus.id)">Usuń</button>
+          +' '+bus.brand+' '+bus.model, bus.id)">Usuń
+          </button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-
 </template>
 
 <script>
@@ -44,7 +76,12 @@ export default {
   data () {
     return {
       buses: [],
-      busesLoaded: false
+      busesLoaded: false,
+      bus: {
+        registrationNr: '',
+        brand: '',
+        model: ''
+      }
     }
   },
   methods: {
@@ -90,6 +127,26 @@ export default {
         .then(function (response) {
           if (response.status === 200) {
             console.log('deleted', response.status)
+          }
+        })
+        .catch(function (error) {
+          console.log('error', error)
+        })
+    },
+    validateForm () {
+      this.$validator.validateAll()
+        .then((result) => {
+          if (result) {
+            this.registerBus(this.bus)
+          }
+        })
+    },
+    registerBus (bus) {
+      axios.post(`${CFG.API_BASE_URL}/buses`)
+        .then(function (response) {
+          console.log(bus)
+          if (response.status === 200) {
+            console.log('registered', response.status)
           }
         })
         .catch(function (error) {

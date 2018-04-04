@@ -24,7 +24,6 @@
         </div>
         <div class="col-md-6 col-lg-9">
           <div class="m-2">
-            <h5>{{panelName}}</h5>
             <router-view></router-view>
           </div>
         </div>
