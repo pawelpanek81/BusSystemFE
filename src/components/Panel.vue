@@ -12,7 +12,7 @@
               </button>
               <div class="collapse navbar-collapse" id="verticalNavbar">
                 <div class="vertical-menu">
-                  <a v-for="item in items" v-bind:key="item.name">{{item.name}}</a>
+                  <a v-for="item in items" v-bind:key="item.name" ref="tab" :class="{active:item.name == selected}" @click="selected = item.name">{{item.name}}</a>
                 </div>
               </div>
             </nav>
@@ -31,14 +31,13 @@
 <script>
 export default {
   props: ['items', 'panelName'],
-  mounted () {
-    $('.vertical-menu a:first').addClass('active')
+  data () {
+    return {
+      selected: undefined
+    }
   },
-  updated () {
-    $('.vertical-menu a').on('click', function () {
-      $(this).addClass('active').siblings().removeClass('active')
-      $('#button-toggle').click()
-    })
+  mounted () {
+    this.selected = this.$refs.tab[0].innerHTML
   }
 }
 </script>
