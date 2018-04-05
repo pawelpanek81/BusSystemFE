@@ -9,17 +9,16 @@ export default {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
     axios.post(`${CFG.API_LOGIN_BASE_URL}/login`, credentail)
       .then(response => {
-        if (response.status === 200) {
-          localStorage.setItem('token', response.headers.authorization)
-          const authToken = jwtDecoder(response.headers.authorization)
-          commit(MUTATION_TYPES.SET_TOKEN, authToken)
-          commit(MUTATION_TYPES.SET_LOGGED)
-          commit(MUTATION_TYPES.SET_USERNAME, authToken.sub)
-          commit(MUTATION_TYPES.SET_USER_TYPE, authToken.ut)
-          commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
-          dispatch('setMessage', 'Zostałeś zalogowany')
-          router.push({path: '/'})
-        }
+        const rawToken = response.headers.authorization
+        localStorage.setItem('token', rawToken)
+        commit(MUTATION_TYPES.SET_TOKEN, rawToken)
+        commit(MUTATION_TYPES.SET_LOGGED)
+        const authDecodedToken = jwtDecoder(response.headers.authorization)
+        commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
+        commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        dispatch('setMessage', 'Zostałeś zalogowany')
+        router.push({path: '/'})
       })
       .catch(function () {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
