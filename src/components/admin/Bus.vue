@@ -8,7 +8,7 @@
                name="busRegistrationNr"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('busRegistrationNr')}"
-               v-model="bus.registrationNumer"
+               v-model="bus.registrationNumber"
                data-vv-as="numer rejestracyjny">
         <span v-show="errors.has('busRegistrationNr')"
               class="invalid-feedback">{{ errors.first('busRegistrationNr') }}</span>
@@ -68,7 +68,8 @@
       </thead>
       <tbody>
       <tr v-for="bus in buses" v-bind:key="bus.id">
-        <th scope="row">{{bus.registrationNumber}}</th>
+        <th scope="row">{{bus.id}}</th>
+        <td>{{bus.registrationNumber}}</td>
         <td>{{bus.brand}}</td>
         <td>{{bus.model}}</td>
         <td>{{bus.seats}}</td>
@@ -95,7 +96,7 @@ export default {
       buses: [],
       busesLoaded: false,
       bus: {
-        registrationNumer: '',
+        registrationNumber: '',
         brand: '',
         model: '',
         seats: 0
@@ -108,7 +109,6 @@ export default {
       axios.get(`${CFG.API_BASE_URL}/buses`)
         .then(function (response) {
           if (response.status === 200) {
-            console.log('buses ', response.data)
             vm.busesLoaded = true
             vm.buses = response.data
           }
@@ -141,7 +141,7 @@ export default {
       })
     },
     deleteBus (id) {
-      axios.delete(`/buses/${id}`)
+      axios.delete(`${CFG.API_BASE_URL}/buses/${id}`)
         .then(function (response) {
           if (response.status === 200) {
             console.log('deleted', response.status)
@@ -152,10 +152,12 @@ export default {
         })
     },
     validateForm () {
+      let vm = this
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
-            this.registerBus(this.bus)
+            let dto = this.bus
+            vm.registerBus(dto)
           }
         })
     },
@@ -173,9 +175,6 @@ export default {
     }
   },
   mounted () {
-    this.getBuses()
-  },
-  updated () {
     this.getBuses()
   }
 }

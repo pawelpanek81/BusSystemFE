@@ -47,7 +47,7 @@
               class="dropdown-item" to="/customer">Panel kienta</router-link>
 
             <router-link v-if="getUserType === 'ADMIN'"
-                         class="dropdown-item" to="/admin">TODO Panel administracyjny</router-link>
+                         class="dropdown-item" to="/admin">Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
