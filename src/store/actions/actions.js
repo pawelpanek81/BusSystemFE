@@ -13,7 +13,7 @@ export default {
         localStorage.setItem('token', rawToken)
         commit(MUTATION_TYPES.SET_TOKEN, rawToken)
         commit(MUTATION_TYPES.SET_LOGGED)
-        const authDecodedToken = jwtDecoder(response.headers.authorization)
+        const authDecodedToken = jwtDecoder(rawToken)
         commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
         commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
