@@ -72,8 +72,7 @@
         <td>{{busline.to.city}} - {{busline.to.name}}</td>
         <td>{{busline.driveTime}} min</td>
         <td>
-          <button class="btn btn-outline-warning" @click="ensureDeletingLine(busline.name, busline.id)">Usuń
-          </button>
+          <button class="btn btn-outline-warning" @click="deleteLine(busline.id)">Usuń</button>
         </td>
       </tr>
       </tbody>
@@ -127,17 +126,28 @@ export default {
         .then((result) => {
           if (result) {
             this.addLine(this.line)
-            this.getLines()
           }
         })
     },
-    addLine (lineData) {
+    async addLine (lineData) {
       this.$store.dispatch('addBusLine', lineData)
+      function sleep () {
+        return new Promise(resolve => setTimeout(resolve, 200))
+      }
+      await sleep()
+      this.getLines()
     },
-    deleteLine (id) {
+    async deleteLine (id) {
+      console.log('no wszedłem ', id)
       this.$store.dispatch('deleteBusLine', id)
+      function sleep () {
+        return new Promise(resolve => setTimeout(resolve, 200))
+      }
+      await sleep()
+      this.getLines()
     },
     ensureDeletingLine (name, id) {
+      console.log('no wszedłem ', name)
       let vm = this
       this.$modal.show('dialog', {
         title: 'Usuń linię autobusową',
