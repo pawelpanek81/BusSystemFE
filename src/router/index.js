@@ -6,6 +6,7 @@ import BOKPanel from './bok/bok-panel'
 import DriverPanel from './driver/driver-panel'
 import Navbar from './navbar'
 import Pagination from './pagination'
+import Map from './map'
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +24,9 @@ export default new Router({
     CustomerPanel.CUSTOMERPANEL,
     DriverPanel.DRIVERPANEL,
     BOKPanel.BOKPANEL,
-    Pagination.GO
+    Pagination.GO,
+    Navbar.ADMINISTRATIONPANEL,
+    AdminPanel.ADDNEWS,
+    Map.MAP
   ]
 })

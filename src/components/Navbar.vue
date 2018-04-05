@@ -16,6 +16,9 @@
               <router-link class="nav-link" to="/bus-stops">Przystanki</router-link>
           </li>
           <li class="nav-item">
+              <router-link class="nav-link" to="/bus-stops">Linie autobuswoe</router-link>
+          </li>
+          <li class="nav-item">
               <router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>
           </li>
           <li v-if="!isLogged" class="nav-item">
