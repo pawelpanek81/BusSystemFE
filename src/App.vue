@@ -36,6 +36,9 @@ export default {
     showGlobalMessage: function () {
       return !!this.getMessage
     }
+  },
+  created () {
+    this.$store.dispatch('restoreUserCredentialsIfLogged')
   }
 }
 </script>
