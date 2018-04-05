@@ -5,6 +5,16 @@ import router from '../../router/index'
 import jwtDecoder from 'jwt-decode'
 
 export default {
+  restoreUserCredentialsIfLogged ({dispatch, commit}) {
+    let rawToken = localStorage.getItem('token')
+    if (rawToken) {
+      commit(MUTATION_TYPES.SET_TOKEN, rawToken)
+      commit(MUTATION_TYPES.SET_LOGGED)
+      const authDecodedToken = jwtDecoder(rawToken)
+      commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
+      commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
+    }
+  },
   login ({dispatch, commit}, credentail) {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
     axios.post(`${CFG.API_LOGIN_BASE_URL}/login`, credentail)
