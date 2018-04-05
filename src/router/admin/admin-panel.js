@@ -36,9 +36,5 @@ export default {
         component: Route
       }
     ]
-  },
-  ADMINBUSLINES2: {
-    path: '/admin/buslines2',
-    component: BusLine
   }
 }
