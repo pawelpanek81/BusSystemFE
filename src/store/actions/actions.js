@@ -102,5 +102,16 @@ export default {
   },
   unsetSignUpServerError ({commit}) {
     commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
+  },
+  addBusLine ({dispatch, commit}, lineData) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
+    axios.post(`${CFG.API_BASE_URL}/bus-lines`, lineData)
+      .then(function (response) {
+        dispatch('setMessage', 'Linia Dodana')
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
+      .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
   }
 }
