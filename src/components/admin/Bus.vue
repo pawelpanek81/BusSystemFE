@@ -8,7 +8,7 @@
                name="busRegistrationNr"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('busRegistrationNr')}"
-               v-model="bus.registrationNr"
+               v-model="bus.registrationNumer"
                data-vv-as="numer rejestracyjny">
         <span v-show="errors.has('busRegistrationNr')"
               class="invalid-feedback">{{ errors.first('busRegistrationNr') }}</span>
@@ -35,7 +35,21 @@
         <span v-show="errors.has('busModel')"
               class="invalid-feedback">{{ errors.first('busModel') }}</span>
       </div>
-      <div class="col-3 mt-4">
+      <div class="col-3">
+        <label for="busSeats">Liczba miejsc siedzących </label>
+        <input type="number" class="form-control form-control-sm" id="busSeats"
+               name="busSeats"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('busSeats')}"
+               v-model="bus.seats"
+               data-vv-as="liczbę miejsc siedzących">
+        <span v-show="errors.has('busSeats')"
+              class="invalid-feedback">{{ errors.first('busSeats') }}</span>
+      </div>
+
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 text-center">
         <button type="button" id="registerBusButton" class="btn btn-outline-success" @click="validateForm">Dodaj pojazd</button>
       </div>
     </div>
@@ -48,17 +62,20 @@
         <th scope="col">Numer rejestracji</th>
         <th scope="col">Marka</th>
         <th scope="col">Model</th>
+        <th scope="col">Liczba miejsc</th>
         <th scope="col">Usuń</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="bus in buses" v-bind:key="bus.id">
-        <th scope="row">{{bus.registration_number}}</th>
+        <th scope="row">{{bus.registrationNumber}}</th>
         <td>{{bus.brand}}</td>
         <td>{{bus.model}}</td>
+        <td>{{bus.seats}}</td>
         <td>
           <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus.registration_number
-          +' '+bus.brand+' '+bus.model, bus.id)">Usuń
+          +' '+bus.brand+' '+bus.model, bus.id)">
+            Usuń
           </button>
         </td>
       </tr>
@@ -78,9 +95,10 @@ export default {
       buses: [],
       busesLoaded: false,
       bus: {
-        registrationNr: '',
+        registrationNumer: '',
         brand: '',
-        model: ''
+        model: '',
+        seats: 0
       }
     }
   },
@@ -142,7 +160,7 @@ export default {
         })
     },
     registerBus (bus) {
-      axios.post(`${CFG.API_BASE_URL}/buses`)
+      axios.post(`${CFG.API_BASE_URL}/buses`, bus)
         .then(function (response) {
           console.log(bus)
           if (response.status === 200) {
