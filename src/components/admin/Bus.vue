@@ -111,6 +111,8 @@ export default {
           if (response.status === 200) {
             vm.busesLoaded = true
             vm.buses = response.data
+            // po post-cie tu wciaz sa stare dane
+            console.log('got busses', response.data)
           }
         })
         .catch(function (error) {
@@ -158,7 +160,14 @@ export default {
           if (result) {
             let dto = this.bus
             vm.registerBus(dto)
+            // np tutaj
+            vm.getBuses()
           }
+        })
+        .then(() => {
+          // np tutaj
+          vm.getBuses()
+          console.log('whyyy', vm.buses)
         })
     },
     registerBus (bus) {
