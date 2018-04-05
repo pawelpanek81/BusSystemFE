@@ -111,8 +111,6 @@ export default {
           if (response.status === 200) {
             vm.busesLoaded = true
             vm.buses = response.data
-            // po post-cie tu wciaz sa stare dane
-            console.log('got busses', response.data)
           }
         })
         .catch(function (error) {
@@ -143,14 +141,13 @@ export default {
       })
     },
     deleteBus (id) {
+      let vm = this
       axios.delete(`${CFG.API_BASE_URL}/buses/${id}`)
         .then(function (response) {
-          if (response.status === 200) {
-            console.log('deleted', response.status)
-          }
+          vm.getBuses()
         })
         .catch(function (error) {
-          console.log('error', error)
+          console.log('error in deleteBus', error)
         })
     },
     validateForm () {
@@ -160,27 +157,28 @@ export default {
           if (result) {
             let dto = this.bus
             vm.registerBus(dto)
-            // np tutaj
-            vm.getBuses()
+            vm.resetInputs()
           }
-        })
-        .then(() => {
-          // np tutaj
-          vm.getBuses()
-          console.log('whyyy', vm.buses)
         })
     },
     registerBus (bus) {
+      let vm = this
       axios.post(`${CFG.API_BASE_URL}/buses`, bus)
         .then(function (response) {
-          console.log(bus)
-          if (response.status === 200) {
-            console.log('registered', response.status)
-          }
+          vm.getBuses()
         })
         .catch(function (error) {
-          console.log('error', error)
+          console.log('error w registerBus', error)
         })
+    },
+    resetInputs () {
+      this.bus = {
+        registrationNumber: ' ',
+        brand: ' ',
+        model: ' ',
+        seats: 0
+      }
+      this.$validator.reset()
     }
   },
   mounted () {
