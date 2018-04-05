@@ -138,7 +138,7 @@ export default {
   },
   methods: {
     getBusStops () {
-      this.$http.get(`${CFG.API_BASE_URL + ENDPOINTS.GET_BUS_STOPS}`)
+      this.$http.get(`${CFG.API_BASE_URL + ENDPOINTS.BUS_STOPS}`)
         .then((res) => {
           this.busStops = res.data
         })
@@ -152,10 +152,10 @@ export default {
         })
     },
     addBusStop (data) {
-      this.$store.dispatch('addBusStop', data)
+      this.$store.dispatch('createNewBusStop', data)
     },
     deleteBusStopById (id) {
-      this.$store.dispatch('deleteBusStop', id)
+      this.$store.dispatch('deleteBusStopById', id)
     },
     busStopToString: (busStop) => {
       return busStop.city + ' ' + busStop.name + ' ' + busStop.address

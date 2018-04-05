@@ -1,4 +1,5 @@
 import CFG from '../../config'
+import ENDPOINTS from '../../endpoints'
 import MUTATION_TYPES from '../mutation-types/mutation-types'
 import axios from 'axios'
 import router from '../../router/index'
@@ -101,5 +102,25 @@ export default {
   },
   unsetSignUpServerError ({commit}) {
     commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
+  },
+  createNewBusStop ({commit}, busStop) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
+    axios.post(`${CFG.API_BASE_URL + ENDPOINTS.BUS_STOPS}`, busStop)
+      .then(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
+      .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
+  },
+  deleteBusStopById ({commit}, id) {
+    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
+    axios.delete(`${CFG.API_BASE_URL + ENDPOINTS.BUS_STOPS}/${id}`)
+      .then(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
+      .catch(function () {
+        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+      })
   }
 }
