@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg mt-2">
     <div class="container">
-      <router-link class="navbar-brand" to="/"><h3>BusSystem</h3></router-link>
+      <router-link class="navbar-brand" to="/"><h3>JanuszPol <i class="fas fa-bus"></i></h3></router-link>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,6 +14,9 @@
           </li>
           <li class="nav-item">
               <router-link class="nav-link" to="/bus-stops">Przystanki</router-link>
+          </li>
+          <li class="nav-item">
+              <router-link class="nav-link" to="/bus-stops">Linie autobuswoe</router-link>
           </li>
           <li class="nav-item">
               <router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>
@@ -30,8 +33,19 @@
             <i class="fas fa-user userIcon"></i>
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <router-link class="dropdown-item" to="/user/tickets">Bilety</router-link>
-            <a class="dropdown-item" href="#">Konto</a>
+            <router-link v-if="getUserType === 'USER'"
+              class="dropdown-item" to="/user/tickets">Bilety</router-link>
+            <router-link v-if="getUserType === 'USER' || getUserType === 'DRIVER'"
+              class="dropdown-item" to="/user/account">Konto</router-link>
+
+            <router-link
+                         class="dropdown-item" to="/driver/driver-panel">TODO Panel kierowcy</router-link>
+
+            <router-link
+                         class="dropdown-item" to="/bok/bok-panel">TODO Panel BOK</router-link>
+
+            <router-link v-if="getUserType === 'ADMIN'"
+                         class="dropdown-item" to="/admin/administration-panel">TODO Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
@@ -51,17 +65,15 @@
   }
 </style>
 <script>
-import jwtDecoder from 'jwt-decode'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'Navbar',
   computed: {
-    ...mapGetters(['isLogged']),
+    ...mapGetters(['isLogged', 'getUserType', 'getUserName']),
     username: function () {
-      let authToken = localStorage.getItem('token')
-      if (authToken) {
-        return jwtDecoder(authToken).sub
+      if (this.isLogged) {
+        return this.getUserName
       }
       return ''
     }
