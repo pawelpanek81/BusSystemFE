@@ -3,6 +3,7 @@ export default {
   getToken: state => state.token,
   getUserName: state => state.username,
   getMessage: state => state.message,
+  getMessageType: state => state.messageType,
   getRegisteredFlag: state => state.registeredFlag,
   getLoginError: state => state.loginError,
   getLoadingSpinner: state => state.showLoader,
