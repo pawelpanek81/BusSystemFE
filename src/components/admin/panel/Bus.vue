@@ -53,7 +53,6 @@
         <button type="button" id="registerBusButton" class="btn btn-outline-success" @click="validateForm">Dodaj pojazd</button>
       </div>
     </div>
-    <v-dialog/>
     <h5 class="mt-4">Wszystkie pojazdy</h5>
     <table v-if="busesLoaded" class="table table-hover" id="allbuss">
       <thead>
@@ -74,7 +73,7 @@
         <td>{{bus.model}}</td>
         <td>{{bus.seats}}</td>
         <td>
-          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus)">
+          <button class="btn btn-outline-warning" @click="ensure2(bus)">
             Usuń
           </button>
         </td>
@@ -87,6 +86,7 @@
 <script>
 import axios from 'axios'
 import CFG from '../../../api/config'
+import swal from 'sweetalert'
 
 export default {
   name: 'buses',
@@ -133,6 +133,23 @@ export default {
           }
         ]
       })
+    },
+    ensure2 (bus) {
+      let busInfo = bus.registrationNumber + ' ' + bus.brand + ' ' + bus.model
+      swal({
+        text: `Czy na pewno chcesz usunąć pojazd ${busInfo} z bazy?`,
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.deleteBus(bus.id)
+            swal('Usunięto', {
+              icon: 'success'
+            })
+          }
+        })
     },
     deleteBus (id) {
       this.$store.dispatch('deleteBus', id).then(() =>
