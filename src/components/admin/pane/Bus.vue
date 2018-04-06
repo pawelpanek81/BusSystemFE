@@ -37,7 +37,7 @@
       </div>
       <div class="col-3">
         <label for="busSeats">Liczba miejsc siedzących </label>
-        <input type="number" class="form-control form-control-sm" id="busSeats"
+        <input type="number" min="0" max="300" class="form-control form-control-sm" id="busSeats"
                name="busSeats"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('busSeats')}"
@@ -74,7 +74,7 @@
         <td>{{bus.model}}</td>
         <td>{{bus.seats}}</td>
         <td>
-          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus.registration_number
+          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus.registrationNumber
           +' '+bus.brand+' '+bus.model, bus.id)">
             Usuń
           </button>
@@ -87,7 +87,7 @@
 
 <script>
 import axios from 'axios'
-import CFG from '../../../config'
+import CFG from '../../../api/config'
 
 export default {
   name: 'buses',
@@ -105,20 +105,14 @@ export default {
   },
   methods: {
     getBuses () {
-      let vm = this
       axios.get(`${CFG.API_BASE_URL}/buses`)
-        .then(function (response) {
-          if (response.status === 200) {
-            vm.busesLoaded = true
-            vm.buses = response.data
-          }
+        .then((response) => {
+          this.busesLoaded = true
+          this.buses = response.data
         })
-        .catch(function (error) {
-          console.log('error', error)
-        })
+        .catch(function () {})
     },
     ensureDeletingBus (bus, id) {
-      let vm = this
       this.$modal.show('dialog', {
         title: 'Usuń pracownika',
         text: `Czy na pewno chcesz usunąć pojazd ${bus} z bazy?`,
@@ -126,7 +120,7 @@ export default {
           {
             title: 'Usuń',
             handler: () => {
-              vm.deleteBus(id)
+              this.deleteBus(id)
               this.$modal.hide('dialog')
             }
           },
@@ -141,35 +135,24 @@ export default {
       })
     },
     deleteBus (id) {
-      let vm = this
-      axios.delete(`${CFG.API_BASE_URL}/buses/${id}`)
-        .then(function (response) {
-          vm.getBuses()
-        })
-        .catch(function (error) {
-          console.log('error in deleteBus', error)
-        })
+      this.$store.dispatch('deleteBus', id).then(() =>
+        this.getBuses()
+      )
     },
     validateForm () {
-      let vm = this
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
             let dto = this.bus
-            vm.registerBus(dto)
-            vm.resetInputs()
+            this.registerBus(dto)
+            this.resetInputs()
           }
         })
     },
     registerBus (bus) {
-      let vm = this
-      axios.post(`${CFG.API_BASE_URL}/buses`, bus)
-        .then(function (response) {
-          vm.getBuses()
-        })
-        .catch(function (error) {
-          console.log('error w registerBus', error)
-        })
+      this.$store.dispatch('registerBus', bus).then(() =>
+        this.getBuses()
+      )
     },
     resetInputs () {
       this.bus = {

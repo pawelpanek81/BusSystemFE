@@ -138,7 +138,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import '../../../static/js/donetyping'
-import CFG from '../../config'
+import CFG from '../../api/config'
 
 export default {
   data () {

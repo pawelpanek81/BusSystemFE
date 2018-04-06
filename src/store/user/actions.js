@@ -1,4 +1,4 @@
-import CFG from '../../config'
+import CFG from '../../api/config'
 import jwtDecoder from 'jwt-decode'
 import router from '../../router'
 import axios from 'axios'
@@ -38,15 +38,11 @@ export default {
     dispatch('setLoadingSpinner')
     axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
       .then(function (response) {
-        if (response.status === 200) {
-          commit(MUTATION_TYPES.SET_REGISTERED)
-          dispatch('unsetLoadingSpinner')
-        }
+        commit(MUTATION_TYPES.SET_REGISTERED)
+        dispatch('unsetLoadingSpinner')
       })
-      .catch(function (error) {
-        if (error.response && error.response.data.status === 3) {
-          dispatch('setSignUpServerError')
-        }
+      .catch(function () {
+        dispatch('setSignUpServerError')
         dispatch('unsetLoadingSpinner')
       })
   },
