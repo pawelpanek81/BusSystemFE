@@ -38,10 +38,10 @@
             <router-link v-if="getUserType === 'USER' || getUserType === 'DRIVER'"
               class="dropdown-item" to="/user/account">Konto</router-link>
 
-            <router-link
+            <router-link v-if="getUserType === 'DRIVER'"
                          class="dropdown-item" to="/driver">TODO Panel kierowcy</router-link>
 
-            <router-link
+            <router-link v-if="getUserType === 'BOK'"
                          class="dropdown-item" to="/bok">TODO Panel BOK</router-link>
             <router-link
               class="dropdown-item" to="/customer">Panel kienta</router-link>

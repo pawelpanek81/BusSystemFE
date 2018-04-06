@@ -74,8 +74,7 @@
         <td>{{bus.model}}</td>
         <td>{{bus.seats}}</td>
         <td>
-          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus.registrationNumber
-          +' '+bus.brand+' '+bus.model, bus.id)">
+          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus)">
             Usuń
           </button>
         </td>
@@ -112,15 +111,16 @@ export default {
         })
         .catch(function () {})
     },
-    ensureDeletingBus (bus, id) {
+    ensureDeletingBus (bus) {
+      let busInfo = bus.registrationNumber + ' ' + bus.brand + ' ' + bus.model
       this.$modal.show('dialog', {
         title: 'Usuń pracownika',
-        text: `Czy na pewno chcesz usunąć pojazd ${bus} z bazy?`,
+        text: `Czy na pewno chcesz usunąć pojazd ${busInfo} z bazy?`,
         buttons: [
           {
             title: 'Usuń',
             handler: () => {
-              this.deleteBus(id)
+              this.deleteBus(bus.id)
               this.$modal.hide('dialog')
             }
           },
@@ -150,15 +150,16 @@ export default {
         })
     },
     registerBus (bus) {
-      this.$store.dispatch('registerBus', bus).then(() =>
-        this.getBuses()
-      )
+      this.$store.dispatch('registerBus', bus)
+        .then(() =>
+          this.getBuses()
+        )
     },
     resetInputs () {
       this.bus = {
-        registrationNumber: ' ',
-        brand: ' ',
-        model: ' ',
+        registrationNumber: '',
+        brand: '',
+        model: '',
         seats: 0
       }
       this.$validator.reset()
@@ -169,6 +170,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

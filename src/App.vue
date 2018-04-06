@@ -18,7 +18,7 @@
 <script>
 import Footer from './components/footer/SiteFooter'
 import Navbar from './components/navbar/Navbar'
-import SiteMessages from './components/footer/SiteGlobalMessages'
+import SiteMessages from './components/home/SiteGlobalMessages'
 import SpinnerComponent from './components/LoadingSpinner'
 import {mapGetters} from 'vuex'
 import '../static/css/spinner.css'

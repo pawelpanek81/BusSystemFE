@@ -2,8 +2,8 @@
   <div>
     <div class="container">
       <div class="mt-4 mb-4">
-        <carousel-pane></carousel-pane>
-        <connections-searcher-pane class="p-0 my-3"></connections-searcher-pane>
+        <carousel-panel></carousel-panel>
+        <connections-searcher-panel class="p-0 my-3"></connections-searcher-panel>
         <home-content></home-content>
       </div>
     </div>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import CarouselPane from '@/components/home/CarouselPane'
-import BuyTicket from '@/components/home/BuyTicketPane'
+import CarouselPanel from '@/components/home/CarouselPanel'
+import BuyTicket from '@/components/home/BuyTicketPanel'
 import HomeContent from '@/components/home/HomeContent'
-import ConnectionsSearcherPane from '../../components/home/ConnectionsSearcherPane'
+import ConnectionsSearcherPanel from '../../components/home/ConnectionsSearcherPanel'
 
 export default {
   methods: {
@@ -29,8 +29,8 @@ export default {
     this.playCarousel()
   },
   components: {
-    CarouselPane: CarouselPane,
-    ConnectionsSearcherPane: ConnectionsSearcherPane,
+    CarouselPanel: CarouselPanel,
+    ConnectionsSearcherPanel: ConnectionsSearcherPanel,
     buyTicketComponent: BuyTicket,
     homeContent: HomeContent
   }

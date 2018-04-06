@@ -1,10 +1,10 @@
 import AdminPanel from '@/pages/users/admin/AdminPanel'
-import Bus from '@/components/admin/pane/Bus'
-import BusLine from '@/components/admin/pane/BusLine'
-import BusStop from '@/components/admin/pane/BusStop'
-import Driver from '@/components/admin/pane/Driver'
-import Route from '@/components/admin/pane/Route'
-import Timetable from '@/components/admin/pane/Timetable'
+import Bus from '@/components/admin/panel/Bus'
+import BusLine from '@/components/admin/panel/BusLine'
+import BusStop from '@/components/admin/panel/BusStop'
+import Driver from '@/components/admin/panel/Driver'
+import Route from '@/components/admin/panel/Route'
+import Timetable from '@/components/admin/panel/Timetable'
 
 export default {
   ADMINPANEL: {

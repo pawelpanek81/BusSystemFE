@@ -19,9 +19,9 @@
 
 <script>
 import SingleNewsComponent from './SingleNews'
-import RightInfoPane from './HomeRightInfoPane'
+import RightInfoPane from './HomeRightInfoPanel'
 import {mapGetters} from 'vuex'
-import PaginationComponent from './PaginationPane'
+import PaginationComponent from './PaginationPanel'
 
 export default {
   data () {
