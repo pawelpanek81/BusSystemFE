@@ -50,7 +50,7 @@
   left: 14px;
 }
 
-@-webkit-keyframes dotOneKeyframes {
+@keyframes dotOneKeyframes {
   0% {
     top: 0;
     left: 0;
@@ -100,7 +100,7 @@
   }
 }
 
-@-webkit-keyframes dotTwoKeyframes {
+@keyframes dotTwoKeyframes {
   0% {
     top: 0;
     left: 14px;
@@ -150,7 +150,7 @@
   }
 }
 
-@-webkit-keyframes dotThreeKeyframes {
+@keyframes dotThreeKeyframes {
   0% {
     top: 14px;
     left: 14px;
