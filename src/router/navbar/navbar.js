@@ -1,10 +1,10 @@
-import Home from '@/pages/Home'
-import Buyticket from '@/pages/Buyticket'
-import Busstops from '@/pages/BusStops'
-import Timetables from '@/pages/Timetables'
-import Registration from '@/pages/Registration'
-import Login from '@/pages/Login'
-import Tickets from '@/pages/Tickets'
+import Home from '@/pages/home/Home'
+import Buyticket from '@/pages/navbar/Buyticket'
+import Busstops from '@/pages/navbar/BusStops'
+import Timetables from '@/pages/navbar/Timetables'
+import Registration from '@/pages/navbar/Registration'
+import Login from '@/pages/navbar/Login'
+import Tickets from '@/pages/navbar/Tickets'
 
 export default {
   HOME: {

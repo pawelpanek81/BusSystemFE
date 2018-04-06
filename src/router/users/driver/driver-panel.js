@@ -1,4 +1,4 @@
-import DriverPanel from '@/pages/DriverPanel'
+import DriverPanel from '@/pages/driver/DriverPanel'
 
 export default {
   DRIVERPANEL: {

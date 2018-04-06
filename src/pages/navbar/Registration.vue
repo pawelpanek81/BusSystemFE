@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import RegistrationForm from '../components/RegistrationForm'
-import RegistrationCongrats from '../components/RegistrationCongrats'
+import RegistrationForm from '../../components/registration/RegistrationForm'
+import RegistrationCongrats from '../../components/registration/RegistrationCongrats'
 import {mapGetters} from 'vuex'
 import 'animate.css/animate.min.css'
 export default {

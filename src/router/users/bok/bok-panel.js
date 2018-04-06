@@ -1,4 +1,4 @@
-import BOKPanel from '@/pages/BOKPanel'
+import BOKPanel from '@/pages/bok/BOKPanel'
 
 export default {
   BOKPANEL: {

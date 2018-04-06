@@ -87,7 +87,7 @@
 
 <script>
 import axios from 'axios'
-import CFG from '../../config'
+import CFG from '../../../config'
 
 export default {
   name: 'buses',

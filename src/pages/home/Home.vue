@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import CarouselPane from '@/components/CarouselPane'
-import BuyTicket from '@/components/BuyTicketPane'
-import HomeContent from '@/components/HomeContent'
-import ConnectionsSearcherPane from '../components/ConnectionsSearcherPane'
+import CarouselPane from '@/components/home/CarouselPane'
+import BuyTicket from '@/components/home/BuyTicketPane'
+import HomeContent from '@/components/home/HomeContent'
+import ConnectionsSearcherPane from '../../components/home/ConnectionsSearcherPane'
 
 export default {
   methods: {
