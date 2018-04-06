@@ -1,4 +1,4 @@
 export default {
-  API_BASE_URL: 'http://localhost:3000/api/v1.0',
-  API_LOGIN_BASE_URL: 'http://localhost:3000'
+  API_BASE_URL: localStorage.getItem('API_BASE_URL'),
+  API_LOGIN_BASE_URL: localStorage.getItem('API_LOGIN_BASE_URL')
 }
