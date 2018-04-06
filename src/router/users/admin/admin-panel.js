@@ -1,4 +1,4 @@
-import AdminPanel from '@/pages/admin/AdminPanel'
+import AdminPanel from '@/pages/users/admin/AdminPanel'
 import Bus from '@/components/admin/pane/Bus'
 import BusLine from '@/components/admin/pane/BusLine'
 import BusStop from '@/components/admin/pane/BusStop'

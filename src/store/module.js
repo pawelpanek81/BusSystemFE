@@ -1,15 +1,11 @@
-import state from './state/state'
-import mutations from './mutations/mutations'
-import getters from './getters/getters'
-import actions from './actions/actions'
+import state from './extra/state'
+import mutations from './extra/mutations'
+import getters from './extra/getters'
+import actions from './extra/actions'
 
 export default {
-  // state,
-  // mutations,
-  // getters,
-  // actions
-  state: Object.assign({}, state),
-  mutations: Object.assign({}, mutations),
-  getters: Object.assign({}, getters),
-  actions: Object.assign({}, actions)
+  state,
+  mutations,
+  getters,
+  actions
 }

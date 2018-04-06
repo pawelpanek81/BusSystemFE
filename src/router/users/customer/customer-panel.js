@@ -1,4 +1,4 @@
-import CustomerPanel from '@/pages/customer/CustomerPanel'
+import CustomerPanel from '@/pages/users/customer/CustomerPanel'
 
 export default {
   CUSTOMERPANEL: {
