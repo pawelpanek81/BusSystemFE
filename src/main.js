@@ -30,14 +30,6 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
-axios.get('/api-base-url')
-  .then(res => { localStorage.setItem('API_BASE_URL', res.data.url) })
-  .catch(() => { localStorage.setItem('API_BASE_URL', 'http://localhost:3000/api/v1.0') })
-
-axios.get('/api-login-base-url')
-  .then(res => { localStorage.setItem('API_LOGIN_BASE_URL', res.data.url) })
-  .catch(() => { localStorage.setItem('API_LOGIN_BASE_URL', 'http://localhost:3000') })
-
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
