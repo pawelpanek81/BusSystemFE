@@ -139,7 +139,7 @@
 import {mapGetters} from 'vuex'
 import '../../../static/js/donetyping'
 import api from '../../api/endpoints'
-import errorCodes from '../../api/errorCodes'
+import errorCodes from '../../api/rest-error-codes'
 
 export default {
   data () {
