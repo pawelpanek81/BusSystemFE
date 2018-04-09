@@ -1,5 +1,5 @@
 import Home from '@/pages/home/Home'
-import Buyticket from '@/pages/navbar/Buyticket'
+import Buyticket from '@/pages/navbar/BuyTicket'
 import Busstops from '@/pages/navbar/BusStops'
 import Timetables from '@/pages/navbar/Timetables'
 import Registration from '@/pages/navbar/Registration'
