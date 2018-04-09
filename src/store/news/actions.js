@@ -16,7 +16,7 @@ export default {
     dispatch('setLoadingSpinner')
     axios.post(api.NEWS, newsData)
       .then(function (response) {
-        dispatch('setMessage', 'News Dodany')
+        dispatch('setMessage', {text: 'News Dodany', type: 'alert-success'})
         dispatch('unsetLoadingSpinner')
         router.push({path: '/'})
       })

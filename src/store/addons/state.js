@@ -1,4 +1,5 @@
 export default {
   showLoader: false,
-  message: null
+  message: null,
+  messageType: ''
 }

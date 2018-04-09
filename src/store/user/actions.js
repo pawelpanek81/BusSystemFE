@@ -6,6 +6,16 @@ import axios from 'axios'
 import MUTATION_TYPES from './mutation-types'
 
 export default {
+  restoreUserCredentialsIfLogged ({dispatch, commit}) {
+    let rawToken = localStorage.getItem('token')
+    if (rawToken) {
+      commit(MUTATION_TYPES.SET_TOKEN, rawToken)
+      commit(MUTATION_TYPES.SET_LOGGED)
+      const authDecodedToken = jwtDecoder(rawToken)
+      commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
+      commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
+    }
+  },
   login ({dispatch, commit}, credentail) {
     dispatch('setLoadingSpinner')
     axios.post(`${CFG.API_LOGIN_BASE_URL}${api.LOGIN}`, credentail)
@@ -18,7 +28,7 @@ export default {
         commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
         commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
         dispatch('unsetLoadingSpinner')
-        dispatch('setMessage', 'Zostałeś zalogowany')
+        dispatch('setMessage', {text: 'Zostałeś zalogowany', type: 'alert-success'})
         router.push({path: '/'})
       })
       .catch(function () {
@@ -32,7 +42,7 @@ export default {
     commit(MUTATION_TYPES.SET_TOKEN, null)
     commit(MUTATION_TYPES.SET_USERNAME, null)
     commit(MUTATION_TYPES.SET_USER_TYPE, null)
-    dispatch('setMessage', 'Zostałeś wylogowany')
+    dispatch('setMessage', {text: 'Zostałeś wylogowany', type: 'alert-success'})
     router.push({path: '/'})
   },
   signUp ({dispatch, commit}, registrationData) {

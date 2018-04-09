@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import api from '../../api/endpoints'
+import api from '../../../api/endpoints'
 import Vue from 'vue'
 
 export default {
@@ -135,7 +135,7 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${api.USERS}/${this.userData.id}/users/userData`)
+    this.$http.get(`${api.USERS}/${this.userData.id}`)
       .then((response) => {
         this.userData = response.data
       })

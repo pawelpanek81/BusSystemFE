@@ -4,5 +4,6 @@ export default {
   AVAILABILITY_OF_EMAIL: '/users/availability/email',
   NEWS: '/news',
   LOGIN: '/login',
-  REGISTER: '/users'
+  REGISTER: '/users',
+  USERS: '/users'
 }
