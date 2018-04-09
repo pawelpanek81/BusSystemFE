@@ -1,11 +1,11 @@
-import CFG from '../../api/config'
+import api from '../../api/endpoints'
 import MUTATION_TYPES from './mutation-types'
 import axios from 'axios'
 import router from '../../router/index'
 
 export default {
   getNews ({dispatch, commit}, settings) {
-    axios.get(`${CFG.API_BASE_URL}/news?page=${settings.page}&size=${settings.size}&sort=dateTime,DESC`)
+    axios.get(`${api.NEWS}?page=${settings.page}&size=${settings.size}&sort=dateTime,DESC`)
       .then(function (response) {
         commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)
         commit(MUTATION_TYPES.TOTAL_NEWS_PAGES, response.data.totalPages)
@@ -14,7 +14,7 @@ export default {
   },
   addNews ({dispatch, commit}, newsData) {
     dispatch('setLoadingSpinner')
-    axios.post(`${CFG.API_BASE_URL}/news`, newsData)
+    axios.post(api.NEWS, newsData)
       .then(function (response) {
         dispatch('setMessage', 'News Dodany')
         dispatch('unsetLoadingSpinner')

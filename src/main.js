@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import VeeValidate from 'vee-validate'
 import language from './language/vee-validate-messages-dictionary'
 import vMediaQuery from 'v-media-query'
+import config from './api/config'
 
 Vue.use(vMediaQuery)
 Vue.use(VeeValidate)
@@ -21,6 +22,8 @@ Vue.config.productionTip = false
 
 VeeValidate.Validator.localize(language.dictionary)
 VeeValidate.Validator.localize('pl')
+
+axios.defaults.baseURL = config.API_BASE_URL
 
 axios.interceptors.request.use((config) => {
   let authToken = store.getters.getToken

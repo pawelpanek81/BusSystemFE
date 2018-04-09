@@ -85,7 +85,7 @@
 
 <script>
 import axios from 'axios'
-import CFG from '../../../api/config'
+import api from '../../../api/endpoints'
 import swal from 'sweetalert'
 
 export default {
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     getBuses () {
-      axios.get(`${CFG.API_BASE_URL}/buses`)
+      axios.get(api.BUSES)
         .then((response) => {
           this.busesLoaded = true
           this.buses = response.data

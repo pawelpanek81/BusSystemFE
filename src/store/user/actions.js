@@ -1,4 +1,5 @@
 import CFG from '../../api/config'
+import api from '../../api/endpoints'
 import jwtDecoder from 'jwt-decode'
 import router from '../../router'
 import axios from 'axios'
@@ -7,7 +8,7 @@ import MUTATION_TYPES from './mutation-types'
 export default {
   login ({dispatch, commit}, credentail) {
     dispatch('setLoadingSpinner')
-    axios.post(`${CFG.API_LOGIN_BASE_URL}/login`, credentail)
+    axios.post(`${CFG.API_LOGIN_BASE_URL}${api.LOGIN}`, credentail)
       .then(response => {
         const rawToken = response.headers.authorization
         localStorage.setItem('token', rawToken)
@@ -36,7 +37,7 @@ export default {
   },
   signUp ({dispatch, commit}, registrationData) {
     dispatch('setLoadingSpinner')
-    axios.post(`${CFG.API_BASE_URL}/users/sign-up`, registrationData)
+    axios.post(api.REGISTER, registrationData)
       .then(function (response) {
         commit(MUTATION_TYPES.SET_REGISTERED)
         dispatch('unsetLoadingSpinner')

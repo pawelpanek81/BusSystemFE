@@ -1,15 +1,15 @@
 import axios from 'axios'
-import CFG from '../../api/config'
+import api from '../../api/endpoints'
 
 export default {
   registerBus ({commit}, bus) {
-    const registerBus = axios.post(`${CFG.API_BASE_URL}/buses`, bus)
+    const registerBus = axios.post(api.BUSES, bus)
       .then((response) => {})
       .catch(function () {})
     return registerBus
   },
   deleteBus ({commit}, id) {
-    const deletedBus = axios.delete(`${CFG.API_BASE_URL}/buses/${id}`)
+    const deletedBus = axios.delete(api.BUSES + '/' + id)
       .then((response) => {})
       .catch(function () {})
     return deletedBus
