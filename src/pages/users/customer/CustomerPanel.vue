@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import panel from '@/components/Panel'
+import panel from '@/components/UserPanel'
 
 export default {
   components: {

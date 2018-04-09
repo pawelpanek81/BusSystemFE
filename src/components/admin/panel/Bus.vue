@@ -73,7 +73,7 @@
         <td>{{bus.model}}</td>
         <td>{{bus.seats}}</td>
         <td>
-          <button class="btn btn-outline-warning" @click="ensure2(bus)">
+          <button class="btn btn-outline-warning" @click="ensureDeletingBus(bus)">
             Usuń
           </button>
         </td>
@@ -112,29 +112,6 @@ export default {
         .catch(function () {})
     },
     ensureDeletingBus (bus) {
-      let busInfo = bus.registrationNumber + ' ' + bus.brand + ' ' + bus.model
-      this.$modal.show('dialog', {
-        title: 'Usuń pracownika',
-        text: `Czy na pewno chcesz usunąć pojazd ${busInfo} z bazy?`,
-        buttons: [
-          {
-            title: 'Usuń',
-            handler: () => {
-              this.deleteBus(bus.id)
-              this.$modal.hide('dialog')
-            }
-          },
-          {
-            title: 'Wróć',
-            default: true,
-            handler: () => {
-              this.$modal.hide('dialog')
-            }
-          }
-        ]
-      })
-    },
-    ensure2 (bus) {
       let busInfo = bus.registrationNumber + ' ' + bus.brand + ' ' + bus.model
       swal({
         text: `Czy na pewno chcesz usunąć pojazd ${busInfo} z bazy?`,

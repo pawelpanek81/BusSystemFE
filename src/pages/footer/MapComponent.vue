@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import CFG from '../api/config'
-import '../../static/js/gmap3.min'
+import CFG from '../../api/config'
+import '../../../static/js/gmap3.min'
 import GoogleMapsLoader from 'google-maps'
 GoogleMapsLoader.KEY = 'AIzaSyBL0B3DQeGfDD6kyjtlbNbeRJEHNt_9giA'
 GoogleMapsLoader.LANGUAGE = 'pl'
