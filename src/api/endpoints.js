@@ -1,8 +1,8 @@
 export default {
   BUSES: '/buses',
-  AVAILABILITY_OF_USERNAME: '/users/check-username-free',
-  AVAILABILITY_OF_EMAIL: '/users/check-email-free',
+  AVAILABILITY_OF_USERNAME: '/users/availability/username',
+  AVAILABILITY_OF_EMAIL: '/users/availability/email',
   NEWS: '/news',
   LOGIN: '/login',
-  REGISTER: '/users/sign-up'
+  REGISTER: '/users'
 }

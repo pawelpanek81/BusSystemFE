@@ -174,7 +174,7 @@ export default {
       this.$store.dispatch('unsetSignUpServerError')
     },
     checkUserNamePopUp: function () {
-      this.$http.post(api.AVAILABILITY_OF_USERNAME, {username: this.registerDTO.username})
+      this.$http.get(`${api.AVAILABILITY_OF_USERNAME}?username=${this.registerDTO.username}`)
         .then(() => {
           $('#inputUsername').popover('dispose')
         })
@@ -185,7 +185,7 @@ export default {
         })
     },
     checkEmailPopUp: function () {
-      this.$http.post(api.AVAILABILITY_OF_EMAIL, { email: this.registerDTO.email })
+      this.$http.get(`${api.AVAILABILITY_OF_USERNAME}?email=${this.registerDTO.email}`)
         .then(() => {
           $('#inputEmail').popover('dispose')
         })
