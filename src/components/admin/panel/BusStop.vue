@@ -76,14 +76,8 @@
       <div class="col-6">
         <input type="text" class="form-control form-control-sm" id="busStopAddress"
                name="busStopAddress"
-               v-validate="'required'"
-               :class="{'is-invalid': errors.has('busStopAddress')}"
                v-model="busStop.address"
                data-vv-as="adres">
-        <transition enter-active-class="animated fadeIn">
-          <span v-show="errors.has('busStopAddress')"
-                class="invalid-feedback">{{ errors.first('busStopAddress') }}</span>
-        </transition>
       </div>
     </div>
     <div class="row mt-4">
