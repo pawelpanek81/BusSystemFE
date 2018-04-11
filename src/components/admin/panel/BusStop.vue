@@ -12,8 +12,10 @@
                :class="{'is-invalid': errors.has('busStopName')}"
                v-model="busStop.name"
                data-vv-as="nazwę przystanku">
-        <span v-show="errors.has('busStopName')"
-              class="invalid-feedback">{{ errors.first('busStopName') }}</span>
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('busStopName')"
+                class="invalid-feedback">{{ errors.first('busStopName') }}</span>
+        </transition>
       </div>
     </div>
     <div class="row mt-2">
@@ -27,8 +29,10 @@
                :class="{'is-invalid': errors.has('busStopCity')}"
                v-model="busStop.city"
                data-vv-as="miasto">
-        <span v-show="errors.has('busStopCity')"
-              class="invalid-feedback">{{ errors.first('busStopCity') }}</span>
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('busStopCity')"
+                class="invalid-feedback">{{ errors.first('busStopCity') }}</span>
+        </transition>
       </div>
     </div>
     <div class="row mt-2">
@@ -42,8 +46,10 @@
                :class="{'is-invalid': errors.has('busStopLatitude')}"
                v-model="busStop.latitude"
                data-vv-as="szerokość geograficzną">
-        <span v-show="errors.has('busStopLatitude')"
-              class="invalid-feedback">{{ errors.first('busStopLatitude') }}</span>
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('busStopLatitude')"
+                class="invalid-feedback">{{ errors.first('busStopLatitude') }}</span>
+        </transition>
       </div>
     </div>
     <div class="row mt-2">
@@ -57,8 +63,10 @@
                :class="{'is-invalid': errors.has('busStopLongitude')}"
                v-model="busStop.longitude"
                data-vv-as="długość geograficzną">
-        <span v-show="errors.has('busStopLongitude')"
-              class="invalid-feedback">{{ errors.first('busStopLongitude') }}</span>
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('busStopLongitude')"
+                class="invalid-feedback">{{ errors.first('busStopLongitude') }}</span>
+        </transition>
       </div>
     </div>
     <div class="row mt-2">
@@ -72,8 +80,10 @@
                :class="{'is-invalid': errors.has('busStopAddress')}"
                v-model="busStop.address"
                data-vv-as="adres">
-        <span v-show="errors.has('busStopAddress')"
-              class="invalid-feedback">{{ errors.first('busStopAddress') }}</span>
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('busStopAddress')"
+                class="invalid-feedback">{{ errors.first('busStopAddress') }}</span>
+        </transition>
       </div>
     </div>
     <div class="row mt-4">
@@ -84,7 +94,6 @@
         </button>
       </div>
     </div>
-    <v-dialog/>
     <h5 class="mt-2">Wszystkie przystanki</h5>
     <table class="table table-hover">
       <thead>
@@ -119,8 +128,7 @@
 </template>
 
 <script>
-import CFG from '../../config'
-import ENDPOINTS from '../../endpoints'
+import api from '../../../api/endpoints'
 import swal from 'sweetalert'
 
 export default {
@@ -137,15 +145,22 @@ export default {
     }
   },
   methods: {
+    clearInput () {
+      this.busStop = {
+        city: '',
+        name: '',
+        address: '',
+        latitude: '',
+        longitude: ''
+      }
+    },
     getBusStops () {
-      this.$http.get(`${CFG.API_BASE_URL + ENDPOINTS.BUS_STOPS}`)
-        .then((res) => {
-          this.busStops = res.data
-        })
+      this.$http.get(api.BUS_STOPS)
+        .then(res => { this.busStops = res.data })
     },
     validateAndSend () {
       this.$validator.validateAll()
-        .then((result) => {
+        .then(result => {
           if (result) {
             this.addBusStop(this.busStop)
           }
@@ -153,9 +168,23 @@ export default {
     },
     addBusStop (data) {
       this.$store.dispatch('createNewBusStop', data)
+        .then(() => {
+          this.getBusStops()
+          swal('Dodano przystanek', {icon: 'success'})
+          this.clearInput()
+          this.$validator.reset()
+        }, () => {
+          swal('Oops', 'Something went wrong!', 'error')
+        })
     },
     deleteBusStopById (id) {
       this.$store.dispatch('deleteBusStopById', id)
+        .then(() => {
+          swal('Usunięto przystanek', {icon: 'success'})
+          this.getBusStops()
+        }, () => {
+          swal('Oops', 'Something went wrong!', 'error')
+        })
     },
     busStopToString: (busStop) => {
       return busStop.city + ' ' + busStop.name + ' ' + busStop.address
@@ -171,9 +200,6 @@ export default {
         .then((willDelete) => {
           if (willDelete) {
             this.deleteBusStopById(id)
-            swal('Usunięto przystanek', {
-              icon: 'success'
-            })
           } else {
             swal('Przystanek został zachowany')
           }
