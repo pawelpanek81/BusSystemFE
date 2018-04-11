@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AdminPanel from './admin/admin-panel'
-import CustomerPanel from './customer/customer-panel'
-import DriverPanel from './driver/driver-panel'
-import BOKPanel from './bok/bok-panel'
-import Navbar from './navbar'
-import Pagination from './pagination'
+import AdminPanel from './users/admin/admin-panel'
+import CustomerPanel from './users/customer/customer-panel'
+import DriverPanel from './users/driver/driver-panel'
+import BOKPanel from './users/bok/bok-panel'
+import Navbar from './navbar/navbar'
+import Pagination from './home/pagination'
 import Map from './map'
 Vue.use(Router)
 
@@ -21,6 +21,7 @@ export default new Router({
     Navbar.TICKETS,
     AdminPanel.ADMINPANEL,
     CustomerPanel.CUSTOMERPANEL,
+    CustomerPanel.ACCOUNT_INFO,
     DriverPanel.DRIVERPANEL,
     BOKPanel.BOKPANEL,
     Pagination.GO,
