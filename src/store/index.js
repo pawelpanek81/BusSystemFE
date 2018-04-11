@@ -1,17 +1,17 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-
-import state from './state/state'
-import mutations from './mutations/mutations'
-import getters from './getters/getters'
-import actions from './actions/actions'
-
+import user from './user/index'
+import addOns from './addons/index'
+import news from './news/index'
+import bus from './bus/index'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: true,
-  state: Object.assign({}, state),
-  mutations: Object.assign({}, mutations),
-  getters: Object.assign({}, getters),
-  actions: Object.assign({}, actions)
+  modules: {
+    user,
+    news,
+    bus,
+    addOns
+  }
 })

@@ -1,4 +1,4 @@
-import MapComponent from '@/pages/MapComponent'
+import MapComponent from '@/pages/footer/MapComponent'
 
 export default {
   MAP: {

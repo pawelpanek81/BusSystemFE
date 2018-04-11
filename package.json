@@ -20,10 +20,13 @@
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
     "popper.js": "^1.12.9",
+    "sweetalert": "^2.1.0",
     "tether": "^1.4.3",
+    "v-media-query": "^1.0.3",
     "vee-validate": "^2.0.5",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
+    "vue-media-queries": "0.0.3",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
