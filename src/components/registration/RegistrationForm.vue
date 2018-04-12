@@ -220,9 +220,9 @@ export default {
 
 <style>
   .popover {
-    border: 1px solid rgba(255, 0, 0, 0.6);
+    border: 1px solid rgba(255, 0, 0, 0.6) !important;
   }
   .popover-body {
-    color: red;
+    color: red !important;
   }
 </style>
