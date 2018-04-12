@@ -5,5 +5,5 @@ export default {
   userType: null,
   signUpServerError: false,
   registeredFlag: false,
-  loginError: false
+  loginError: ''
 }

@@ -19,8 +19,9 @@ export default {
       .then(function () {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
-      .catch(function () {
+      .catch(function (error) {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        return Promise.reject(error)
       })
   }
 }

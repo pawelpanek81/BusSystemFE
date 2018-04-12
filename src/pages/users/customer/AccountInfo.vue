@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import api from '../../../api/endpoints'
+import API from '../../../api/endpoints'
 import Vue from 'vue'
 
 export default {
@@ -115,7 +115,7 @@ export default {
           this.putCursorAtEnd($('#firstInput'))
         })
       } else {
-        this.$http.put(`${api.USERS}/${this.userData.id}`, this.userData)
+        this.$http.put(`${API.USERS}/${this.userData.id}`, this.userData)
           .then(() => {
             this.$store.dispatch('logout').then(() => {
               this.$store.dispatch('setMessage',
@@ -135,7 +135,7 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${api.USERS}/${this.userData.id}`)
+    this.$http.get(`${API.USERS}/${this.userData.id}`)
       .then((response) => {
         this.userData = response.data
       })

@@ -1,5 +1,5 @@
 import CFG from '../../api/config'
-import api from '../../api/endpoints'
+import API from '../../api/endpoints'
 import jwtDecoder from 'jwt-decode'
 import router from '../../router'
 import axios from 'axios'
@@ -18,7 +18,7 @@ export default {
   },
   login ({dispatch, commit}, credentail) {
     dispatch('setLoadingSpinner')
-    axios.post(`${CFG.API_LOGIN_BASE_URL}${api.LOGIN}`, credentail)
+    axios.post(`${CFG.API_LOGIN_BASE_URL}${API.LOGIN}`, credentail)
       .then(response => {
         const rawToken = response.headers.authorization
         localStorage.setItem('token', rawToken)
@@ -31,9 +31,13 @@ export default {
         dispatch('setMessage', {text: 'Zostałeś zalogowany', type: 'alert-success'})
         router.push({path: '/'})
       })
-      .catch(function () {
+      .catch(function (error) {
         dispatch('unsetLoadingSpinner')
-        dispatch('setLoginError')
+        if (error.response.status === 404) {
+          dispatch('setLoginError', 'Błędny login lub hasło!')
+        } else {
+          dispatch('setLoginError', 'Aktywuj konto!')
+        }
       })
   },
   logout ({dispatch, commit}) {
@@ -47,7 +51,7 @@ export default {
   },
   signUp ({dispatch, commit}, registrationData) {
     dispatch('setLoadingSpinner')
-    axios.post(api.REGISTER, registrationData)
+    axios.post(API.USERS, registrationData)
       .then(function (response) {
         commit(MUTATION_TYPES.SET_REGISTERED)
         dispatch('unsetLoadingSpinner')
@@ -66,8 +70,8 @@ export default {
   unsetSignUpServerError ({commit}) {
     commit(MUTATION_TYPES.UNSET_SIGNUP_SERVER_ERROR)
   },
-  setLoginError ({commit}) {
-    commit(MUTATION_TYPES.SET_LOGIN_ERROR)
+  setLoginError ({commit}, message) {
+    commit(MUTATION_TYPES.SET_LOGIN_ERROR, message)
   },
   unsetLoginError ({commit}) {
     commit(MUTATION_TYPES.UNSET_LOGIN_ERROR)

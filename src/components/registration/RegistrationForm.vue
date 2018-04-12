@@ -136,10 +136,9 @@
 </template>
 
 <script>
+import API from '../../api/endpoints'
 import {mapGetters} from 'vuex'
 import '../../../static/js/donetyping'
-import api from '../../api/endpoints'
-import errorCodes from '../../api/rest-error-codes'
 
 export default {
   data () {
@@ -174,24 +173,24 @@ export default {
       this.$store.dispatch('unsetSignUpServerError')
     },
     checkUserNamePopUp: function () {
-      this.$http.get(`${api.AVAILABILITY_OF_USERNAME}?username=${this.registerDTO.username}`)
+      this.$http.get(`${API.USERNAMES}?username=${this.registerDTO.username}`)
         .then(() => {
-          $('#inputUsername').popover('dispose')
+          $('#inputUsername').popover('show')
         })
-        .catch((error) => {
-          if (error.response && error.response.data.status === errorCodes.USERNAME_IS_TAKEN) {
-            $('#inputUsername').popover('show')
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $('#inputUsername').popover('dispose')
           }
         })
     },
     checkEmailPopUp: function () {
-      this.$http.get(`${api.AVAILABILITY_OF_USERNAME}?email=${this.registerDTO.email}`)
-        .then(() => {
-          $('#inputEmail').popover('dispose')
+      this.$http.get(`${API.EMAILS}?email=${this.registerDTO.email}`)
+        .then((response) => {
+          $('#inputEmail').popover('show')
         })
-        .catch((error) => {
-          if (error.response && error.response.data.status === errorCodes.EMAIL_IS_ALREADY_USED) {
-            $('#inputEmail').popover('show')
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $('#inputEmail').popover('dispose')
           }
         })
     }
