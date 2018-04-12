@@ -8,7 +8,9 @@
       </div>
       <div class="row">
         <div class="col-4">
-          <input v-model="line.name" placeholder="nazwa linii" id="lineName" name="lineName" v-validate>
+          <input type="text" class="form-control"
+                 v-model="line.name" placeholder="nazwa linii"
+                 id="lineName" name="lineName" v-validate>
         </div>
       </div>
       <div class="row pt-4">
@@ -21,13 +23,13 @@
       </div>
       <div class="row">
         <div class="col-5">
-          <select v-model="line.busStopFromId" id="lineFromStop" name="lineFromStop">
+          <select class="form-control" v-model="line.busStopFromId" id="lineFromStop" name="lineFromStop">
             <option disabled value="">Wybierz przystanek początkowy</option>
             <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
           </select>
         </div>
         <div class="col-5">
-          <select v-model="line.busStopToId" id="lineToStop" name="lineToStop">
+          <select class="form-control" v-model="line.busStopToId" id="lineToStop" name="lineToStop">
             <option disabled value="">Wybierz przystanek końcowy</option>
             <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
           </select>
@@ -39,9 +41,10 @@
           <label for="lineDriveTime">Całkowity czas przejazdu</label></div>
       </div>
       <div class="row">
-        <div class="col">
-          <input type="text" v-model="line.driveTime" placeholder="czas przejazdu w minutach" id="lineDriveTime"
-                 name="lineDriveTime">
+        <div class="col-4">
+          <input type="text" class="form-control"
+                 v-model="line.driveTime" placeholder="czas przejazdu w minutach"
+                 id="lineDriveTime" name="lineDriveTime" v-validate>
         </div>
       </div>
 
@@ -72,7 +75,7 @@
         <td>{{busline.to.city}} - {{busline.to.name}}</td>
         <td>{{busline.driveTime}} min</td>
         <td>
-          <button class="btn btn-outline-warning" @click="deleteLine(busline.id)">Usuń</button>
+          <button class="btn btn-outline-warning" @click="ensureDeletingLine(busline)">Usuń</button>
         </td>
       </tr>
       </tbody>
@@ -82,7 +85,8 @@
 
 <script>
 import axios from 'axios'
-import CFG from '../../config'
+import api from '../../../api/endpoints'
+import swal from 'sweetalert'
 
 export default {
   name: 'lines',
@@ -92,7 +96,7 @@ export default {
       line: {
         busStopFromId: 0,
         busStopToId: 0,
-        driveTime: 0,
+        driveTime: null,
         name: ''
       },
       lines: []
@@ -101,9 +105,8 @@ export default {
   methods: {
     getStops () {
       let self = this
-      axios.get(`${CFG.API_BASE_URL}/bus-stops`)
+      axios.get(`${api.BUS_STOPS}`)
         .then(function (response) {
-          console.log('bus-stops', response.data)
           self.stops = response.data
         })
         .catch(function (error) {
@@ -112,9 +115,8 @@ export default {
     },
     getLines () {
       let self = this
-      axios.get(`${CFG.API_BASE_URL}/bus-lines`)
+      axios.get(`${api.BUS_LINES}`)
         .then(function (response) {
-          console.log('bus-lines', response.data)
           self.lines = response.data
         })
         .catch(function (error) {
@@ -129,53 +131,35 @@ export default {
           }
         })
     },
-    async addLine (lineData) {
+    addLine (lineData) {
       this.$store.dispatch('addBusLine', lineData)
-      function sleep () {
-        return new Promise(resolve => setTimeout(resolve, 200))
-      }
-      await sleep()
-      this.getLines()
+        .then(() => this.getLines())
     },
-    async deleteLine (id) {
-      console.log('no wszedłem ', id)
+    deleteLine (id) {
       this.$store.dispatch('deleteBusLine', id)
-      function sleep () {
-        return new Promise(resolve => setTimeout(resolve, 200))
-      }
-      await sleep()
-      this.getLines()
+        .then(() => this.getLines())
     },
-    ensureDeletingLine (name, id) {
-      console.log('no wszedłem ', name)
-      let vm = this
-      this.$modal.show('dialog', {
-        title: 'Usuń linię autobusową',
-        text: `Czy na pewno chcesz usunąć linię ${name}?`,
-        buttons: [
-          {
-            title: 'Usuń',
-            handler: () => {
-              vm.deleteLine(id)
-              this.$modal.hide('dialog')
-            }
-          },
-          {
-            title: 'Wróć',
-            default: true,
-            handler: () => {
-              this.$modal.hide('dialog')
-            }
-          }
-        ]
+    ensureDeletingLine (busline) {
+      swal({
+        text: `Czy na pewno chcesz usunąć trasę ${busline.name} z bazy?`,
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
       })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.deleteLine(busline.id)
+            swal('Usunięto', {
+              icon: 'success'
+            })
+          }
+        })
     }
   },
 
   mounted () {
     this.getStops()
     this.getLines()
-    console.log('mounted')
   }
 }
 
