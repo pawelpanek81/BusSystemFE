@@ -4,6 +4,7 @@
       <site-navbar></site-navbar>
       <site-messages
         :message="getMessage"
+        :type="getMessageType"
         v-if="showGlobalMessage"></site-messages>
       <transition name="fade">
         <router-view/>
@@ -16,9 +17,9 @@
 </template>
 
 <script>
-import Footer from './components/SiteFooter'
-import Navbar from './components/Navbar'
-import SiteMessages from './components/SiteGlobalMessages'
+import Footer from './components/footer/SiteFooter'
+import Navbar from './components/navbar/Navbar'
+import SiteMessages from './components/home/SiteGlobalMessages'
 import SpinnerComponent from './components/LoadingSpinner'
 import {mapGetters} from 'vuex'
 import '../static/css/spinner.css'
@@ -32,7 +33,7 @@ export default {
     spinnerComponent: SpinnerComponent
   },
   computed: {
-    ...mapGetters(['getMessage', 'getLoadingSpinner']),
+    ...mapGetters(['getMessage', 'getMessageType', 'getLoadingSpinner']),
     showGlobalMessage: function () {
       return !!this.getMessage
     }
