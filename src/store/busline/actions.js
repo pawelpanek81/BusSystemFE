@@ -1,27 +1,27 @@
-import api from '../../api/endpoints'
-import MUTATION_TYPES from './mutation-types'
+import API from '../../api/endpoints'
+import ADDONS_MUTATION_TYPES from '../addons/mutation-types'
 import axios from 'axios'
 
 export default {
   addBusLine ({dispatch, commit}, lineData) {
-    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    const addLine = axios.post(`${api.BUS_LINES}`, lineData)
+    commit(ADDONS_MUTATION_TYPES.SET_LOADING_SPINNER)
+    const addLine = axios.post(API.BUS_LINES, lineData)
       .then(function (response) {
-        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        commit(ADDONS_MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
       .catch(function () {
-        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        commit(ADDONS_MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
     return addLine
   },
   deleteBusLine ({dispatch, commit}, lineID) {
-    commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    const delLine = axios.delete(`${api.BUS_LINES}/${lineID}`)
+    commit(ADDONS_MUTATION_TYPES.SET_LOADING_SPINNER)
+    const delLine = axios.delete(`${API.BUS_LINES}/${lineID}`)
       .then(function (response) {
-        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        commit(ADDONS_MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
       .catch(function () {
-        commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
+        commit(ADDONS_MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
     return delLine
   }

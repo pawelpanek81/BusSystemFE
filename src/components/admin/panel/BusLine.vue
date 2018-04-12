@@ -10,7 +10,7 @@
         <div class="col-4">
           <input type="text" class="form-control"
                  v-model="line.name" placeholder="nazwa linii"
-                 id="lineName" name="lineName" v-validate>
+                 id="lineName" name="lineName" v-validate="'required'">
         </div>
       </div>
       <div class="row pt-4">
@@ -23,13 +23,13 @@
       </div>
       <div class="row">
         <div class="col-5">
-          <select class="form-control" v-model="line.busStopFromId" id="lineFromStop" name="lineFromStop">
+          <select class="form-control" v-model="line.busStopFromId" id="lineFromStop" name="lineFromStop" v-validate="'required'">
             <option disabled value="">Wybierz przystanek początkowy</option>
             <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
           </select>
         </div>
         <div class="col-5">
-          <select class="form-control" v-model="line.busStopToId" id="lineToStop" name="lineToStop">
+          <select class="form-control" v-model="line.busStopToId" id="lineToStop" name="lineToStop" v-validate="'required'">
             <option disabled value="">Wybierz przystanek końcowy</option>
             <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
           </select>
@@ -44,7 +44,7 @@
         <div class="col-4">
           <input type="text" class="form-control"
                  v-model="line.driveTime" placeholder="czas przejazdu w minutach"
-                 id="lineDriveTime" name="lineDriveTime" v-validate>
+                 id="lineDriveTime" name="lineDriveTime" v-validate="'required'">
         </div>
       </div>
 
@@ -85,7 +85,7 @@
 
 <script>
 import axios from 'axios'
-import api from '../../../api/endpoints'
+import API from '../../../api/endpoints'
 import swal from 'sweetalert'
 
 export default {
@@ -104,24 +104,18 @@ export default {
   },
   methods: {
     getStops () {
-      let self = this
-      axios.get(`${api.BUS_STOPS}`)
-        .then(function (response) {
-          self.stops = response.data
+      axios.get(API.BUS_STOPS)
+        .then((response) => {
+          this.stops = response.data
         })
-        .catch(function (error) {
-          console.log('getStops error: ', error)
-        })
+        .catch(function () {})
     },
     getLines () {
-      let self = this
-      axios.get(`${api.BUS_LINES}`)
-        .then(function (response) {
-          self.lines = response.data
+      axios.get(API.BUS_LINES)
+        .then((response) => {
+          this.lines = response.data
         })
-        .catch(function (error) {
-          console.log('getLines error: ', error)
-        })
+        .catch(function () {})
     },
     validateForm () {
       this.$validator.validateAll()
