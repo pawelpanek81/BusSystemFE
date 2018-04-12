@@ -4,7 +4,6 @@ export default {
   AVAILABILITY_OF_EMAIL: '/users/availability/email',
   NEWS: '/news',
   LOGIN: '/login',
-  REGISTER: '/users',
   USERS: '/users',
   BUS_LINES: '/bus-lines',
   BUS_STOPS: '/bus-stops'
