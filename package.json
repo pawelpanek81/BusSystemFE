@@ -28,6 +28,7 @@
     "vue-axios": "^2.0.2",
     "vue-media-queries": "0.0.3",
     "vue-router": "^3.0.1",
+    "vue-tables-2": "^1.4.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

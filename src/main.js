@@ -13,10 +13,12 @@ import VeeValidate from 'vee-validate'
 import language from './language/vee-validate-messages-dictionary'
 import vMediaQuery from 'v-media-query'
 import config from './api/config'
+import {ClientTable} from 'vue-tables-2'
 
 Vue.use(vMediaQuery)
 Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
+Vue.use(ClientTable)
 
 Vue.config.productionTip = false
 
