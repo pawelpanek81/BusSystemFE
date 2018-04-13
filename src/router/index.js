@@ -15,6 +15,7 @@ export default new Router({
     Navbar.HOME,
     Navbar.BUYTICKET,
     Navbar.BUSSTOPS,
+    Navbar.BUSLINES,
     Navbar.TIMETABLES,
     Navbar.LOGIN,
     Navbar.REGISTER,
