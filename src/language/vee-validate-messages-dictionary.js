@@ -10,6 +10,9 @@ export default {
         },
         confirmed: function () {
           return `Hasła muszą być zgodne.`
+        },
+        min_value: function (field) {
+          return `Podana wartość jest za mała`
         }
       }
     }

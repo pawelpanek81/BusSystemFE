@@ -2,15 +2,30 @@
   <div>
     <div class="container">
       <div class="row pt-1">
-        <div class="col-4">
+        <div class="col-5">
           <label for="lineName">Nazwa lini autobusowej</label>
+        </div>
+        <div class="col">
+          <label for="lineDriveTime">Całkowity czas przejazdu</label>
         </div>
       </div>
       <div class="row">
-        <div class="col-4">
-          <input type="text" class="form-control"
+        <div class="col-5">
+          <input type="text" class="form-control form-control-sm"
                  v-model="line.name" placeholder="nazwa linii"
-                 id="lineName" name="lineName" v-validate="'required'">
+                 id="lineName" name="lineName"
+                 v-validate="'required'">
+        </div>
+        <div class="col-5">
+          <input type="number" class="form-control form-control-sm"
+                 id="lineDriveTime" name="lineDriveTime"
+                 v-model="line.driveTime"
+                 placeholder="czas przejazdu w minutach" min="1"
+                 v-validate="'required|min_value:1'"
+                 :class="{'is-invalid': errors.has('lineDriveTime')}"
+                 data-vv-as="całkowity czas przejazdu w minutach">
+          <span v-show="errors.has('lineDriveTime')"
+                class="invalid-feedback">{{ errors.first('lineDriveTime') }}</span>
         </div>
       </div>
       <div class="row pt-4">
@@ -23,28 +38,22 @@
       </div>
       <div class="row">
         <div class="col-5">
-          <select class="form-control" v-model="line.busStopFromId" id="lineFromStop" name="lineFromStop" v-validate="'required'">
+          <select class="form-control form-control-sm" v-model="line.busStopFromId"
+                  id="lineFromStop" name="lineFromStop" v-validate="'required'">
             <option disabled value="">Wybierz przystanek początkowy</option>
-            <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
+            <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">
+              {{st.city + ' - ' + st.name}}
+            </option>
           </select>
         </div>
         <div class="col-5">
-          <select class="form-control" v-model="line.busStopToId" id="lineToStop" name="lineToStop" v-validate="'required'">
+          <select class="form-control form-control-sm" v-model="line.busStopToId"
+                  id="lineToStop" name="lineToStop" v-validate="'required'">
             <option disabled value="">Wybierz przystanek końcowy</option>
-            <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">{{st.city + ' - ' + st.name}}</option>
+            <option v-for="st in stops" v-bind:key="st.id" v-bind:value="st.id">
+              {{st.city + ' - ' + st.name}}
+            </option>
           </select>
-        </div>
-      </div>
-
-      <div class="row pt-4">
-        <div class="col">
-          <label for="lineDriveTime">Całkowity czas przejazdu</label></div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <input type="text" class="form-control"
-                 v-model="line.driveTime" placeholder="czas przejazdu w minutach"
-                 id="lineDriveTime" name="lineDriveTime" v-validate="'required'">
         </div>
       </div>
 
@@ -124,6 +133,15 @@ export default {
             this.addLine(this.line)
           }
         })
+    },
+    resetInputs () {
+      this.line = {
+        busStopFromId: 0,
+        busStopToId: 0,
+        driveTime: null,
+        name: ''
+      }
+      this.$validator.reset()
     },
     addLine (lineData) {
       this.$store.dispatch('addBusLine', lineData)
