@@ -6,7 +6,7 @@
       </h5>
     </div>
     <div class="row mt-4">
-      <div class="col-6">
+      <div class="col-5">
         <label for="busStopInput">Przystanek </label>
         <select class="custom-select form-control form-control-sm" id="busStopInput"
                 name="busStop"
@@ -21,7 +21,7 @@
         <span v-show="errors.has('busStop')"
               class="invalid-feedback">{{ errors.first('busStop') }}</span>
       </div>
-      <div class="col-3">
+      <div class="col-3 offset-1">
         <label for="sequenceInput">Pozycja na trasie </label>
         <input type="number" class="form-control form-control-sm" id="sequenceInput"
                name="sequenceInput"
@@ -53,10 +53,10 @@
       </div>
     </div>
     <div class="row mt-4" v-if="busLineLoaded">
-      <div class="col-8">
-        <h5>Linia nr P3 {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
+      <div class="col-9">
+        <h5>Linia nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <router-link to="/admin/buslines">
           <button type="button" class="btn btn-outline-success">
             Pokaż wszystkie linie
