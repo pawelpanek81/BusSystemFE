@@ -36,5 +36,8 @@ export default {
   },
   [MUTATION_TYPES.SET_USER_TYPE] (state, userType) {
     state.userType = userType
+  },
+  [MUTATION_TYPES.SET_USER_ID] (state, id) {
+    state.userId = id
   }
 }

@@ -21,7 +21,6 @@ export default new Router({
     Navbar.TICKETS,
     AdminPanel.ADMINPANEL,
     CustomerPanel.CUSTOMERPANEL,
-    CustomerPanel.ACCOUNT_INFO,
     DriverPanel.DRIVERPANEL,
     BOKPanel.BOKPANEL,
     Pagination.GO,

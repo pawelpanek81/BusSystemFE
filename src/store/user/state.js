@@ -1,4 +1,5 @@
 export default {
+  userId: null,
   token: null,
   logged: false,
   username: null,

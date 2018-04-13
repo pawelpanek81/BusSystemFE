@@ -14,6 +14,7 @@ export default {
       const authDecodedToken = jwtDecoder(rawToken)
       commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
       commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
+      commit(MUTATION_TYPES.SET_USER_ID, authDecodedToken.id)
     }
   },
   login ({dispatch, commit}, credentail) {
@@ -27,6 +28,7 @@ export default {
         const authDecodedToken = jwtDecoder(rawToken)
         commit(MUTATION_TYPES.SET_USERNAME, authDecodedToken.sub)
         commit(MUTATION_TYPES.SET_USER_TYPE, authDecodedToken.ut)
+        commit(MUTATION_TYPES.SET_USER_ID, authDecodedToken.id)
         dispatch('unsetLoadingSpinner')
         dispatch('setMessage', {text: 'Zostałeś zalogowany', type: 'alert-success'})
         router.push({path: '/'})

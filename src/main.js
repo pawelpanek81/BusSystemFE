@@ -13,10 +13,13 @@ import VeeValidate from 'vee-validate'
 import language from './language/vee-validate-messages-dictionary'
 import vMediaQuery from 'v-media-query'
 import config from './api/config'
+import Element from 'element-ui/lib/element-ui.common'
+import locale from 'element-ui/lib/locale/lang/en'
 
 Vue.use(vMediaQuery)
 Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
+Vue.use(Element, { locale })
 
 Vue.config.productionTip = false
 
