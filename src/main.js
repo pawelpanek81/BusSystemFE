@@ -15,7 +15,7 @@ import vMediaQuery from 'v-media-query'
 import config from './api/config'
 import Element from 'element-ui/lib/element-ui.common'
 import locale from 'element-ui/lib/locale/lang/en'
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(vMediaQuery)
 Vue.use(VeeValidate)
