@@ -13,7 +13,7 @@
                      class="row card-body pb-0">
                   <div class="col-md-12">
                     <div id="errorMessageAlert" class="alert alert-danger mb-0" role="alert">
-                      Błędny login lub hasło!
+                      {{this.getLoginError}}
                     </div>
                   </div>
                 </div>

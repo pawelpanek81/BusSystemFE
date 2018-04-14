@@ -12,8 +12,7 @@ export default {
   data: function () {
     var items = [
       {name: 'Moje bilety', urlLink: '/customer'},
-      {name: 'Moje dane', urlLink: '/customer'},
-      {name: 'Wyszukaj połączenie', urlLink: '/customer'}
+      {name: 'Moje dane', urlLink: '/customer/info'}
     ]
     var panelName = 'CustomerPanel'
     return {items, panelName}

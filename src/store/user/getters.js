@@ -1,4 +1,5 @@
 export default {
+  getUserId: state => state.userId,
   isLogged: state => state.logged,
   getToken: state => state.token,
   getUserName: state => state.username,
