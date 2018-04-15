@@ -16,7 +16,7 @@
               <router-link class="nav-link" to="/bus-stops">Przystanki</router-link>
           </li>
           <li class="nav-item">
-              <router-link class="nav-link" to="/bus-stops">Linie autobuswoe</router-link>
+              <router-link class="nav-link" to="/bus-stops">Linie autobusowe</router-link>
           </li>
           <li class="nav-item">
               <router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>
@@ -34,18 +34,11 @@
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <router-link v-if="getUserType === 'USER'"
-              class="dropdown-item" to="/user/tickets">Bilety</router-link>
-            <router-link v-if="getUserType === 'USER' || getUserType === 'DRIVER'"
-              class="dropdown-item" to="/user/account">Konto</router-link>
-
+              class="dropdown-item" to="/customer">Panel klienta</router-link>
             <router-link v-if="getUserType === 'DRIVER'"
-                         class="dropdown-item" to="/driver">TODO Panel kierowcy</router-link>
-
+                         class="dropdown-item" to="/driver">Panel kierowcy</router-link>
             <router-link v-if="getUserType === 'BOK'"
-                         class="dropdown-item" to="/bok">TODO Panel BOK</router-link>
-            <router-link
-              class="dropdown-item" to="/customer">Panel kienta</router-link>
-
+                         class="dropdown-item" to="/bok">Panel BOK</router-link>
             <router-link v-if="getUserType === 'ADMIN'"
                          class="dropdown-item" to="/admin">Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>

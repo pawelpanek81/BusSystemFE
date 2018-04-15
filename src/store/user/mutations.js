@@ -22,8 +22,8 @@ export default {
   [MUTATION_TYPES.UNSET_REGISTERED] (state) {
     state.registeredFlag = false
   },
-  [MUTATION_TYPES.SET_LOGIN_ERROR] (state) {
-    state.loginError = true
+  [MUTATION_TYPES.SET_LOGIN_ERROR] (state, message) {
+    state.loginError = message
   },
   [MUTATION_TYPES.UNSET_LOGIN_ERROR] (state) {
     state.loginError = false
@@ -36,5 +36,8 @@ export default {
   },
   [MUTATION_TYPES.SET_USER_TYPE] (state, userType) {
     state.userType = userType
+  },
+  [MUTATION_TYPES.SET_USER_ID] (state, id) {
+    state.userId = id
   }
 }

@@ -1,11 +1,11 @@
-import api from '../../api/endpoints'
+import API from '../../api/endpoints'
 import MUTATION_TYPES from './mutation-types'
 import axios from 'axios'
 import router from '../../router/index'
 
 export default {
   getNews ({dispatch, commit}, settings) {
-    axios.get(`${api.NEWS}?page=${settings.page}&size=${settings.size}&sort=dateTime,DESC`)
+    axios.get(`${API.NEWS}?page=${settings.page}&size=${settings.size}&sort=dateTime,DESC`)
       .then(function (response) {
         commit(MUTATION_TYPES.LOAD_NEWS, response.data.content)
         commit(MUTATION_TYPES.TOTAL_NEWS_PAGES, response.data.totalPages)
@@ -14,7 +14,7 @@ export default {
   },
   addNews ({dispatch, commit}, newsData) {
     dispatch('setLoadingSpinner')
-    axios.post(api.NEWS, newsData)
+    axios.post(API.NEWS, newsData)
       .then(function (response) {
         dispatch('setMessage', {text: 'News Dodany', type: 'alert-success'})
         dispatch('unsetLoadingSpinner')
