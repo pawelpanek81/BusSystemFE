@@ -1,15 +1,16 @@
 import CustomerPanel from '@/pages/users/customer/CustomerPanel'
-import AccountInfo from '@/pages/users/customer/AccountInfo'
+import AccountInfo from '@/pages/users/AccountInfo'
 
 export default {
   CUSTOMERPANEL: {
     path: '/customer',
     name: 'CustomerPanel',
-    component: CustomerPanel
-  },
-  ACCOUNT_INFO: {
-    path: '/user/info',
-    name: 'AccountInfo',
-    component: AccountInfo
+    component: CustomerPanel,
+    children: [
+      {
+        path: 'info',
+        component: AccountInfo
+      }
+    ]
   }
 }

@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import api from '../../../api/endpoints'
+import API from '../../../api/endpoints'
 import swal from 'sweetalert'
 
 export default {
@@ -149,7 +149,7 @@ export default {
       }
     },
     getBusStops () {
-      this.$http.get(api.BUS_STOPS)
+      this.$http.get(API.BUS_STOPS)
         .then(res => { this.busStops = res.data })
     },
     validateAndSend () {
@@ -168,7 +168,7 @@ export default {
           this.clearInput()
           this.$validator.reset()
         }, () => {
-          swal('Oops', 'Something went wrong!', 'error')
+          swal('Wystąpił błąd', 'Skontaktuj się z administratorem', 'error')
         })
     },
     deleteBusStopById (id) {
@@ -176,8 +176,12 @@ export default {
         .then(() => {
           swal('Usunięto przystanek', {icon: 'success'})
           this.getBusStops()
-        }, () => {
-          swal('Oops', 'Something went wrong!', 'error')
+        }, (error) => {
+          if (error.response.status === 409) {
+            swal('Wystąpił błąd', 'Próbujesz usunąć przystanek który jest wykorzystywany', 'error')
+          } else {
+            swal('Wystąpił błąd', 'Skontaktuj się z administratorem', 'error')
+          }
         })
     },
     busStopToString: (busStop) => {
