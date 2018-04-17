@@ -13,7 +13,6 @@ export default {
     var items = [
       {name: 'Kierowcy', urlLink: '/admin/drivers'},
       {name: 'Przystanki', urlLink: '/admin/busstops'},
-      {name: 'Trasy', urlLink: '/admin/routes'},
       {name: 'Linie autobusowe', urlLink: '/admin/buslines'},
       {name: 'Rozkłady jazdy', urlLink: '/admin/timetables'},
       {name: 'Pojazdy', urlLink: '/admin/buses'}

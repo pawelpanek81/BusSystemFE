@@ -3,9 +3,9 @@ import api from '../../api/endpoints'
 import MUTATION_TYPES from '../addons/mutation-types'
 
 export default {
-  registerBus ({commit}, bus) {
+  deleteBusStopFromRoute ({commit}, data) {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    return axios.post(api.BUSES, bus)
+    return axios.delete(`${api.BUS_LINES}/${data.lineId}/routes/${data.busStopId}`)
       .then((response) => {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
@@ -14,9 +14,9 @@ export default {
         return Promise.reject(error)
       })
   },
-  deleteBus ({commit}, id) {
+  addBusStopToRoute ({commit}, data) {
     commit(MUTATION_TYPES.SET_LOADING_SPINNER)
-    return axios.delete(api.BUSES + '/' + id)
+    return axios.post(`${api.BUS_LINES}/${data.id}/routes`, data.busStop)
       .then((response) => {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
