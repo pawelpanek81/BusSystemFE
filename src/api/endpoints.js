@@ -5,5 +5,6 @@ export default {
   NEWS: '/news',
   LOGIN: '/login',
   USERS: '/users',
+  BUS_LINES: '/bus-lines',
   BUS_STOPS: '/bus-stops'
 }

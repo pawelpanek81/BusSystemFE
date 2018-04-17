@@ -1,5 +1,5 @@
 <template>
   <div>
-    no hej w bus lines
+    <router-view/>
   </div>
 </template>

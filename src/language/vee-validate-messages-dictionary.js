@@ -10,6 +10,9 @@ export default {
         },
         confirmed: function () {
           return `Hasła muszą być zgodne.`
+        },
+        decimal: function () {
+          return 'Pole może zawierać tylko liczby'
         }
       }
     }
