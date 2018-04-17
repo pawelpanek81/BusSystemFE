@@ -53,22 +53,28 @@
       </div>
     </div>
     <div class="row mt-4" v-if="busLineLoaded">
-      <div class="col-9">
+      <div class="col-9 mb-3">
         <h5>Linia nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
       </div>
       <div class="col-3">
         <router-link to="/admin/buslines">
-          <button type="button" class="btn btn-outline-success">
+          <button type="button" class="btn btn-outline-success btn-sm">
             Pokaż wszystkie linie
           </button>
         </router-link>
       </div>
     </div>
     <div v-if="busStopsLoaded" class="row container" v-for="busStop in busStopsInRoute" v-bind:key="busStop.id">
-      <div class="busStop mr-2"/>
-      <div class="align-self-center">
-        Czas: {{busStop.driveTime}}, {{busStop.busStop.city}} {{busStop.busStop.address}}
-      </div>
+      <div class="busStop"/>
+      <p class="col-7 align-self-center mb-0">
+        {{busStop.busStop.city}} {{busStop.busStop.address}}
+      </p>
+      <p class="col-2 align-self-center mb-0">
+        Czas: {{busStop.driveTime}}
+      </p>
+      <button class="btn btn-outline-danger btn-sm col-2 align-self-center" @click="ensureDeletingBusStopFromRoute(busStop.id)">
+        Usuń z trasy
+      </button>
     </div>
   </div>
 </template>
@@ -113,7 +119,7 @@ export default {
       this.$http.get(`${api.BUS_LINES}/${id}/leftStops`)
         .then(res => { this.allBusStops = res.data })
     },
-    addBusStopToRoute (busStop, id) {
+    addBusStopToRoute (busStopId, id) {
       axios.post(`${api.BUS_LINES}/${id}/routes`, busStop)
         .then((response) => {
           swal('Dodano przystanek do trasy!', {icon: 'success'})
@@ -122,6 +128,29 @@ export default {
           this.getAllLeftStops(this.lineId)
         }).catch(() => {
           swal('Oops', 'Coś poszło nie tak...', 'error')
+        })
+    },
+    deleteBusStopFromRoute (busStopId, lineId) {
+      this.$http.delete(`${api.BUS_LINES}/${lineId}/routes/${busStopId}`)
+        .then(res => {
+          this.getBusStopsInRoute(lineId)
+          swal('Usunięto', {
+            icon: 'success'
+          })
+          this.getAllLeftStops(lineId)
+        })
+    },
+    ensureDeletingBusStopFromRoute (busStopId) {
+      swal({
+        text: `Czy na pewno chcesz usunąć przystanek o nr ${busStopId} z bazy?`,
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.deleteBusStopFromRoute(busStopId, this.lineId)
+          }
         })
     },
     validateForm () {
@@ -155,8 +184,9 @@ export default {
 <style>
   .busStop {
     background-image: url('../../../../static/images/busStopIcon.png');
-    background-size: contain;
-    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 25px 100%;
+    min-height: 50px;
     width: 25px;
   }
 </style>
