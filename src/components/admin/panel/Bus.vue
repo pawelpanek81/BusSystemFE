@@ -158,9 +158,15 @@ export default {
     },
     registerBus (bus) {
       this.$store.dispatch('registerBus', bus)
-        .then(() =>
+        .then(() => {
           this.getBuses()
-        )
+          swal('Dodano', {
+            icon: 'success'
+          })
+        })
+        .catch(() => {
+          swal('Oops', 'Coś poszło nie tak...', 'error')
+        })
     },
     resetInputs () {
       this.bus = {

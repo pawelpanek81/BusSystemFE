@@ -67,7 +67,7 @@
     <div v-if="busStopsLoaded" class="row container" v-for="busStop in busStopsInRoute" v-bind:key="busStop.id">
       <div class="busStop"/>
       <p class="col-7 align-self-center mb-0">
-        {{busStop.busStop.city}} {{busStop.busStop.address}}
+        {{busStop.busStop.city}}, {{busStop.busStop.name}}
       </p>
       <p class="col-2 align-self-center mb-0">
         Czas: {{busStop.driveTime}}
@@ -82,6 +82,7 @@
 <script>
 import axios from 'axios'
 import api from '../../../api/endpoints'
+import codes from '../../../api/rest-error-codes'
 import swal from 'sweetalert'
 
 export default {
@@ -119,25 +120,47 @@ export default {
       this.$http.get(`${api.BUS_LINES}/${id}/leftStops`)
         .then(res => { this.allBusStops = res.data })
     },
-    addBusStopToRoute (busStopId, id) {
-      axios.post(`${api.BUS_LINES}/${id}/routes`, busStop)
+    addBusStopToRoute (busStop, id) {
+      let data = {
+        busStop: busStop,
+        id: id
+      }
+      this.$store.dispatch('addBusStopToRoute', data)
         .then((response) => {
           swal('Dodano przystanek do trasy!', {icon: 'success'})
           this.resetInputs()
           this.getBusStopsInRoute(this.lineId)
           this.getAllLeftStops(this.lineId)
-        }).catch(() => {
-          swal('Oops', 'Coś poszło nie tak...', 'error')
+        })
+        .catch((error) => {
+          if (error.response.data.status === codes.INVALID_DRIVE_TIME) {
+            swal('Oops', 'Nieprawidłowa wartość czasu przejazdu', 'error')
+          } else if (error.response.data.status === codes.DRIVE_TIME_LESS_THAN_0) {
+            swal('Oops', 'Wartość czasu przejazdu nie może być ujemna!', 'error')
+          } else if (error.response.data.status === codes.ROUTE_SEQUENCE_GREATER_THAN_CAN_BE) {
+            swal('Oops', 'Niewłaściwa wartość pozycji! ', 'error')
+          } else if (error.response.data.status === codes.ROUTE_SEQUENCE_LESS_THAN_2) {
+            swal('Oops', 'Wartość pozycji nie może być mniejsza od 2', 'error')
+          } else {
+            swal('Oops', 'Coś poszło nie tak...', 'error')
+          }
         })
     },
     deleteBusStopFromRoute (busStopId, lineId) {
-      this.$http.delete(`${api.BUS_LINES}/${lineId}/routes/${busStopId}`)
+      let data = {
+        busStopId: busStopId,
+        lineId: lineId
+      }
+      this.$store.dispatch('deleteBusStopFromRoute', data)
         .then(res => {
           this.getBusStopsInRoute(lineId)
           swal('Usunięto', {
             icon: 'success'
           })
           this.getAllLeftStops(lineId)
+        })
+        .catch(() => {
+          swal('Oops', 'Coś poszło nie tak...', 'error')
         })
     },
     ensureDeletingBusStopFromRoute (busStopId) {
