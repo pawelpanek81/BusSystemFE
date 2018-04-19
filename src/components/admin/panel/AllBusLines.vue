@@ -93,7 +93,7 @@
               Więcej
             </button>
           </router-link>
-          <button class="btn btn-outline-warning" @click="ensureDeletingLine(busLine)">
+          <button class="btn btn-outline-danger" @click="ensureDeletingLine(busLine)">
             Usuń
           </button>
         </td>
