@@ -53,7 +53,7 @@
           <div class="navbar-toggler w-100 p-0" data-toggle="collapse"
                href="#footerElem4"
                aria-controls="verticalNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <h6><b>Podróż<i class="fas fa-caret-down float-right"></i></b></h6>
+            <h6><b>Kontakt<i class="fas fa-caret-down float-right"></i></b></h6>
             <hr/>
           </div>
           <div class="collapse navbar-collapse d-sm-table justify-content-center" id="footerElem4">
