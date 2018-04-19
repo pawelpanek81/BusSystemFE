@@ -20,7 +20,7 @@ export default {
       .then((response) => {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
       })
-      .catch(() => {
+      .catch((error) => {
         commit(MUTATION_TYPES.UNSET_LOADING_SPINNER)
         return Promise.reject(error)
       })

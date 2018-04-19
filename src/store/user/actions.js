@@ -53,7 +53,7 @@ export default {
   },
   signUp ({dispatch, commit}, registrationData) {
     dispatch('setLoadingSpinner')
-    axios.post(api.USERS, registrationData)
+    axios.post(API.USERS, registrationData)
       .then(function (response) {
         commit(MUTATION_TYPES.SET_REGISTERED)
         dispatch('unsetLoadingSpinner')

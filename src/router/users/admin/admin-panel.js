@@ -6,7 +6,7 @@ import Driver from '@/components/admin/panel/Driver'
 import Route from '@/components/admin/panel/Route'
 import Timetable from '@/components/admin/panel/Timetable'
 import AllBusLines from '@/components/admin/panel/AllBusLines'
-
+import Schedule from '@/components/admin/panel/LineSchedule'
 export default {
   ADMINPANEL: {
     path: '/admin',
@@ -27,6 +27,10 @@ export default {
           {
             path: ':id/route',
             component: Route
+          },
+          {
+            path: ':id/schedule',
+            component: Schedule
           }
         ]
       },

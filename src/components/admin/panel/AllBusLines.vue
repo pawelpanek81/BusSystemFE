@@ -19,7 +19,8 @@
           <th scope="col">Z</th>
           <th scope="col">Do</th>
           <th scope="col">Czas przejazdu</th>
-          <th scope="col">Więcej</th>
+          <th scope="col">Trasa lini</th>
+          <th scope="col">Rozkład lini</th>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +33,14 @@
           <td>
             <router-link :to="{path: `/admin/buslines/${busLine.id}/route`, params: {lineId: busLine.id}}">
               <button class="btn btn-outline-success">
-                Więcej
+                Trasa
+              </button>
+            </router-link>
+          </td>
+          <td>
+            <router-link :to="{path: `/admin/buslines/${busLine.id}/schedule`, params: {lineId: busLine.id}}">
+              <button class="btn btn-outline-success">
+                Rozkład
               </button>
             </router-link>
           </td>
