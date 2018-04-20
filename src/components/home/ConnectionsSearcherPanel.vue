@@ -26,6 +26,7 @@
           <label for="startDate"><i class="fas fa-calendar-alt"></i> Odjazd</label>
           <div id="startDate">
             <el-date-picker
+              :picker-options="pickerOptions"
               v-model="value1"
               type="date"
               placeholder="Pick a day">
@@ -36,11 +37,17 @@
           <label for="endDate"><i class="fas fa-calendar-alt"></i> Przyjazd</label>
           <div id="endDate">
             <el-date-picker
+              :picker-options="pickerOptions1"
+              :disabled="this.value1 == null"
               v-model="value2"
               type="date"
               placeholder="Pick a day">
             </el-date-picker>
           </div>
+        </div>
+        <div class="my-2">
+          <label for="passengers"><i class="fas fa-users"></i> Pasażerowie</label>
+          <input type="number" id="passengers" min="0" class="form-control input-width"/>
         </div>
         <div class="my-2">
           <button class="btn btn-success">Szukaj połączenia</button>
@@ -55,18 +62,37 @@ export default {
   name: 'connections-searcher',
   data () {
     return {
-      value1: ''
+      value1: null,
+      value2: null,
+      pickerOptions: {
+        disabledDate (date) {
+          return date.getTime() + 86400000 < Date.now()
+        }
+      },
+      pickerOptions1: {
+        disabledDate: (date) => {
+          return date.getTime() < this.value1
+        }
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-  .card-size {
-    width: 100%;
-    height: 100px;
-  }
   .select-width {
-    min-width: 200px;
+    width: 180px;
+  }
+  .container {
+    font-size: small;
+  }
+  .input-width {
+    width: 100px
+  }
+</style>
+
+<style>
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 180px;
   }
 </style>
