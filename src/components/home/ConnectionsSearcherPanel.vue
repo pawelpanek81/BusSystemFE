@@ -1,6 +1,6 @@
 <template>
   <div class="container my-3 px-2">
-    <div class="card ">
+    <div class="card">
       <div class="row d-flex align-items-end justify-content-around mx-1 my-3">
         <div class="my-2">
           <label for="from"><i class="fas fa-map-marker-alt"></i> Z</label>
@@ -89,10 +89,7 @@ export default {
   .input-width {
     width: 100px
   }
-</style>
-
-<style>
-  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+  .card >>> .el-date-editor.el-input, .el-date-editor.el-input__inner{
     width: 180px;
   }
 </style>
