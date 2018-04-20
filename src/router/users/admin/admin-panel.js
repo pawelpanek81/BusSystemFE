@@ -4,8 +4,8 @@ import BusLine from '@/components/admin/panel/BusLine'
 import BusStop from '@/components/admin/panel/BusStop'
 import Driver from '@/components/admin/panel/Driver'
 import Route from '@/components/admin/panel/Route'
-import Timetable from '@/components/admin/panel/Timetable'
 import AllBusLines from '@/components/admin/panel/AllBusLines'
+import Timetable from '@/components/admin/panel/Timetable'
 
 export default {
   ADMINPANEL: {

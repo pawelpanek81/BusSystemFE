@@ -4,6 +4,7 @@ import user from './user/index'
 import addOns from './addons/index'
 import news from './news/index'
 import bus from './bus/index'
+import busline from './busline/index'
 import busstops from './busstops/index'
 import routes from './route/index'
 Vue.use(Vuex)
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     user,
     news,
     bus,
+    busline,
     busstops,
     routes,
     addOns
