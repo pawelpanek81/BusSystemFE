@@ -7,6 +7,7 @@ import Login from '@/pages/navbar/Login'
 import Tickets from '@/pages/navbar/Tickets'
 import BusLines from '@/pages/navbar/BusLines'
 import AllBusLines from '@/components/navbar/AllBusLines'
+import BusLineRoute from '@/components/navbar/BusLineRoute'
 
 export default {
   HOME: {
@@ -52,6 +53,10 @@ export default {
       {
         path: '',
         component: AllBusLines
+      },
+      {
+        path: ':id',
+        component: BusLineRoute
       }
     ]
   }

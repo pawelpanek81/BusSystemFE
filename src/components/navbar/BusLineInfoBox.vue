@@ -1,6 +1,10 @@
 <template>
   <div class="inline">
-    <button class="btn btn-outline-dark" v-on:mouseover="hover" v-on:mouseout="hoverOut">{{ busLine.name }}</button>
+    <router-link :to="{path: `/bus-lines/${busLine.id}`, params: {lineId: busLine.id}}">
+      <button class="btn btn-outline-dark" v-on:mouseover="hover" v-on:mouseout="hoverOut">
+        {{ busLine.name }}
+      </button>
+    </router-link>
     <div class="info-popover" v-if="showPopup" transition="fade" v-on:mouseover="hoverInfo" v-on:mouseout="hoverOutInfo">
       <p>Linia nr {{ busLine.name }}</p>
       <p>{{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}}</p>
@@ -21,17 +25,17 @@ export default {
 
   methods: {
     hover: function () {
-      let vm = this
+      let self = this
       this.timer = setTimeout(function () {
-        vm.showPopover()
+        self.showPopover()
       }, 600)
     },
     hoverOut: function () {
-      let vm = this
-      clearTimeout(vm.timer)
+      let self = this
+      clearTimeout(self.timer)
       this.timer = setTimeout(function () {
-        if (!vm.isInInfo) {
-          vm.closePopover()
+        if (!self.isInInfo) {
+          self.closePopover()
         }
       }, 200)
     },

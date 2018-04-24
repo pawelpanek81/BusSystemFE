@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container mx-5">
       <div class="mt-4 mb-4">
-        <h5 class="mb-5">Wybierz linię aby zobaczyć więcej</h5>
+        <h5 class="mb-5">Wybierz linię, aby zobaczyć więcej</h5>
         <div v-if="busLineLoaded" class="container d-flex justify-content-around flex-wrap" id="allBusLines">
           <p v-for="busLine in busLines" v-bind:key="busLine.id">
             <bus-line-info :busLine="busLine"/>
