@@ -12,7 +12,7 @@
         <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
       </div>
     </div>
-    <div v-if="busLineSchedulesLoaded" >
+    <div v-if="busLineSchedulesLoaded">
       <div class="row">
         <table class="table table-hover text-center" id="allbusLineSchedules">
           <thead>
@@ -33,15 +33,28 @@
             <td v-else>Nie</td>
             <td> 5 zł</td>
             <td>{{schedule.startHour}}</td>
-            <td><input type="checkbox"/></td>
+            <td><input type="checkbox" v-bind:value="schedule.id" v-model="schedulesIds"/></td>
           </tr>
           </tbody>
         </table>
       </div>
-      <div class="row justify-content-end mr-2">
-        <button type="button" class="btn btn-outline-success" @click="ensureGenerating">
-          Generuj
-        </button>
+      <div class="row justify-content-around date-picker-width">
+        <div class="my-2">
+          <label for="startDate"><i class="fas fa-calendar-alt"></i> Wybierz termin</label>
+          <div id="startDate">
+            <el-date-picker
+              :picker-options="pickerOptions"
+              v-model="dateTime"
+              type="datetimerange"
+              range-separator="-" start-placeholder="Początek" end-placeholder="Koniec">
+            </el-date-picker>
+          </div>
+        </div>
+        <div class="my-2 d-flex align-items-end">
+          <button type="button" class="btn btn-outline-success" id="buttonGenerate" @click="ensureGenerating">
+            Generuj przejazdy
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -55,11 +68,18 @@ import swal from 'sweetalert'
 export default {
   data () {
     return {
+      pickerOptions: {
+        disabledDate (date) {
+          return date.getTime() + 86400000 < Date.now()
+        }
+      },
       lineId: null,
       busLine: null,
       busLineLoaded: false,
       busLineSchedules: [],
-      busLineSchedulesLoaded: false
+      busLineSchedulesLoaded: false,
+      dateTime: null,
+      schedulesIds: []
     }
   },
   methods: {
@@ -78,6 +98,12 @@ export default {
         })
     },
     ensureGenerating () {
+      let generateData = {
+        busLine: this.lineId,
+        startDateTime: this.dateTime[0],
+        endDateTime: this.dateTime[1],
+        schedulesIds: this.schedulesIds
+      }
       swal({
         text: `Czy na pewno chcesz wygenerować te kursy?`,
         icon: 'warning',
@@ -85,7 +111,16 @@ export default {
       })
         .then((willSave) => {
           if (willSave) {
-            console.log('Wyygenerowano')
+            this.$store.dispatch('generateTimetables', generateData)
+              .then(() => {
+                swal('Wygenerowano wybrane przejazdy!', {
+                  icon: 'success'
+                })
+                this.getLineSchedules(this.lineId)
+              })
+              .catch(() => {
+                swal('Oops', 'Coś poszło nie tak...', 'error')
+              })
           }
         })
     }
@@ -100,9 +135,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .go-back {
     color: green;
     text-decoration: underline;
+  }
+  #buttonGenerate {
+    height: 40px;
   }
 </style>
