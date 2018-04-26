@@ -7,6 +7,9 @@ import Route from '@/components/admin/panel/Route'
 import Timetable from '@/components/admin/panel/Timetable'
 import AllBusLines from '@/components/admin/panel/AllBusLines'
 import Schedule from '@/components/admin/panel/LineSchedule'
+import ActiveTimetables from '@/components/admin/panel/ActiveTimetables'
+import NonActiveTimetables from '@/components/admin/panel/NonActiveTimetables'
+
 export default {
   ADMINPANEL: {
     path: '/admin',
@@ -44,7 +47,17 @@ export default {
       },
       {
         path: 'timetables',
-        component: Timetable
+        component: Timetable,
+        children: [
+          {
+            path: '',
+            component: ActiveTimetables
+          },
+          {
+            path: 'nonactivetimetables',
+            component: NonActiveTimetables
+          }
+        ]
       }
     ]
   }
