@@ -100,8 +100,8 @@ export default {
     ensureGenerating () {
       let generateData = {
         busLine: this.lineId,
-        startDateTime: this.dateTime[0],
-        endDateTime: this.dateTime[1],
+        startDateTime: this.toLocalISOTime(this.dateTime[0]),
+        endDateTime: this.toLocalISOTime(this.dateTime[1]),
         schedulesIds: this.schedulesIds
       }
       swal({
@@ -123,6 +123,10 @@ export default {
               })
           }
         })
+    },
+    toLocalISOTime (time) {
+      var tzoffset = (new Date()).getTimezoneOffset() * 60000
+      return (new Date(time - tzoffset)).toISOString().slice(0, -1)
     }
   },
   created () {
