@@ -127,6 +127,10 @@ export default {
     toLocalISOTime (time) {
       var tzoffset = (new Date()).getTimezoneOffset() * 60000
       return (new Date(time - tzoffset)).toISOString().slice(0, -1)
+    },
+    showHumanReadableTime (time) {
+      let date = new Date(time)
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     }
   },
   created () {
