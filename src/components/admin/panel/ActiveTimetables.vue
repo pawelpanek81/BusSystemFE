@@ -62,6 +62,9 @@
         </tbody>
       </table>
     </div>
+    <div v-if="timetablesLoaded && timetables.content.length == 0" class="d-flex justify-content-center m-4">
+      Brak pasujących wyników
+    </div>
     <div class="mt-5 d-flex justify-content-center">
       <pagination-panel
                         :results-on-page="resultsOnPage"
@@ -95,23 +98,10 @@ export default {
       busLinesLoaded: false
     }
   },
-  watch: {
-    active: function () {
-      this.reloadSettings()
-    },
-    timePeriod: function () {
-      this.reloadSettings()
-    },
-    line: function () {
-      this.reloadSettings()
-    },
-    resultsOnPage: function () {
-      this.reloadSettings()
-    }
-  },
   methods: {
     getAllTimetables (response) {
       this.timetables = response
+      console.log(this.timetables)
       this.timetablesLoaded = true
     },
     getBusLines () {
@@ -171,9 +161,6 @@ export default {
       } else {
         return driver.name + ' ' + driver.surname
       }
-    },
-    reloadSettings () {
-      console.log('bhjbhhjbj')
     }
   },
   mounted () {
