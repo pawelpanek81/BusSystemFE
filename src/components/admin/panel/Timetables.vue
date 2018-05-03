@@ -12,7 +12,7 @@
       </div>
       <div class="col-3">
         <label class="m-0">Linie</label>
-        <select id="line" class="custom-select custom-select-sm" v-model="line">
+        <select disabled id="line" class="custom-select custom-select-sm" v-model="line">
           <option v-bind:value="''">Wszystkie</option>
           <option v-for="line in busLines" v-bind:key="line.id" v-bind:value="line.id">{{line.name}}</option>
         </select>
@@ -32,7 +32,7 @@
         </select>
       </div>
     </div>
-    <div v-if='timetablesLoaded && timetables.content.length != 0'>
+    <div>
       <table class='table table-hover text-center' id='rides'>
         <thead>
           <tr>
@@ -46,7 +46,7 @@
             <th scope='col'></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if='timetablesLoaded && timetables.content.length != 0'>
           <tr v-for='ride in timetables.content' v-bind:key='ride.id'>
             <th scope='row'>{{ride.id}}</th>
             <td>{{ride.busLine.name}}</td>
@@ -64,7 +64,8 @@
         </tbody>
       </table>
     </div>
-    <div class="d-flex justify-content-center m-4" v-else>
+    <div v-if='timetablesLoaded && timetables.content.length == 0'
+         class="d-flex justify-content-center m-4">
       Brak pasujących wyników
     </div>
     <div class="mt-5 d-flex justify-content-center">
@@ -82,13 +83,11 @@
 import axios from 'axios'
 import api from '../../../api/endpoints'
 import moment from 'moment'
-import Ride from './Ride'
 import PaginationPanel from './TimetablesPaginationPanel'
 
 export default {
   components: {
-    PaginationPanel,
-    Ride
+    PaginationPanel
   },
   data () {
     return {
@@ -120,7 +119,7 @@ export default {
       $('#rides').DataTable({
         language: {
           'decimal': '',
-          'emptyTable': 'Brak danych w tabeli',
+          'emptyTable': '',
           'info': 'Wyświetlono _START_ do _END_ z _TOTAL_ pozycji',
           'infoEmpty': 'Wyświetlno 0 z 0 pozycji',
           'infoFiltered': '(filtered from _MAX_ total entries)',
@@ -130,7 +129,7 @@ export default {
           'loadingRecords': 'Ładowanie..',
           'processing': 'Przetwarzanie...',
           'search': 'Szukaj:',
-          'zeroRecords': 'Brak pasujących wyników',
+          'zeroRecords': '',
           'paginate': {
             'first': 'Pierwszy',
             'last': 'Ostatni',
