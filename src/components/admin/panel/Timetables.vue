@@ -32,16 +32,17 @@
         </select>
       </div>
     </div>
-    <div v-if='timetablesLoaded'>
+    <div v-if='timetablesLoaded && timetables.content.length != 0'>
       <table class='table table-hover text-center' id='rides'>
         <thead>
           <tr>
             <th scope='col'>#</th>
-            <th scope='col'>Nr linii</th>
-            <th scope='col'>Wyjazd</th>
+            <th scope='col'>Linia</th>
+            <th scope='col'>Wyjazd </th>
             <th scope='col'>Przyjazd</th>
             <th scope='col'>Kierowca</th>
-            <th scope='col'>Autobus</th>
+            <th scope='col'>Bus</th>
+            <th scope='col'>Akt.</th>
             <th scope='col'></th>
           </tr>
         </thead>
@@ -57,12 +58,13 @@
             </td>
             <td>{{handleEmptyDriverData(ride.primaryDriver)}}</td>
             <td>{{handleEmptyBusData(ride.bus)}}</td>
-            <td><button class="btn btn-outline-success btn-sm">Więcej</button></td>
+            <td><input type="checkbox" disabled :checked="ride.active"/></td>
+            <td><router-link :to="{name: 'Ride', params: {id: ride.id, ride: ride}}"><button class="btn btn-outline-success btn-sm">Więcej</button></router-link></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div v-if="timetablesLoaded && timetables.content.length == 0" class="d-flex justify-content-center m-4">
+    <div class="d-flex justify-content-center m-4" v-else>
       Brak pasujących wyników
     </div>
     <div class="mt-5 d-flex justify-content-center">
@@ -80,11 +82,13 @@
 import axios from 'axios'
 import api from '../../../api/endpoints'
 import moment from 'moment'
+import Ride from './Ride'
 import PaginationPanel from './TimetablesPaginationPanel'
 
 export default {
   components: {
-    PaginationPanel
+    PaginationPanel,
+    Ride
   },
   data () {
     return {
