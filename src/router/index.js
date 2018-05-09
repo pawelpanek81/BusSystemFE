@@ -7,6 +7,7 @@ import BOKPanel from './users/bok/bok-panel'
 import Navbar from './navbar/navbar'
 import Pagination from './home/pagination'
 import Map from './map'
+import ConnectionSearchResult from './connectionSearchResults/connectionSearchResults'
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +25,7 @@ export default new Router({
     DriverPanel.DRIVERPANEL,
     BOKPanel.BOKPANEL,
     Pagination.GO,
-    Map.MAP
+    Map.MAP,
+    ConnectionSearchResult.CONNECTION_SEARCH_RESULT
   ]
 })

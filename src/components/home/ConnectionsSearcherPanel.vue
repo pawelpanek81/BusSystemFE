@@ -5,7 +5,7 @@
         <div class="my-2">
           <label for="from"><i class="fas fa-map-marker-alt"></i> Z</label>
           <div id="from">
-            <select class="custom-select select-width" v-model.number="busFrom">
+            <select class="custom-select select-width" v-model.number="busStopFrom">
               <option v-for="busStop in busStops" v-bind:key="busStop.id"
                       v-bind:value="busStop.id">
                 {{busStop.city}}, {{busStop.name}}
@@ -16,9 +16,9 @@
         <div class="my-2">
           <label for="to"><i class="fas fa-map-marker-alt"></i> Do</label>
           <div id="to">
-            <select class="custom-select select-width" v-model.number="busTo">
+            <select class="custom-select select-width" v-model.number="busStopTo">
               <option v-for="busStop in busStops" v-bind:key="busStop.id"
-                      v-if="busStop.id != busFrom" v-bind:value="busStop.id">
+                      v-if="busStop.id != busStopFrom" v-bind:value="busStop.id">
                 {{busStop.city}}, {{busStop.name}}
               </option>
             </select>
@@ -30,7 +30,8 @@
             <el-date-picker
               :picker-options="pickerOptions"
               v-model="startTime"
-              type="datetime"
+              type="date"
+              value-format="yyyy-MM-dd"
               placeholder="Odjazd">
             </el-date-picker>
           </div>
@@ -42,7 +43,8 @@
               :picker-options="pickerOptions1"
               :disabled="this.startTime == null"
               v-model="endTime"
-              type="datetime"
+              type="date"
+              value-format="yyyy-MM-dd"
               placeholder="Przyjazd">
             </el-date-picker>
           </div>
@@ -55,7 +57,12 @@
       </div>
       <div class="row d-flex align-items-end justify-content-around mx-1 mb-3 mt-1">
         <div>
-          <button class="btn btn-success">Wyszukaj połączenie</button>
+          <router-link :to="{name: 'Search',
+           params: {from: busStopFrom, to: busStopTo, startTime: startTime, endTime: endTime, nrOfPassengers: nrOfPassengers}}">
+            <button class="btn btn-success">
+              Wyszukaj połączenie
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -83,14 +90,9 @@ export default {
       },
       busStops: [],
       busStopsLoaded: false,
-      busFrom: '',
-      busTo: '',
+      busStopFrom: '',
+      busStopTo: '',
       nrOfPassengers: 1
-    }
-  },
-  watch: {
-    busFrom: function () {
-      console.log(this.busFrom)
     }
   },
   methods: {
@@ -99,8 +101,8 @@ export default {
         .then((response) => {
           this.busStops = response.data
           this.busStopsLoaded = true
-          this.busFrom = this.busStops[0].id
-          this.busTo = this.busStops[1].id
+          this.busStopFrom = this.busStops[0].id
+          this.busStopTo = this.busStops[1].id
         })
     }
   },
