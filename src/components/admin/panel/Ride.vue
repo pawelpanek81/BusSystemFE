@@ -115,7 +115,7 @@ export default {
         primaryDriver: this.primaryDriver === '' ? null : this.primaryDriver,
         secondaryDriver: this.secondaryDriver === '' ? null : this.secondaryDriver,
         driveNettoPrice: this.ridePrice,
-        busId: this.bus === '' ? null : this.bus,
+        bus: this.bus === '' ? null : this.bus,
         active: this.active
       }
     }
