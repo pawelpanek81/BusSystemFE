@@ -2,7 +2,7 @@
   <div>
     <h3 class='mb-3'>Przejazdy</h3>
     <div class="row mb-3" v-if="busLinesLoaded">
-      <div class="col-3">
+      <div class="col-4">
         <label class="m-0">Aktywne?</label>
         <select id="active" class="custom-select custom-select-sm" v-model="active">
           <option selected v-bind:value="'active'">Tak</option>
@@ -10,20 +10,13 @@
           <option v-bind:value="''">Aktywne i nieaktywne</option>
         </select>
       </div>
-      <div class="col-3">
-        <label class="m-0">Linie</label>
-        <select disabled id="line" class="custom-select custom-select-sm" v-model="line">
-          <option v-bind:value="''">Wszystkie</option>
-          <option v-for="line in busLines" v-bind:key="line.id" v-bind:value="line.id">{{line.name}}</option>
-        </select>
-      </div>
-      <div class="col-3">
+      <div class="col-4">
         <label class="m-0">Pozycji na stronie</label>
         <select id="resultsOnPage" class="custom-select custom-select-sm" v-model="resultsOnPage">
          <option v-for="nr in [5, 10, 20, 50, 100]" v-bind:key="nr" v-bind:value="nr">{{nr}}</option>
         </select>
       </div>
-      <div class="col-3">
+      <div class="col-4">
         <label class="m-0">Przedział czasowy</label>
         <select id="timePeriod" class="custom-select custom-select-sm" v-model="timePeriod">
           <option v-bind:value="''">Wszystkie</option>
