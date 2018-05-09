@@ -105,7 +105,4 @@ export default {
     }
   }
 }
-// &type=${this.active}&period=${this.timePeriod}
 </script>
-<style scoped>
-</style>
