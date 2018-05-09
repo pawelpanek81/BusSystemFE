@@ -11,6 +11,9 @@ export default {
         confirmed: function () {
           return `Hasła muszą być zgodne.`
         },
+        min_value: function (field) {
+          return `Podana wartość jest za mała`
+        },
         decimal: function () {
           return 'Pole może zawierać tylko liczby oraz kropkę'
         }
