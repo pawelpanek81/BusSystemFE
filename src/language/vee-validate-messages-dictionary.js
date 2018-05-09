@@ -12,7 +12,7 @@ export default {
           return `Hasła muszą być zgodne.`
         },
         decimal: function () {
-          return 'Pole może zawierać tylko liczby'
+          return 'Pole może zawierać tylko liczby oraz kropkę'
         }
       }
     }
