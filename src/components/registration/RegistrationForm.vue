@@ -154,7 +154,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getSignUpServerError'])
+  ...mapGetters(['getSignUpServerError'])
   },
   methods: {
     validateForm () {
