@@ -76,6 +76,9 @@
             </div>
           </div>
         </div>
+        <div v-if="!redirected">
+          <map-component/>
+        </div>
       </div>
     </div>
   </div>
@@ -86,18 +89,26 @@ import ConnectionSearcherPanel from '../../components/home/ConnectionsSearcherPa
 import axios from 'axios'
 import api from '../../api/endpoints'
 import moment from 'moment'
+import MapComponent from '../../pages/footer/MapComponent'
 
 export default {
   props: ['from', 'to', 'startTime', 'endTime', 'nrOfPassengers'],
   components: {
-    ConnectionSearcherPanel
+    ConnectionSearcherPanel,
+    MapComponent
   },
   data () {
     return {
+      redirected: true,
       searchResults: [],
       searchResultsLoaded: false,
       busStopFrom: '',
       busStopTo: ''
+    }
+  },
+  watch: {
+    $route (data, oldData) {
+      this.getConnections()
     }
   },
   methods: {
@@ -116,7 +127,7 @@ export default {
             console.log(response.data)
           })
       } else {
-        console.log('no props')
+        this.redirected = false
       }
     },
     formatDate (time) {
@@ -138,7 +149,7 @@ export default {
 </script>
 <style scoped>
   .no-results {
-    font-size: 22px;
+    font-size: 20px;
     color: darkgrey;
   }
 </style>

@@ -58,8 +58,10 @@
       <div class="row d-flex align-items-end justify-content-around mx-1 mb-3 mt-1">
         <div>
           <router-link :to="{name: 'Search',
-           params: {from: busStopFrom, to: busStopTo, startTime: startTime, endTime: endTime, nrOfPassengers: nrOfPassengers}}">
-            <button class="btn btn-success">
+           params: {from: busStopFrom, to: busStopTo,
+            startTime: startTime, endTime: endTime, nrOfPassengers: nrOfPassengers},
+            query: {searchId: + new Date()}}">
+            <button class="btn btn-success" :disabled="searchButtonDisabled">
               Wyszukaj połączenie
             </button>
           </router-link>
@@ -92,7 +94,13 @@ export default {
       busStopsLoaded: false,
       busStopFrom: '',
       busStopTo: '',
+      searchButtonDisabled: true,
       nrOfPassengers: 1
+    }
+  },
+  watch: {
+    startTime: function (val) {
+      this.searchButtonDisabled = val === ''
     }
   },
   methods: {
