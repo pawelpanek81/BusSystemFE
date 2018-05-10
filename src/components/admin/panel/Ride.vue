@@ -147,7 +147,6 @@ export default {
         })
     },
     ensureUpdatingRide () {
-      console.log(this.rideData)
       swal({
         text: `Czy na pewno chcesz zaktualizować ten przejazd?`,
         icon: 'warning',
@@ -170,14 +169,13 @@ export default {
     },
     bindSelects () {
       this.primaryDriver = this.ride.primaryDriver == null ? '' : this.ride.primaryDriver.id
-      this.secondaryDriver = this.ride.secondaryDriver == null ? '' : this.ride.secondaryDriver
+      this.secondaryDriver = this.ride.secondaryDriver == null ? '' : this.ride.secondaryDriver.id
       this.bus = this.ride.bus == null ? '' : this.ride.bus.id
       this.active = this.ride.active
       this.ridePrice = this.ride.driveNettoPrice
     }
   },
   mounted () {
-    console.log(this.ride)
     this.getDrivers()
     this.getBuses()
     this.bindSelects()
