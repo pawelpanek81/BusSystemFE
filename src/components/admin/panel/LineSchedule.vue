@@ -31,7 +31,7 @@
             <td v-else>Nie</td>
             <td> 5 zł</td>
             <td>{{schedule.startHour}}</td>
-            <td><input type="checkbox" v-bind:value="schedule.id" v-model="schedulesIds"/></td>
+            <td><input type="checkbox" :disabled="!schedule.enabled" v-bind:value="schedule.id" v-model="schedulesIds"/></td>
           </tr>
           </tbody>
         </table>

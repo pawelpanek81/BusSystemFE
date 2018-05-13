@@ -76,6 +76,8 @@
 <script>
 import axios from 'axios'
 import api from '../../api/endpoints'
+import moment from 'moment'
+
 export default {
   name: 'connections-searcher',
   data () {
@@ -90,7 +92,7 @@ export default {
       },
       pickerOptionsEnd: {
         disabledDate: (date) => {
-          return date.getTime() < this.startTime
+          return date.getTime() < moment(this.startTime, 'YYYY-MM-DD')
         }
       },
       busStops: [],

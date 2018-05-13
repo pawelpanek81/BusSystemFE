@@ -68,7 +68,7 @@
         <div class="form-group">
           <label for="price">Cena w zł</label>
           <input type="number" min="0" class="form-control form-control-sm" id="price"
-                 name="ridePrice" :disabled="dataObject"
+                 name="ridePrice"
                  v-validate="'decimal'"
                  :class="{'is-invalid': errors.has('ridePrice')}"
                  v-model.number="ridePrice"
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!disabledOthers" class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
       <button class="btn btn-outline-success" @click="validateForm">
         Zapisz nowe ustawienia
       </button>

@@ -40,7 +40,7 @@
               <p class="no-results">Brak przejazdów na wybranej trasie w określonym dniu</p>
             </div>
           </div>
-          <div v-if="endTime != null" class="mt-3">
+          <div v-if="endTime != null" class="mt-5">
             <div class="d-flex justify-content-center mb-3">
               <h3>
                 {{busStopTo.city}} {{busStopTo.name}}
@@ -51,7 +51,7 @@
             <div class="d-flex justify-content-center mb-2">
               <h5> {{formatDate(endTime)}}</h5>
             </div>
-            <div v-if="searchResults.departurePossibilities.length != 0">
+            <div v-if="searchResults.returnPossibilities.length != 0">
               <table class="table table-md-responsive text-center">
                 <thead>
                 <tr>
