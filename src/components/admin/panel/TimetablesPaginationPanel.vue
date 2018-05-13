@@ -63,6 +63,9 @@ export default {
     },
     active: function () {
       this.reloadNews(1)
+    },
+    lineId: function () {
+      this.reloadNews(1)
     }
   },
   mounted () {
@@ -97,7 +100,7 @@ export default {
       if (this.timePeriod !== '') {
         extraSettingsPeriod = '&period=' + this.timePeriod
       }
-      if (this.line !== '') {
+      if (this.lineId !== '') {
         extraSettingLine = '&lineId=' + this.lineId
       }
       axios.get(`${api.BUS_RIDES}?page=${pageNumber - 1}&size=${this.resultsOnPage}${extraSettingsActive}${extraSettingsPeriod}${extraSettingLine}`)

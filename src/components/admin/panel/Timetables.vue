@@ -12,7 +12,7 @@
       </div>
       <div class="col-3">
         <label class="m-0">Linie</label>
-        <select disabled id="line" class="custom-select custom-select-sm" v-model.number="line">
+        <select id="line" class="custom-select custom-select-sm" v-model.number="lineId">
           <option v-bind:value="''">Wszystkie</option>
           <option v-for="line in busLines" v-bind:key="line.id" v-bind:value="line.id">{{line.name}}</option>
         </select>

@@ -69,7 +69,7 @@
     </div>
 
     <div class="h4 pt-4">Wszystkie linie</div>
-    <table v-if="busLinesLoaded" class="table table-hover" id="allbusLines">
+    <table v-if="busLinesLoaded" class="table table-hover text-center" id="allbusLines">
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -77,7 +77,7 @@
         <th scope="col">Z</th>
         <th scope="col">Do</th>
         <th scope="col">Czas przejazdu</th>
-        <th scope="col">Więcej</th>
+        <th scope="col" colspan="3">Więcej</th>
       </tr>
       </thead>
       <tbody>
@@ -90,10 +90,19 @@
         <td>
           <router-link :to="{path: `/admin/buslines/${busLine.id}/route`, params: {lineId: busLine.id}}">
             <button class="btn btn-outline-success">
-              Więcej
+              Trasa
             </button>
           </router-link>
-          <button class="btn btn-outline-danger" @click="ensureDeletingLine(busLine)">
+        </td>
+        <td>
+          <router-link :to="{path: `/admin/buslines/${busLine.id}/schedule`, params: {lineId: busLine.id}}">
+            <button class="btn btn-outline-success">
+              Rozkład
+            </button>
+          </router-link>
+        </td>
+        <td>
+         <button class="btn btn-outline-danger" @click="ensureDeletingLine(busLine)">
             Usuń
           </button>
         </td>

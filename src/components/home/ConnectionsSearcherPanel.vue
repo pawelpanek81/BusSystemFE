@@ -73,7 +73,7 @@ export default {
       startTime: null,
       endTime: null,
       pickerOptionsStart: {
-        disabledDate (date) {
+        disabledDate: (date) => {
           return date.getTime() + this.milisecondsInADay < Date.now()
         }
       },
