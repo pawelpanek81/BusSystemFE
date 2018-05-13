@@ -30,10 +30,10 @@
             @click="reloadNews(nextNextPage)">
           <span class="page-link">{{nextNextPage}}</span>
         </li>
-        <li v-if="NNNPage <= totalNrOfPages"
+        <li v-if="nextNextNextPage <= totalNrOfPages"
             class="page-item"
-            @click="reloadNews(NNNPage)">
-          <span class="page-link">{{NNNPage}}</span>
+            @click="reloadNews(nextNextNextPage)">
+          <span class="page-link">{{nextNextNextPage}}</span>
         </li>
         <li class="page-item" :class="{disabled: nextPage > totalNrOfPages}">
           <span class="page-link" @click="reloadNews(nextPage)">Następny</span>
@@ -47,7 +47,7 @@
 import axios from 'axios'
 import api from '../../../api/endpoints'
 export default {
-  props: ['resultsOnPage', 'timePeriod', 'active'],
+  props: ['resultsOnPage', 'timePeriod', 'active', 'lineId'],
   data () {
     return {
       actualPage: 1,
@@ -62,6 +62,9 @@ export default {
       this.reloadNews(1)
     },
     active: function () {
+      this.reloadNews(1)
+    },
+    lineId: function () {
       this.reloadNews(1)
     }
   },
@@ -81,7 +84,7 @@ export default {
     nextNextPage: function () {
       return this.actualPage + 2
     },
-    NNNPage: function () {
+    nextNextNextPage: function () {
       return this.actualPage + 3
     }
   },
@@ -90,18 +93,21 @@ export default {
       this.actualPage = pageNumber
       let extraSettingsActive = ''
       let extraSettingsPeriod = ''
+      let extraSettingLine = ''
       if (this.active !== '') {
         extraSettingsActive = '&type=' + this.active
       }
       if (this.timePeriod !== '') {
         extraSettingsPeriod = '&period=' + this.timePeriod
       }
-      axios.get(`${api.BUS_RIDES}?page=${pageNumber - 1}&size=${this.resultsOnPage}${extraSettingsActive}${extraSettingsPeriod}`)
+      if (this.lineId !== '') {
+        extraSettingLine = '&lineId=' + this.lineId
+      }
+      axios.get(`${api.BUS_RIDES}?page=${pageNumber - 1}&size=${this.resultsOnPage}${extraSettingsActive}${extraSettingsPeriod}${extraSettingLine}`)
         .then((response) => {
           this.totalNrOfPages = response.data.totalPages
           this.$emit('update-timetables', response.data)
         })
-        .catch(() => {})
     }
   }
 }

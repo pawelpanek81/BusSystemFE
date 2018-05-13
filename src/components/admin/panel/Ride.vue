@@ -29,7 +29,8 @@
       <div class="col-6">
         <div class="form-group">
           <label for="primaryDriver">Kierowca podstawowy </label>
-          <select id="primaryDriver" v-model.number="primaryDriver" class="form-control form-control-sm">
+          <select id="primaryDriver" v-model.number="primaryDriver" :disabled="disabledOthers"
+                  class="form-control form-control-sm">
             <option disabled value="">Wybierz kierowcę</option>
             <option v-for="driver in drivers" v-bind:key="driver.id" v-bind:value="driver.id">
               {{driver.name}} {{driver.surname}} {{driver.email}}
@@ -40,9 +41,10 @@
       <div class="col-6">
         <div class="form-group">
           <label for="secondaryDriver">Kierowca zastępczy </label>
-          <select id="secondaryDriver" v-model.number="secondaryDriver" class="form-control form-control-sm">
+          <select id="secondaryDriver" v-model.number="secondaryDriver" :disabled="disabledOthers"
+                  class="form-control form-control-sm">
             <option disabled value="">Wybierz kierowcę</option>
-            <option v-for="driver in drivers" v-bind:key="driver.id" v-bind:value="driver.id">
+            <option v-if="driver.id !== primaryDriver" v-for="driver in drivers" v-bind:key="driver.id" v-bind:value="driver.id">
               {{driver.name}} {{driver.surname}} {{driver.email}}
             </option>
           </select>
@@ -53,7 +55,8 @@
       <div class="col-6">
         <div class="form-group">
           <label for="bus">Autobus</label>
-          <select id="bus" v-model.number="bus" class="form-control form-control-sm">
+          <select id="bus" v-model.number="bus" :disabled="disabledOthers"
+                  class="form-control form-control-sm">
             <option disabled value="">Wybierz autobus</option>
             <option v-for="bus in buses" v-bind:key="bus.id" v-bind:value="bus.id">
               {{bus.registrationNumber}} {{bus.brand}} {{bus.model}} miejsc: {{bus.seats}}
@@ -64,8 +67,8 @@
       <div class="col-3">
         <div class="form-group">
           <label for="price">Cena w zł</label>
-          <input type="text" min="0" class="form-control form-control-sm" id="price"
-                 name="ridePrice"
+          <input type="number" min="0" class="form-control form-control-sm" id="price"
+                 name="ridePrice" :disabled="dataObject"
                  v-validate="'decimal'"
                  :class="{'is-invalid': errors.has('ridePrice')}"
                  v-model.number="ridePrice"
@@ -80,12 +83,15 @@
         <div class="form-check">
           <label for="active">Aktywny?</label>
           <div>
-            <input id="active" v-model="active" type="checkbox"/></div>
+            <input id="active" v-model="active" type="checkbox"
+                   :disabled="activeCheckboxDisabled" /></div>
         </div>
       </div>
     </div>
-    <div class="row d-flex justify-content-center">
-      <button class="btn btn-outline-success" @click="validateForm">Zapisz nowe ustawienia</button>
+    <div v-if="!disabledOthers" class="row d-flex justify-content-center">
+      <button class="btn btn-outline-success" @click="validateForm">
+        Zapisz nowe ustawienia
+      </button>
     </div>
   </div>
 </template>
@@ -103,10 +109,23 @@ export default {
       primaryDriver: null,
       secondaryDriver: null,
       ridePrice: null,
-      bus: '',
+      bus: null,
       active: false,
       drivers: [],
-      buses: []
+      buses: [],
+      activeCheckboxDisabled: true,
+      disabledOthers: true
+    }
+  },
+  watch: {
+    primaryDriver: function (val) {
+      this.activeCheckboxDisabled = this.disabledOthers || !(val !== '' && this.secondaryDriver !== '' && this.bus !== '')
+    },
+    secondaryDriver: function (val) {
+      this.activeCheckboxDisabled = this.disabledOthers || !(val !== '' && this.primaryDriver !== null && this.bus !== '')
+    },
+    bus: function (val) {
+      this.activeCheckboxDisabled = this.disabledOthers || !(val !== '' && this.secondaryDriver !== null && this.primaryDriver !== '')
     }
   },
   computed: {
@@ -147,7 +166,6 @@ export default {
         })
     },
     ensureUpdatingRide () {
-      console.log(this.rideData)
       swal({
         text: `Czy na pewno chcesz zaktualizować ten przejazd?`,
         icon: 'warning',
@@ -170,17 +188,21 @@ export default {
     },
     bindSelects () {
       this.primaryDriver = this.ride.primaryDriver == null ? '' : this.ride.primaryDriver.id
-      this.secondaryDriver = this.ride.secondaryDriver == null ? '' : this.ride.secondaryDriver
+      this.secondaryDriver = this.ride.secondaryDriver == null ? '' : this.ride.secondaryDriver.id
       this.bus = this.ride.bus == null ? '' : this.ride.bus.id
       this.active = this.ride.active
+      this.disabledOthers = this.ride.active
       this.ridePrice = this.ride.driveNettoPrice
     }
   },
   mounted () {
-    console.log(this.ride)
-    this.getDrivers()
-    this.getBuses()
-    this.bindSelects()
+    if (this.ride) {
+      this.getDrivers()
+      this.getBuses()
+      this.bindSelects()
+    } else {
+      this.$router.push('/admin/timetables')
+    }
   }
 }
 </script>

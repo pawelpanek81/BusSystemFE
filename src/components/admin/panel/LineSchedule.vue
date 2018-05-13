@@ -7,10 +7,8 @@
         </p>
       </router-link>
     </div>
-    <div class="row mt-4" v-if="busLineLoaded">
-      <div class="mb-3">
-        <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
-      </div>
+    <div class="row mt-4 mb-3" v-if="busLineLoaded">
+      <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
     </div>
     <div v-if="busLineSchedulesLoaded">
       <div class="row">
@@ -44,14 +42,14 @@
           <div id="startDate">
             <el-date-picker
               :picker-options="pickerOptions"
-              v-model="dateTime"
+              v-model="datePeriod"
               type="datetimerange"
               range-separator="-" start-placeholder="Początek" end-placeholder="Koniec">
             </el-date-picker>
           </div>
         </div>
         <div class="my-2 d-flex align-items-end">
-          <button type="button" class="btn btn-outline-success" id="buttonGenerate" @click="ensureGenerating">
+          <button type="button" :disabled="generateButtonDisabled" class="btn btn-outline-success" id="buttonGenerate" @click="ensureGenerating">
             Generuj przejazdy
           </button>
         </div>
@@ -68,9 +66,10 @@ import swal from 'sweetalert'
 export default {
   data () {
     return {
+      milisecondsInADay: 86400000,
       pickerOptions: {
-        disabledDate (date) {
-          return date.getTime() + 86400000 < Date.now()
+        disabledDate: (date) => {
+          return date.getTime() + this.milisecondsInADay < Date.now()
         }
       },
       lineId: null,
@@ -78,8 +77,17 @@ export default {
       busLineLoaded: false,
       busLineSchedules: [],
       busLineSchedulesLoaded: false,
-      dateTime: null,
-      schedulesIds: []
+      datePeriod: null,
+      schedulesIds: [],
+      generateButtonDisabled: true
+    }
+  },
+  watch: {
+    datePeriod: function (val) {
+      this.generateButtonDisabled = !(val !== null && this.schedulesIds.length !== 0)
+    },
+    schedulesIds: function (val) {
+      this.generateButtonDisabled = !(val.length !== 0 && this.datePeriod !== null)
     }
   },
   methods: {
@@ -100,8 +108,8 @@ export default {
     ensureGenerating () {
       let generateData = {
         busLine: this.lineId,
-        startDateTime: this.toLocalISOTime(this.dateTime[0]),
-        endDateTime: this.toLocalISOTime(this.dateTime[1]),
+        startDateTime: this.toLocalISOTime(this.datePeriod[0]),
+        endDateTime: this.toLocalISOTime(this.datePeriod[1]),
         schedulesIds: this.schedulesIds
       }
       swal({
