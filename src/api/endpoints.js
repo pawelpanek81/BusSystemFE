@@ -6,5 +6,7 @@ export default {
   LOGIN: '/login',
   USERS: '/users',
   BUS_LINES: '/bus-lines',
-  BUS_STOPS: '/bus-stops'
+  BUS_STOPS: '/bus-stops',
+  BUS_RIDES: '/bus-rides',
+  GENERATED_BUS_RIDES: '/bus-rides/generated'
 }

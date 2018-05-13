@@ -4,8 +4,11 @@ import BusLine from '@/components/admin/panel/BusLine'
 import BusStop from '@/components/admin/panel/BusStop'
 import Driver from '@/components/admin/panel/Driver'
 import Route from '@/components/admin/panel/Route'
-import AllBusLines from '@/components/admin/panel/AllBusLines'
 import Timetable from '@/components/admin/panel/Timetable'
+import AllBusLines from '@/components/admin/panel/AllBusLines'
+import Schedule from '@/components/admin/panel/LineSchedule'
+import Timetables from '@/components/admin/panel/Timetables'
+import Ride from '@/components/admin/panel/Ride'
 
 export default {
   ADMINPANEL: {
@@ -27,6 +30,10 @@ export default {
           {
             path: ':id/route',
             component: Route
+          },
+          {
+            path: ':id/schedule',
+            component: Schedule
           }
         ]
       },
@@ -40,7 +47,19 @@ export default {
       },
       {
         path: 'timetables',
-        component: Timetable
+        component: Timetable,
+        children: [
+          {
+            path: '',
+            component: Timetables
+          },
+          {
+            path: ':id',
+            name: 'Ride',
+            component: Ride,
+            props: true
+          }
+        ]
       }
     ]
   }

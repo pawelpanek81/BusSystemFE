@@ -15,7 +15,7 @@ export default {
           return `Podana wartość jest za mała`
         },
         decimal: function () {
-          return 'Pole może zawierać tylko liczby'
+          return 'Pole może zawierać tylko liczby oraz kropkę'
         }
       }
     }
