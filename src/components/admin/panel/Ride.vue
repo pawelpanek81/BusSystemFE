@@ -68,7 +68,7 @@
         <div class="form-group">
           <label for="price">Cena w zł</label>
           <input type="number" min="0" class="form-control form-control-sm" id="price"
-                 name="ridePrice"
+                 name="ridePrice" :disabled="disabledOthers"
                  v-validate="'decimal'"
                  :class="{'is-invalid': errors.has('ridePrice')}"
                  v-model.number="ridePrice"
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div v-if="!disabledOthers" class="row d-flex justify-content-center">
       <button class="btn btn-outline-success" @click="validateForm">
         Zapisz nowe ustawienia
       </button>
@@ -196,13 +196,9 @@ export default {
     }
   },
   mounted () {
-    if (this.ride) {
-      this.getDrivers()
-      this.getBuses()
-      this.bindSelects()
-    } else {
-      this.$router.push('/admin/timetables')
-    }
+    this.getDrivers()
+    this.getBuses()
+    this.bindSelects()
   }
 }
 </script>
