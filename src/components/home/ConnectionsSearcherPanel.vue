@@ -28,7 +28,7 @@
           <label for="startDate"><i class="fas fa-calendar-alt"></i> Odjazd</label>
           <div id="startDate">
             <el-date-picker
-              :picker-options="pickerOptions"
+              :picker-options="pickerOptionsStart"
               v-model="startTime"
               type="datetime"
               placeholder="Odjazd">
@@ -39,7 +39,7 @@
           <label for="endDate"><i class="fas fa-calendar-alt"></i> Przyjazd</label>
           <div id="endDate">
             <el-date-picker
-              :picker-options="pickerOptions1"
+              :picker-options="pickerOptionsEnd"
               :disabled="this.startTime == null"
               v-model="endTime"
               type="datetime"
@@ -69,14 +69,15 @@ export default {
   name: 'connections-searcher',
   data () {
     return {
+      milisecondsInADay: 86400000,
       startTime: null,
       endTime: null,
-      pickerOptions: {
+      pickerOptionsStart: {
         disabledDate (date) {
-          return date.getTime() + 86400000 < Date.now()
+          return date.getTime() + this.milisecondsInADay < Date.now()
         }
       },
-      pickerOptions1: {
+      pickerOptionsEnd: {
         disabledDate: (date) => {
           return date.getTime() < this.startTime
         }

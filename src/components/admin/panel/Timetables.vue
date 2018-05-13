@@ -2,7 +2,7 @@
   <div>
     <h3 class='mb-3'>Przejazdy</h3>
     <div class="row mb-3" v-if="busLinesLoaded">
-      <div class="col-4">
+      <div class="col-3">
         <label class="m-0">Aktywne?</label>
         <select id="active" class="custom-select custom-select-sm" v-model="active">
           <option selected v-bind:value="'active'">Tak</option>
@@ -10,13 +10,20 @@
           <option v-bind:value="''">Aktywne i nieaktywne</option>
         </select>
       </div>
-      <div class="col-4">
+      <div class="col-3">
+        <label class="m-0">Linie</label>
+        <select disabled id="line" class="custom-select custom-select-sm" v-model.number="line">
+          <option v-bind:value="''">Wszystkie</option>
+          <option v-for="line in busLines" v-bind:key="line.id" v-bind:value="line.id">{{line.name}}</option>
+        </select>
+      </div>
+      <div class="col-3">
         <label class="m-0">Pozycji na stronie</label>
         <select id="resultsOnPage" class="custom-select custom-select-sm" v-model="resultsOnPage">
          <option v-for="nr in [5, 10, 20, 50, 100]" v-bind:key="nr" v-bind:value="nr">{{nr}}</option>
         </select>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <label class="m-0">Przedział czasowy</label>
         <select id="timePeriod" class="custom-select custom-select-sm" v-model="timePeriod">
           <option v-bind:value="''">Wszystkie</option>
@@ -66,6 +73,7 @@
                         :results-on-page="resultsOnPage"
                         :time-period="timePeriod"
                         :active="active"
+                        :lineId="lineId"
                         v-on:update-timetables="getAllTimetables($event)"
       />
     </div>
@@ -77,6 +85,7 @@ import axios from 'axios'
 import api from '../../../api/endpoints'
 import moment from 'moment'
 import PaginationPanel from './TimetablesPaginationPanel'
+import swal from 'sweetalert'
 
 export default {
   components: {
@@ -87,7 +96,7 @@ export default {
       timetables: [],
       active: '',
       timePeriod: 'month',
-      line: '',
+      lineId: '',
       resultsOnPage: 5,
       timetablesLoaded: false,
       busLines: [],
@@ -97,7 +106,6 @@ export default {
   methods: {
     getAllTimetables (response) {
       this.timetables = response
-      console.log(this.timetables)
       this.timetablesLoaded = true
     },
     getBusLines () {
@@ -106,38 +114,7 @@ export default {
           this.busLinesLoaded = true
           this.busLines = response.data
         })
-        .catch(function () {})
-    },
-    showTableOptions () {
-      $('#rides').DataTable({
-        language: {
-          'decimal': '',
-          'emptyTable': '',
-          'info': 'Wyświetlono _START_ do _END_ z _TOTAL_ pozycji',
-          'infoEmpty': 'Wyświetlno 0 z 0 pozycji',
-          'infoFiltered': '(filtered from _MAX_ total entries)',
-          'infoPostFix': '',
-          'thousands': '',
-          'lengthMenu': 'Pokaż _MENU_ pozycji',
-          'loadingRecords': 'Ładowanie..',
-          'processing': 'Przetwarzanie...',
-          'search': 'Szukaj:',
-          'zeroRecords': '',
-          'paginate': {
-            'first': 'Pierwszy',
-            'last': 'Ostatni',
-            'next': 'Następny',
-            'previous': 'Poprzedni'
-          },
-          'aria': {
-            'sortAscending': ': activate to sort column ascending',
-            'sortDescending': ': activate to sort column descending'
-          }
-        },
-        paging: false,
-        searching: false,
-        info: false
-      })
+        .catch(() => swal('Oops', 'Coś poszło nie tak... Nie można załadować danych', 'error'))
     },
     formatIsoTime (time) {
       let readableDate = moment(time, moment.ISO_8601).format('DD-MM-YYYY')
@@ -161,9 +138,6 @@ export default {
   },
   mounted () {
     this.getBusLines()
-      .then(() => {
-        this.showTableOptions()
-      })
   }
 }
 </script>

@@ -64,7 +64,7 @@
       <div class="col-3">
         <div class="form-group">
           <label for="price">Cena w zł</label>
-          <input type="text" min="0" class="form-control form-control-sm" id="price"
+          <input type="number" min="0" class="form-control form-control-sm" id="price"
                  name="ridePrice"
                  v-validate="'decimal'"
                  :class="{'is-invalid': errors.has('ridePrice')}"

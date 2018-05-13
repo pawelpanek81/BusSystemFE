@@ -7,10 +7,8 @@
         </p>
       </router-link>
     </div>
-    <div class="row mt-4" v-if="busLineLoaded">
-      <div class="mb-3">
-        <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
-      </div>
+    <div class="row mt-4 mb-3" v-if="busLineLoaded">
+      <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
     </div>
     <div v-if="busLineSchedulesLoaded">
       <div class="row">
@@ -68,9 +66,10 @@ import swal from 'sweetalert'
 export default {
   data () {
     return {
+      milisecondsInADay: 86400000,
       pickerOptions: {
         disabledDate (date) {
-          return date.getTime() + 86400000 < Date.now()
+          return date.getTime() + this.milisecondsInADay < Date.now()
         }
       },
       lineId: null,
