@@ -14,7 +14,7 @@
               </h3>
             </div>
             <div class="d-flex justify-content-center mb-2">
-              <h5> {{formatDate(startTime)}}</h5>
+              <h5>{{formatDate(startTime)}}</h5>
             </div>
             <div v-if="searchResults.departurePossibilities.length != 0">
               <table class="table table-md-responsive text-center">
@@ -124,7 +124,6 @@ export default {
             this.busStopFrom = this.searchResults.stopFrom
             this.busStopTo = this.searchResults.stopTo
             this.searchResultsLoaded = true
-            console.log(response.data)
           })
       } else {
         this.redirected = false

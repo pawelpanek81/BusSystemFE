@@ -31,6 +31,7 @@
               :picker-options="pickerOptions"
               v-model="startTime"
               type="date"
+              format="dd-MM-yyyy"
               value-format="yyyy-MM-dd"
               placeholder="Odjazd">
             </el-date-picker>
@@ -44,6 +45,7 @@
               :disabled="this.startTime == null"
               v-model="endTime"
               type="date"
+              format="dd-MM-yyyy"
               value-format="yyyy-MM-dd"
               placeholder="Przyjazd">
             </el-date-picker>
