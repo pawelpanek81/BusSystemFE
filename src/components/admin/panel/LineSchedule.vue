@@ -29,7 +29,7 @@
             <td>{{schedule.code}}</td>
             <td v-if="schedule.enabled">Tak</td>
             <td v-else>Nie</td>
-            <td> 5 zł</td>
+            <td> {{schedule.driveNettoPrice}} zł</td>
             <td>{{schedule.startHour}}</td>
             <td><input type="checkbox" :disabled="!schedule.enabled" v-bind:value="schedule.id" v-model="schedulesIds"/></td>
           </tr>
