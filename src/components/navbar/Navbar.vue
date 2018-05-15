@@ -32,7 +32,7 @@
           <div class="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user userIcon"></i>
           </div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="userSubmenu">
             <router-link v-if="getUserType === 'USER'"
               class="dropdown-item" to="/customer">Panel klienta</router-link>
             <router-link v-if="getUserType === 'DRIVER'"
@@ -72,6 +72,14 @@ export default {
       }
       return ''
     }
+  },
+  mounted () {
+    $('.navbar-nav>li').on('click', function () {
+      $('.navbar-collapse').collapse('hide')
+    })
+    $('.navbar-nav>#userSubmenu').on('click', function () {
+      $('.navbar-collapse').collapse('hide')
+    })
   },
   methods: {
     logout () {
