@@ -13,7 +13,7 @@
               <div class="collapse navbar-collapse" id="verticalNavbar">
                 <div class="vertical-menu">
                   <router-link v-for="item in items" v-bind:key="item.name" :to="{path: item.urlLink}"
-                               ref="tab" :class="{active:item.name == selected} " v-on:click.native="selected = item.name"
+                               ref="tab" :class="{active:item.routeName == selected} " v-on:click.native=" selected = item.routeName"
                   exact-active-class="" active-class="">
                     {{item.name}}
                   </router-link>
@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted () {
-    this.selected = this.$refs.tab[0].$el.innerText
+    this.selected = this.$route.path.split('/')[2]
   }
 }
 </script>
@@ -52,22 +52,24 @@ export default {
   }
 
   .vertical-menu a {
-    background-color: #eee;
+    background-color: rgba(245, 245, 245, 0.52);
     color: black;
     display: block;
     padding: 12px;
+    margin: 1px;
     text-decoration: none;
+    border-radius: 5px;
   }
 
   .vertical-menu button {
-    background-color: #eee;
+    background-color: rgba(248, 248, 248, 0.17);
     color: black;
     padding: 12px;
     text-decoration: none;
   }
 
   .vertical-menu a:hover {
-    background-color: #ccc;
+    background-color: #eaeaea;
     cursor: pointer;
   }
 

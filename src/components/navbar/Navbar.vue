@@ -40,7 +40,7 @@
             <router-link v-if="getUserType === 'BOK'"
                          class="dropdown-item" to="/bok">Panel BOK</router-link>
             <router-link v-if="getUserType === 'ADMIN'"
-                         class="dropdown-item" to="/admin">Panel administracyjny</router-link>
+                         class="dropdown-item" to="/admin/buslines">Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
