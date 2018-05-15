@@ -1,8 +1,13 @@
 <template>
   <div>
+    <router-link to="/admin/buslines">
+      <p class="go-back">
+        Pokaż wszystkie linie
+      </p>
+    </router-link>
     <div class="row mt-4 ml-1">
       <h5>
-        Dodaj przystanek do trasy tej lini
+        Dodaj przystanek do trasy tej linii
       </h5>
     </div>
     <div class="row mt-4">
@@ -53,15 +58,8 @@
       </div>
     </div>
     <div class="row mt-4" v-if="busLineLoaded">
-      <div class="col-9 mb-3">
+      <div class="mb-3">
         <h5>Linia nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
-      </div>
-      <div class="col-3">
-        <router-link to="/admin/buslines">
-          <button type="button" class="btn btn-outline-success btn-sm">
-            Pokaż wszystkie linie
-          </button>
-        </router-link>
       </div>
     </div>
     <div v-if="busStopsLoaded" class="row container" v-for="busStop in busStopsInRoute" v-bind:key="busStop.id">
@@ -180,7 +178,6 @@ export default {
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
-            console.log(this.busStopToRoute)
             this.addBusStopToRoute(this.busStopToRoute, this.lineId)
           }
         })
@@ -211,5 +208,9 @@ export default {
     background-size: 25px 100%;
     min-height: 50px;
     width: 25px;
+  }
+  .go-back {
+    color: green;
+    text-decoration: underline;
   }
 </style>

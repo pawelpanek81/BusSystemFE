@@ -14,7 +14,7 @@ export default {
       {name: 'Kierowcy', urlLink: '/admin/drivers'},
       {name: 'Przystanki', urlLink: '/admin/busstops'},
       {name: 'Linie autobusowe', urlLink: '/admin/buslines'},
-      {name: 'Rozkłady jazdy', urlLink: '/admin/timetables'},
+      {name: 'Przejazdy', urlLink: '/admin/timetables'},
       {name: 'Pojazdy', urlLink: '/admin/buses'}
     ]
     var panelName = 'AdministrationPanel'

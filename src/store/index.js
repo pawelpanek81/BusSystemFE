@@ -7,6 +7,8 @@ import bus from './bus/index'
 import busline from './busline/index'
 import busstops from './busstops/index'
 import routes from './route/index'
+import timetables from './timetables/index'
+import ride from './ride/index'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -18,6 +20,8 @@ export default new Vuex.Store({
     busline,
     busstops,
     routes,
+    timetables,
+    ride,
     addOns
   }
 })
