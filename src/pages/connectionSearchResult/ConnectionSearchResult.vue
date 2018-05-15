@@ -76,10 +76,10 @@
             </div>
           </div>
         </div>
-        <div v-if="!redirected">
-          <map-component/>
-        </div>
       </div>
+    </div>
+    <div v-if="!redirected">
+      <map-component/>
     </div>
   </div>
 </template>
