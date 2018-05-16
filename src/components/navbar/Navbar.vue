@@ -34,7 +34,7 @@
           </div>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="userSubmenu">
             <router-link v-if="getUserType === 'USER'"
-              class="dropdown-item" to="/customer">Panel klienta</router-link>
+              class="dropdown-item" to="/customer/info">Panel klienta</router-link>
             <router-link v-if="getUserType === 'DRIVER'"
                          class="dropdown-item" to="/driver">Panel kierowcy</router-link>
             <router-link v-if="getUserType === 'BOK'"
