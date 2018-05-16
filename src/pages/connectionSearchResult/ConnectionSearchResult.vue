@@ -31,7 +31,14 @@
                   <td>{{formatTime(result.startDateTime)}}</td>
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
-                  <td><button class="btn btn-outline-success btn-sm">Rezerwuj</button></td>
+                  <td>
+                    <router-link :to="{name: 'BuyTicket',
+                       params: {ride: result, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
+                      <button class="btn btn-outline-success btn-sm">
+                        Rezerwuj
+                      </button>
+                    </router-link>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -66,7 +73,14 @@
                   <td>{{formatTime(result.startDateTime)}}</td>
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
-                  <td><button class="btn btn-outline-success btn-sm">Rezerwuj</button></td>
+                  <td>
+                    <router-link :to="{name: 'BuyTicket',
+                       params: {ride: result, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
+                      <button class="btn btn-outline-success btn-sm">
+                        Rezerwuj
+                      </button>
+                    </router-link>
+                  </td>
                 </tr>
                 </tbody>
               </table>

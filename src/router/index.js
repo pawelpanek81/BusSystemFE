@@ -14,7 +14,6 @@ export default new Router({
   mode: 'history',
   routes: [
     Navbar.HOME,
-    Navbar.BUYTICKET,
     Navbar.BUSSTOPS,
     Navbar.TIMETABLES,
     Navbar.LOGIN,

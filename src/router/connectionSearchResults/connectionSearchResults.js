@@ -10,6 +10,8 @@ export default {
   },
   BUY_TICKET: {
     path: '/buyticket',
-    component: BuyTicketPanel
+    component: BuyTicketPanel,
+    name: 'BuyTicket',
+    props: true
   }
 }

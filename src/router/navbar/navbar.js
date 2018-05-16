@@ -1,5 +1,4 @@
 import Home from '@/pages/home/Home'
-import Buyticket from '@/pages/navbar/BuyTicket'
 import Busstops from '@/pages/navbar/BusStops'
 import Timetables from '@/pages/navbar/Timetables'
 import Registration from '@/pages/navbar/Registration'
@@ -11,11 +10,6 @@ export default {
     path: '/',
     name: 'Home',
     component: Home
-  },
-  BUYTICKET: {
-    path: '/buy-ticket',
-    name: 'Buyticket',
-    component: Buyticket
   },
   BUSSTOPS: {
     path: '/bus-stops',
