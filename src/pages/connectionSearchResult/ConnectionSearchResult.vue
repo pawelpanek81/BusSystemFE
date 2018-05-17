@@ -23,7 +23,7 @@
                   <th scope="col">Godzina odjazdu</th>
                   <th scope="col">Godzina przyjazdu</th>
                   <th scope="col">Cena</th>
-                  <th scope="col"></th>
+                  <th scope="col">Wybierz bilet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,12 +32,7 @@
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
                   <td>
-                    <router-link :to="{name: 'BuyTicket',
-                       params: {ride: result, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
-                      <button class="btn btn-outline-success btn-sm">
-                        Rezerwuj
-                      </button>
-                    </router-link>
+                    <input class="form-check-input" type="radio" v-model="ticketTo" name="ticketTo" v-bind:value="result">
                   </td>
                 </tr>
                 </tbody>
@@ -65,7 +60,7 @@
                   <th scope="col">Godzina odjazdu</th>
                   <th scope="col">Godzina przyjazdu</th>
                   <th scope="col">Cena</th>
-                  <th scope="col"></th>
+                  <th scope="col">Wybierz bilet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,12 +69,7 @@
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
                   <td>
-                    <router-link :to="{name: 'BuyTicket',
-                       params: {ride: result, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
-                      <button class="btn btn-outline-success btn-sm">
-                        Rezerwuj
-                      </button>
-                    </router-link>
+                    <input class="form-check-input" type="radio" v-model="ticketFrom" name="ticketFrom" v-bind:value="result">
                   </td>
                 </tr>
                 </tbody>
@@ -88,6 +78,14 @@
             <div class="d-flex justify-content-center" v-else>
               <p class="no-results"> Brak przejazdów powrotnych na wybranej trasie w określonym dniu </p>
             </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <router-link :to="{name: 'BuyTicket',
+                       params: {rideTo: ticketTo, rideFrom: ticketFrom, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
+              <button class="btn btn-success" :disabled="!atLeastOneTicketChosen">
+                Rezerwuj
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -117,12 +115,18 @@ export default {
       searchResults: [],
       searchResultsLoaded: false,
       busStopFrom: '',
-      busStopTo: ''
+      busStopTo: '',
+      ticketFrom: '',
+      ticketTo: '',
+      atLeastOneTicketChosen: false
     }
   },
   watch: {
     $route (data, oldData) {
       this.getConnections()
+    },
+    ticketTo: function () {
+      this.atLeastOneTicketChosen = this.ticketTo !== ''
     }
   },
   methods: {

@@ -9,5 +9,7 @@ export default {
   BUS_STOPS: '/bus-stops',
   BUS_RIDES: '/bus-rides',
   SEARCH_BUS_RIDES: '/bus-rides/search',
-  GENERATED_BUS_RIDES: '/bus-rides/generated'
+  GENERATED_BUS_RIDES: '/bus-rides/generated',
+  TICKETS: '/tickets',
+  PAYMENTS: '/payments'
 }
