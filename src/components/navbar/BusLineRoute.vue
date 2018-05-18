@@ -52,8 +52,10 @@ export default {
         })
     },
     getBusStopsInRoute (id) {
+      this.$store.dispatch('setLoadingSpinner')
       axios.get(`${api.BUS_LINES}/${id}/routes`)
         .then((response) => {
+          this.$store.dispatch('unsetLoadingSpinner')
           this.busStopsInRoute = response.data
           this.busStopsLoaded = true
         })

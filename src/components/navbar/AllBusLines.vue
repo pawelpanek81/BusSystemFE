@@ -29,8 +29,10 @@ export default {
   },
   methods: {
     getLines () {
+      this.$store.dispatch('setLoadingSpinner')
       axios.get(API.BUS_LINES)
         .then((response) => {
+          this.$store.dispatch('unsetLoadingSpinner')
           this.busLineLoaded = true
           this.busLines = response.data
         })

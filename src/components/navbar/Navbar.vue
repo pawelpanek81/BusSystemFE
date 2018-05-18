@@ -13,9 +13,6 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-              <router-link class="nav-link" to="/bus-stops">Przystanki</router-link>
-          </li>
-          <li class="nav-item">
               <router-link class="nav-link" to="/bus-lines">Linie autobusowe</router-link>
           </li>
           <li class="nav-item">
