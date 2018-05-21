@@ -5,6 +5,9 @@ import Timetables from '@/pages/navbar/Timetables'
 import Registration from '@/pages/navbar/Registration'
 import Login from '@/pages/navbar/Login'
 import Tickets from '@/pages/navbar/Tickets'
+import BusLines from '@/pages/navbar/BusLines'
+import AllBusLines from '@/components/navbar/AllBusLines'
+import BusLineRoute from '@/components/navbar/BusLineRoute'
 
 export default {
   HOME: {
@@ -41,5 +44,20 @@ export default {
     path: '/user/tickets',
     name: 'Tickets',
     component: Tickets
+  },
+  BUSLINES: {
+    path: '/bus-lines',
+    name: 'Bus Lines',
+    component: BusLines,
+    children: [
+      {
+        path: '',
+        component: AllBusLines
+      },
+      {
+        path: ':id',
+        component: BusLineRoute
+      }
+    ]
   }
 }
