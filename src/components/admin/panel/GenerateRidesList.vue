@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="h4 pt-4">Wszystkie linie</div>
+    <div class="h4 pb-4">Wybierz linię aby wygenerować przejazdy</div>
     <table v-if="busLinesLoaded" class="table table-hover text-center" id="allbusLines">
       <thead>
       <tr>

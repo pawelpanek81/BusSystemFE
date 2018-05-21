@@ -12,7 +12,7 @@
       <div class="col-3">
         <label for="scheduleCode">Kod </label>
         <input type="text" class="form-control form-control-sm" id="scheduleCode"
-               name="busRegistrationNr"
+               name="scheduleCode"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('scheduleCode')}"
                v-model="schedule.code"
@@ -25,7 +25,7 @@
       <div class="col-3">
         <label for="scheduleStartHour">Godzina odjazdu </label>
         <input type="text" class="form-control form-control-sm" id="scheduleStartHour"
-               name="busBrand"
+               name="scheduleStartHour"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('scheduleStartHour')}"
                v-model="schedule.startHour"
@@ -38,7 +38,7 @@
       <div class="col-3">
         <label for="scheduleDriveNettoPrice">Cena netto za przejazd </label>
         <input type="text" class="form-control form-control-sm" id="scheduleDriveNettoPrice"
-               name="busModel"
+               name="scheduleDriveNettoPrice"
                v-validate="'required'"
                :class="{'is-invalid': errors.has('scheduleDriveNettoPrice')}"
                v-model="schedule.driveNettoPrice"
@@ -148,7 +148,13 @@ export default {
     addSchedule (schedule, lineId) {
       this.$store.dispatch('addSchedule', { schedule: schedule, busLineId: lineId })
         .then(() => {
+          swal('Dodano harmonogram!', {
+            icon: 'success'
+          })
           this.getLineSchedules(this.lineId)
+        })
+        .catch(() => {
+          swal('Oops', 'Coś poszło nie tak...', 'error')
         })
     },
     ensureDeletingSchedule (id) {

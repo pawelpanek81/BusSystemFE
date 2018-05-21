@@ -23,7 +23,11 @@
         </div>
       </div>
       <div class="col my-2 d-flex align-items-end">
-        <button type="button" :disabled="generateButtonDisabled" class="btn btn-outline-success" id="buttonGenerate" @click="ensureGenerating">
+        <button type="button"
+                :disabled="generateButtonDisabled"
+                class="btn btn-outline-success"
+                id="buttonGenerate"
+                @click="ensureGenerating">
           Generuj
         </button>
       </div>
