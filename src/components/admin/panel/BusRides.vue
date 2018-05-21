@@ -64,11 +64,11 @@
         </tbody>
       </table>
     </div>
-    <div v-if='timetablesLoaded && timetables.content.length == 0'
+    <div v-if='timetablesLoaded && timetables.content.length === 0'
          class="d-flex justify-content-center m-4">
       Brak pasujących wyników
     </div>
-    <div class="mt-5 d-flex justify-content-center">
+    <div class="mt-5 d-flex">
       <pagination-panel
                         :results-on-page="resultsOnPage"
                         :time-period="timePeriod"
@@ -84,7 +84,7 @@
 import axios from 'axios'
 import api from '../../../api/endpoints'
 import moment from 'moment'
-import PaginationPanel from './TimetablesPaginationPanel'
+import PaginationPanel from './PaginationPanel'
 import swal from 'sweetalert'
 
 export default {

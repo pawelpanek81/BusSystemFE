@@ -7,10 +7,58 @@
         </p>
       </router-link>
     </div>
-    <div class="row mt-4 mb-3" v-if="busLineLoaded">
-      <h5>Kursy linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
+    <h5>Dodaj nowy harmonogram</h5>
+    <div class="row mt-4">
+      <div class="col-3">
+        <label for="scheduleCode">Kod </label>
+        <input type="text" class="form-control form-control-sm" id="scheduleCode"
+               name="busRegistrationNr"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('scheduleCode')}"
+               v-model="schedule.code"
+               data-vv-as="kod">
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('scheduleCode')"
+                class="invalid-feedback">{{ errors.first('scheduleCode') }}</span>
+        </transition>
+      </div>
+      <div class="col-3">
+        <label for="scheduleStartHour">Godzina odjazdu </label>
+        <input type="text" class="form-control form-control-sm" id="scheduleStartHour"
+               name="busBrand"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('scheduleStartHour')}"
+               v-model="schedule.startHour"
+               data-vv-as="godzinę odjazdu">
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('scheduleStartHour')"
+                class="invalid-feedback">{{ errors.first('scheduleStartHour') }}</span>
+        </transition>
+      </div>
+      <div class="col-3">
+        <label for="scheduleDriveNettoPrice">Cena netto za przejazd </label>
+        <input type="text" class="form-control form-control-sm" id="scheduleDriveNettoPrice"
+               name="busModel"
+               v-validate="'required'"
+               :class="{'is-invalid': errors.has('scheduleDriveNettoPrice')}"
+               v-model="schedule.driveNettoPrice"
+               data-vv-as="cenę netto">
+        <transition enter-active-class="animated fadeIn">
+          <span v-show="errors.has('scheduleDriveNettoPrice')"
+                class="invalid-feedback">{{ errors.first('scheduleDriveNettoPrice') }}</span>
+        </transition>
+      </div>
     </div>
-    <div v-if="busLineSchedulesLoaded">
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <button type="button" id="addSchedule" class="btn btn-outline-success"
+                @click="validateForm">Dodaj rozkład</button>
+      </div>
+    </div>
+    <div class="row mt-4 mb-3">
+      <h5>Harmonogram dla linii nr {{busLine.name}} {{busLine.from.city}} <i class="fas fa-long-arrow-alt-right"></i> {{busLine.to.city}} </h5>
+    </div>
+    <div>
       <div class="row">
         <table class="table table-hover text-center" id="allbusLineSchedules">
           <thead>
@@ -19,40 +67,28 @@
             <th scope="col">Kod (dni kursów)</th>
             <th scope="col">Aktywny?</th>
             <th scope="col">Cena przejazdu</th>
-            <th scope="col">Godzina rozpoczęcia kursu</th>
-            <th scope="col">Dodaj</th>
+            <th scope="col">Godz. rozp. kursu</th>
+            <th scope="col">Więcej</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="schedule in busLineSchedules" v-bind:key="schedule.id">
+          <tr v-for="schedule in busLineSchedules" v-bind:key="schedule.id"
+              v-bind:style="{color: schedule.enabled ? 'black' : '#a6a8ad'}">
             <th scope="row">{{schedule.id}}</th>
             <td>{{schedule.code}}</td>
             <td v-if="schedule.enabled">Tak</td>
             <td v-else>Nie</td>
             <td> {{schedule.driveNettoPrice}} zł</td>
             <td>{{schedule.startHour}}</td>
-            <td><input type="checkbox" :disabled="!schedule.enabled" v-bind:value="schedule.id" v-model="schedulesIds"/></td>
+            <td>
+              <button class="btn btn-outline-danger" @click="ensureDeletingSchedule(schedule.id)">Usuń</button>
+              <button :disabled="schedule.enabled"
+                      class="btn"
+                      :class="{'btn-outline-success': !schedule.enabled}" @click="activateSchedule(schedule.id)">Aktywuj</button>
+            </td>
           </tr>
           </tbody>
         </table>
-      </div>
-      <div class="row justify-content-around date-picker-width">
-        <div class="my-2">
-          <label for="startDate"><i class="fas fa-calendar-alt"></i> Wybierz termin</label>
-          <div id="startDate">
-            <el-date-picker
-              :picker-options="pickerOptions"
-              v-model="datePeriod"
-              type="datetimerange"
-              range-separator="-" start-placeholder="Początek" end-placeholder="Koniec">
-            </el-date-picker>
-          </div>
-        </div>
-        <div class="my-2 d-flex align-items-end">
-          <button type="button" :disabled="generateButtonDisabled" class="btn btn-outline-success" id="buttonGenerate" @click="ensureGenerating">
-            Generuj przejazdy
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -66,28 +102,18 @@ import swal from 'sweetalert'
 export default {
   data () {
     return {
-      milisecondsInADay: 86400000,
-      pickerOptions: {
-        disabledDate: (date) => {
-          return date.getTime() + this.milisecondsInADay < Date.now()
-        }
-      },
       lineId: null,
-      busLine: null,
-      busLineLoaded: false,
-      busLineSchedules: [],
-      busLineSchedulesLoaded: false,
-      datePeriod: null,
-      schedulesIds: [],
-      generateButtonDisabled: true
-    }
-  },
-  watch: {
-    datePeriod: function (val) {
-      this.generateButtonDisabled = !(val !== null && this.schedulesIds.length !== 0)
-    },
-    schedulesIds: function (val) {
-      this.generateButtonDisabled = !(val.length !== 0 && this.datePeriod !== null)
+      busLine: {
+        name: null,
+        from: { id: null },
+        to: { id: null }
+      },
+      busLineSchedules: null,
+      schedule: {
+        code: null,
+        startHour: null,
+        driveNettoPrice: null
+      }
     }
   },
   methods: {
@@ -95,33 +121,47 @@ export default {
       axios.get(`${api.BUS_LINES}/${id}`)
         .then((response) => {
           this.busLine = response.data
-          this.busLineLoaded = true
         })
     },
     getLineSchedules (id) {
       axios.get(`${api.BUS_LINES}/${id}/schedules`)
         .then((response) => {
           this.busLineSchedules = response.data
-          this.busLineSchedulesLoaded = true
         })
     },
-    ensureGenerating () {
-      let generateData = {
-        busLine: this.lineId,
-        startDateTime: this.toLocalISOTime(this.datePeriod[0]),
-        endDateTime: this.toLocalISOTime(this.datePeriod[1]),
-        schedulesIds: this.schedulesIds
-      }
+    toLocalISOTime (time) {
+      const tzoffset = (new Date()).getTimezoneOffset() * 60000
+      return (new Date(time - tzoffset)).toISOString().slice(0, -1)
+    },
+    showHumanReadableTime (time) {
+      let date = new Date(time)
+      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    },
+    validateForm () {
+      this.$validator.validateAll()
+        .then((result) => {
+          if (result) {
+            this.addSchedule(this.schedule, this.lineId)
+          }
+        })
+    },
+    addSchedule (schedule, lineId) {
+      this.$store.dispatch('addSchedule', { schedule: schedule, busLineId: lineId })
+        .then(() => {
+          this.getLineSchedules(this.lineId)
+        })
+    },
+    ensureDeletingSchedule (id) {
       swal({
-        text: `Czy na pewno chcesz wygenerować te kursy?`,
+        text: `Czy na pewno chcesz usunąć ten harmonogram?`,
         icon: 'warning',
         buttons: true
       })
         .then((willSave) => {
           if (willSave) {
-            this.$store.dispatch('generateTimetables', generateData)
+            this.$store.dispatch('removeSchedule', {busLineId: this.lineId, scheduleId: id})
               .then(() => {
-                swal('Wygenerowano wybrane przejazdy!', {
+                swal('Usunięto harmonogram!', {
                   icon: 'success'
                 })
                 this.getLineSchedules(this.lineId)
@@ -131,14 +171,6 @@ export default {
               })
           }
         })
-    },
-    toLocalISOTime (time) {
-      var tzoffset = (new Date()).getTimezoneOffset() * 60000
-      return (new Date(time - tzoffset)).toISOString().slice(0, -1)
-    },
-    showHumanReadableTime (time) {
-      let date = new Date(time)
-      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     }
   },
   created () {
@@ -150,13 +182,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .go-back {
-    color: green;
-    text-decoration: underline;
-  }
-  #buttonGenerate {
-    height: 40px;
-  }
-</style>
