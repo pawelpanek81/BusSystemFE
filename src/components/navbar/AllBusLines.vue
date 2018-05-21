@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=" d-flex justify-content-center ">
     <div class="container mx-5">
       <div class="mt-4 mb-4">
         <h5 class="mb-5">Wybierz linię, aby zobaczyć więcej</h5>

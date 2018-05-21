@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=" d-flex justify-content-center ">
     <div class="container mx-5">
       <div class="row mt-4" v-if="busLineLoaded">
         <div class="col-9 mb-3">
