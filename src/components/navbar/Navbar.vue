@@ -9,7 +9,7 @@
       <div class="navbar-collapse collapse" id="navbarNav" >
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <router-link class="nav-link" to="/buy-ticket">Kup bilet</router-link>
+            <router-link class="nav-link" to="/search">Kup bilet</router-link>
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
