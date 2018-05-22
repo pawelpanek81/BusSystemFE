@@ -23,13 +23,19 @@
         </transition>
       </div>
       <div class="col-3">
-        <label for="scheduleStartHour">Godzina odjazdu </label>
-        <input type="text" class="form-control form-control-sm" id="scheduleStartHour"
-               name="scheduleStartHour"
-               v-validate="'required'"
-               :class="{'is-invalid': errors.has('scheduleStartHour')}"
-               v-model="schedule.startHour"
-               data-vv-as="godzinę odjazdu">
+        <label>Godzina odjazdu </label>
+        <el-time-picker class="form-control form-control-sm"
+          id="scheduleStartHour"
+          name="scheduleStartHour"
+          v-validate="'required'"
+          :class="{'is-invalid': errors.has('scheduleStartHour')}"
+          size="small"
+          value-format="HH:mm:s"
+          v-model="schedule.startHour"
+          data-vv-as="godzinę odjazdu"
+          placeholder="Godzina odjazdu">
+        </el-time-picker>
+
         <transition enter-active-class="animated fadeIn">
           <span v-show="errors.has('scheduleStartHour')"
                 class="invalid-feedback">{{ errors.first('scheduleStartHour') }}</span>
@@ -188,3 +194,14 @@ export default {
   }
 }
 </script>
+
+<style>
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 100%;
+    height: 32px;
+  }
+  .el-input--small .el-input__inner {
+    height: 22px;
+    border: none;
+  }
+</style>
