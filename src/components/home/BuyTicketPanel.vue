@@ -160,8 +160,7 @@ export default {
         })
     },
     formatDateTime (time) {
-      let convertedTime = moment(time, moment.ISO_8601).format('D MMM YYYY HH:mm')
-      return convertedTime
+      return moment(time, moment.ISO_8601).format('D MMM YYYY HH:mm')
     },
     ensureBuyingATicket () {
       this.$validator.validateAll()
@@ -198,6 +197,9 @@ export default {
             signature: 'Lubię spać'
           }
           axios.post(API.PAYMENTS, paymentData)
+            .then((res) => {
+              window.open(res.headers.location, '_blank')
+            })
         })
     }
   },

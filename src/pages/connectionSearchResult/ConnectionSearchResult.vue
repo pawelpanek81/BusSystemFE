@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-center mb-2">
               <h5>{{formatDate(startTime)}}</h5>
             </div>
-            <div v-if="searchResults.departurePossibilities.length != 0">
+            <div v-if="searchResults.departurePossibilities.length !== 0">
               <table class="table table-md-responsive text-center">
                 <thead>
                 <tr>
@@ -32,7 +32,10 @@
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
                   <td>
-                    <input class="form-check-input" type="radio" v-model="ticketTo" name="ticketTo" v-bind:value="result">
+                    <label>
+                      <input class="form-check-input" type="radio" v-model="ticketTo" name="ticketTo"
+                             v-bind:value="result">
+                    </label>
                   </td>
                 </tr>
                 </tbody>
@@ -53,7 +56,7 @@
             <div class="d-flex justify-content-center mb-2">
               <h5> {{formatDate(endTime)}}</h5>
             </div>
-            <div v-if="searchResults.returnPossibilities.length != 0">
+            <div v-if="searchResults.returnPossibilities.length !== 0">
               <table class="table table-md-responsive text-center">
                 <thead>
                 <tr>
@@ -69,7 +72,10 @@
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
                   <td>
-                    <input class="form-check-input" type="radio" v-model="ticketFrom" name="ticketFrom" v-bind:value="result">
+                    <label>
+                      <input class="form-check-input" type="radio" v-model="ticketFrom" name="ticketFrom"
+                             v-bind:value="result">
+                    </label>
                   </td>
                 </tr>
                 </tbody>
@@ -148,12 +154,10 @@ export default {
       }
     },
     formatDate (time) {
-      let convertedTime = moment(time, 'YYYY-MM-DD').format('D MMM YYYY')
-      return convertedTime
+      return moment(time, 'YYYY-MM-DD').format('D MMM YYYY')
     },
     formatTime (time) {
-      let convertedTime = moment(time, moment.ISO_8601).format('HH:mm')
-      return convertedTime
+      return moment(time, moment.ISO_8601).format('HH:mm')
     }
   },
   mounted () {

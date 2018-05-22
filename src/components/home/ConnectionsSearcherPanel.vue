@@ -59,14 +59,9 @@
       </div>
       <div class="row d-flex align-items-end justify-content-around mx-1 mb-3 mt-1">
         <div>
-          <router-link :to="{name: 'Search',
-           params: {from: busStopFrom, to: busStopTo,
-            startTime: startTime, endTime: endTime, nrOfPassengers: nrOfPassengers},
-            query: {searchId: + new Date()}}">
-            <button class="btn btn-success" :disabled="searchButtonDisabled">
+            <button class="btn btn-success" @click="search" :disabled="searchButtonDisabled">
               Wyszukaj połączenie
             </button>
-          </router-link>
         </div>
       </div>
     </div>
@@ -82,12 +77,12 @@ export default {
   name: 'connections-searcher',
   data () {
     return {
-      milisecondsInADay: 86400000,
+      millisecondsInADay: 86400000,
       startTime: null,
       endTime: null,
       pickerOptionsStart: {
         disabledDate: (date) => {
-          return date.getTime() + this.milisecondsInADay < Date.now()
+          return date.getTime() + this.millisecondsInADay < Date.now()
         }
       },
       pickerOptionsEnd: {
@@ -117,6 +112,19 @@ export default {
           this.busStopFrom = this.busStops[0].id
           this.busStopTo = this.busStops[1].id
         })
+    },
+    search () {
+      this.$router.push({
+        name: 'Search',
+        params: {
+          from: this.busStopFrom,
+          to: this.busStopTo,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          nrOfPassengers: this.nrOfPassengers
+        },
+        query: {t: +new Date()}
+      })
     }
   },
   mounted () {
