@@ -69,7 +69,7 @@
           </div>
         </div>
     </div>
-    <div v-if="rideFrom != ''" class="row card p-3">
+    <div v-if="rideFrom !== ''" class="row card p-3">
       <div>
         <h3 class="mb-0 mb-4 text-center">Bilet w drugą stronę</h3>
         <div class="row d-flex justify-content-around">
