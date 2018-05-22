@@ -13,9 +13,10 @@ export default {
     var items = [
       {name: 'Kierowcy', urlLink: '/admin/drivers'},
       {name: 'Przystanki', urlLink: '/admin/busstops'},
+      {name: 'Pojazdy', urlLink: '/admin/buses'},
       {name: 'Linie autobusowe', urlLink: '/admin/buslines'},
-      {name: 'Przejazdy', urlLink: '/admin/timetables'},
-      {name: 'Pojazdy', urlLink: '/admin/buses'}
+      {name: 'Wyświetl przejazdy', urlLink: '/admin/busrides'},
+      {name: 'Generuj przejazdy', urlLink: '/admin/generate-rides'}
     ]
     var panelName = 'AdministrationPanel'
     return {items, panelName}

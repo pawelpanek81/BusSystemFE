@@ -4,10 +4,13 @@ import BusLine from '@/components/admin/panel/BusLine'
 import BusStop from '@/components/admin/panel/BusStop'
 import Driver from '@/components/admin/panel/Driver'
 import Route from '@/components/admin/panel/Route'
-import Timetable from '@/components/admin/panel/Timetable'
+import BusRide from '@/components/admin/panel/BusRide'
 import AllBusLines from '@/components/admin/panel/AllBusLines'
 import Schedule from '@/components/admin/panel/LineSchedule'
-import Timetables from '@/components/admin/panel/Timetables'
+import BusRides from '@/components/admin/panel/BusRides'
+import GenerateRides from '@/components/admin/panel/GenerateRides'
+import GenerateRidesList from '@/components/admin/panel/GenerateRidesList'
+import GenerateRidesBySchedule from '@/components/admin/panel/GenerateRidesBySchedule'
 import Ride from '@/components/admin/panel/Ride'
 
 export default {
@@ -46,17 +49,32 @@ export default {
         component: Driver
       },
       {
-        path: 'timetables',
-        component: Timetable,
+        path: 'busrides',
+        component: BusRide,
         children: [
           {
             path: '',
-            component: Timetables
+            component: BusRides
           },
           {
             path: ':id',
             name: 'Ride',
             component: Ride,
+            props: true
+          }
+        ]
+      },
+      {
+        path: 'generate-rides',
+        component: GenerateRides,
+        children: [
+          {
+            path: '',
+            component: GenerateRidesList
+          },
+          {
+            path: ':id/generate',
+            component: GenerateRidesBySchedule,
             props: true
           }
         ]
