@@ -89,7 +89,7 @@
             <router-link :to="{name: 'BuyTicket',
                        params: {rideTo: ticketTo, rideFrom: ticketFrom, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
               <button class="btn btn-success" :disabled="!atLeastOneTicketChosen">
-                Rezerwuj
+                Przejdź do podsumowania
               </button>
             </router-link>
           </div>

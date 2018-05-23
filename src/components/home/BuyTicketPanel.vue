@@ -103,10 +103,11 @@
         </div>
       </div>
       <div class="row mr-1">
-        <div class="col-6 offset-6 d-block text-right justify-content-end p-0">
-          <button @click="ensureBuyingATicket" class="btn btn-success mx-2">Kupuję bilet</button>
+        <div class="col-md-6 col-12 offset-md-6 d-flex flex-wrap align-items-center p-0">
+          <button class="payu-payment mb-2" @click="ensureBuyingAndPayingForTicket"> </button>
+          <button class="btn btn-outline-success mx-2" @click="ensureBuyingATicket">Płacę później</button>
           <router-link to="/search">
-            <button class="btn btn-outline-success mx-2">Powrót</button>
+            <button class="btn btn-outline-dark mx-2">Powrót</button>
           </router-link>
         </div>
       </div>
@@ -170,6 +171,14 @@ export default {
           }
         })
     },
+    ensureBuyingAndPayingForTicket () {
+      this.$validator.validateAll()
+        .then((result) => {
+          if (result) {
+            this.reserveAndPayForTicket()
+          }
+        })
+    },
     reserveTicket () {
       let ticketData = {
         email: this.userData.email,
@@ -182,7 +191,10 @@ export default {
         destinationBusStopId: this.to.id,
         fromBusStopId: this.from.id
       }
-      axios.post(API.TICKETS, ticketData)
+      return axios.post(API.TICKETS, ticketData)
+    },
+    reserveAndPayForTicket () {
+      this.reserveTicket()
         .then((response) => {
           let paymentData = {
             departureTicket: {
@@ -194,11 +206,12 @@ export default {
               ticketId: response.data.backTicket,
               ticketPrice: this.rideFrom.price
             } : null,
-            signature: 'Lubię spać'
+            signature: ''
           }
           axios.post(API.PAYMENTS, paymentData)
             .then((res) => {
               window.open(res.headers.location, '_blank')
+              this.$router.push('/')
             })
         })
     }
@@ -222,5 +235,14 @@ export default {
   }
   input {
     min-width: 200px;
+  }
+  .payu-payment {
+    border: 0px;
+    min-height: 50px;
+    min-width: 280px;
+    background: url('http://static.payu.com/pl/standard/partners/buttons/payu_account_button_long_03.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
   }
 </style>

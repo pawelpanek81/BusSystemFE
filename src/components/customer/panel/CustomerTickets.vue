@@ -109,7 +109,7 @@ export default {
       axios.get(API.USER_TICKETS)
         .then((res) => {
           let tickets = res.data
-          this.ticketsPaid = tickets.filter(ticket => ticket.paid === true)
+          this.ticketsPaid = tickets
           this.ticketsUnpaid = tickets.filter(ticket => ticket.paid === false)
           console.log(tickets)
         })
