@@ -11,10 +11,14 @@ import language from './language/vee-validate-messages-dictionary'
 import vMediaQuery from 'v-media-query'
 import config from './api/config'
 import Element from 'element-ui/lib/element-ui.common'
-import locale from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale/lang/pl'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueTabs from 'vue-nav-tabs'
 import 'vue-nav-tabs/themes/vue-tabs.css'
+import moment from 'moment'
+import 'moment/locale/pl'
+
+moment.locale('pl')
 
 Vue.use(VueTabs)
 Vue.use(vMediaQuery)
