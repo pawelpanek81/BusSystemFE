@@ -5,7 +5,7 @@
         <h4 class='mb-3'>Przejazd nr {{ride.id}}</h4>
       </div>
       <div class="col-4">
-        <router-link to="/admin/timetables">
+        <router-link to="/admin/busrides">
           <p class="go-back">
             Pokaż wszystkie przejazdy
           </p>
@@ -178,7 +178,7 @@ export default {
                 swal('Przejazd został zaktualizowany!', {
                   icon: 'success'
                 })
-                this.$router.push({path: '/admin/timetables'})
+                this.$router.push({path: '/admin/busrides'})
               })
               .catch(() => {
                 swal('Oops', 'Coś poszło nie tak...', 'error')

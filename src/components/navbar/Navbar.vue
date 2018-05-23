@@ -13,14 +13,11 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-              <router-link class="nav-link" to="/bus-stops">Przystanki</router-link>
+              <router-link class="nav-link" to="/bus-lines">Linie autobusowe</router-link>
           </li>
-          <li class="nav-item">
-              <router-link class="nav-link" to="/bus-stops">Linie autobusowe</router-link>
-          </li>
-          <li class="nav-item">
-              <router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>
-          </li>
+          <!--<li class="nav-item">-->
+              <!--<router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>-->
+          <!--</li>-->
           <li v-if="!isLogged" class="nav-item">
               <router-link class="nav-link" to="/login">Logowanie</router-link>
           </li>

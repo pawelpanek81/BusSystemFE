@@ -53,7 +53,7 @@
         </div>
         <div class="my-2">
           <label for="passengers"><i class="fas fa-users"></i> Pasażerowie</label>
-          <input type="number" id="passengers" min="0" class="form-control input-width"
+          <input type="number" id="passengers" min="1" class="form-control input-width"
                  v-model.number="nrOfPassengers"/>
         </div>
       </div>

@@ -42,6 +42,9 @@ export default {
   },
   mounted () {
     this.selected = this.$route.path.split('/')[2]
+    if (!this.selected) {
+      this.selected = ''
+    }
     $('.navbar>#verticalNavbar').on('click', function () {
       $('.navbar-collapse').collapse('hide')
     })

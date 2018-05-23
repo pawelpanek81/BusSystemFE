@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-5">
           <input type="text" class="form-control form-control-sm"
-                 v-model="line.name" placeholder="nazwa linii"
+                 v-model="line.name" placeholder="Nazwa linii"
                  id="lineName" name="lineName"
                  v-validate="'required'">
         </div>
@@ -20,7 +20,7 @@
           <input type="number" class="form-control form-control-sm"
                  id="lineDriveTime" name="lineDriveTime"
                  v-model="line.driveTime"
-                 placeholder="czas przejazdu w minutach" min="1"
+                 placeholder="Czas przejazdu w minutach" min="1"
                  v-validate="'required|min_value:1'"
                  :class="{'is-invalid': errors.has('lineDriveTime')}"
                  data-vv-as="całkowity czas przejazdu w minutach">

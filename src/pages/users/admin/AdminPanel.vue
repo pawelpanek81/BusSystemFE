@@ -11,11 +11,12 @@ export default {
   },
   data: function () {
     var items = [
-      {name: 'Kierowcy', urlLink: '/admin/drivers', routeName: 'drivers'},
-      {name: 'Przystanki', urlLink: '/admin/busstops', routeName: 'busstops'},
-      {name: 'Linie autobusowe', urlLink: '/admin/buslines', routeName: 'buslines'},
-      {name: 'Przejazdy', urlLink: '/admin/timetables', routeName: 'timetables'},
-      {name: 'Pojazdy', urlLink: '/admin/buses', routeName: 'buses'}
+      {name: 'Kierowcy', urlLink: '/admin/drivers'},
+      {name: 'Przystanki', urlLink: '/admin/busstops'},
+      {name: 'Pojazdy', urlLink: '/admin/buses'},
+      {name: 'Linie autobusowe', urlLink: '/admin/buslines'},
+      {name: 'Wyświetl przejazdy', urlLink: '/admin/busrides'},
+      {name: 'Generuj przejazdy', urlLink: '/admin/generate-rides'}
     ]
     var panelName = 'AdministrationPanel'
     return {items, panelName}
