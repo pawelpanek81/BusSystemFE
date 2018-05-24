@@ -13,7 +13,7 @@
               <div class="collapse navbar-collapse" id="verticalNavbar">
                 <div class="vertical-menu">
                   <router-link v-for="item in items" v-bind:key="item.name" :to="{path: item.urlLink}"
-                               ref="tab" :class="{active:item.routeName == selected} " v-on:click.native=" selected = item.routeName"
+                               ref="tab" :class="{active:item.routeName == selected} " v-on:click.native="selected = item.routeName"
                   exact-active-class="" active-class="">
                     {{item.name}}
                   </router-link>
@@ -45,6 +45,8 @@ export default {
     if (!this.selected) {
       this.selected = ''
     }
+    console.log(this.selected)
+
     $('.navbar>#verticalNavbar').on('click', function () {
       $('.navbar-collapse').collapse('hide')
     })
