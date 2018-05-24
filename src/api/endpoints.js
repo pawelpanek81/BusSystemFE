@@ -13,5 +13,6 @@ export default {
   GENERATED_BUS_RIDES: '/bus-rides/generated',
   TICKETS: '/tickets',
   PAYMENTS: '/payments',
-  USER_TICKETS: '/tickets/by-user'
+  USER_TICKETS: '/tickets/by-user',
+  ORDERS: '/orders'
 }

@@ -103,9 +103,9 @@
         </div>
       </div>
       <div class="row mr-1">
-        <div class="col-md-6 col-12 offset-md-6 d-flex flex-wrap align-items-center p-0">
+        <div class="col-12 d-flex flex-wrap align-items-center p-0 justify-content-end">
           <button class="payu-payment mb-2" @click="ensureBuyingAndPayingForTicket"> </button>
-          <button class="btn btn-outline-success mx-2" @click="ensureBuyingATicket">Płacę później</button>
+          <!--<button class="btn btn-outline-success mx-2" @click="ensureBuyingATicket">Płacę później</button>-->
           <router-link to="/search">
             <button class="btn btn-outline-dark mx-2">Powrót</button>
           </router-link>
@@ -170,6 +170,9 @@ export default {
             this.reserveTicket()
           }
         })
+        .then(() => {
+          // this.$router.push('/')
+        })
     },
     ensureBuyingAndPayingForTicket () {
       this.$validator.validateAll()
@@ -211,7 +214,7 @@ export default {
           axios.post(API.PAYMENTS, paymentData)
             .then((res) => {
               window.open(res.headers.location, '_blank')
-              this.$router.push('/')
+              this.$router.push('/customer')
             })
         })
     }
