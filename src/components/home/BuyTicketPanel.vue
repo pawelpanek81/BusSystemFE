@@ -105,7 +105,6 @@
       <div class="row mr-1">
         <div class="col-12 d-flex flex-wrap align-items-center p-0 justify-content-end">
           <button class="payu-payment mb-2" @click="ensureBuyingAndPayingForTicket"> </button>
-          <!--<button class="btn btn-outline-success mx-2" @click="ensureBuyingATicket">Płacę później</button>-->
           <router-link to="/search">
             <button class="btn btn-outline-dark mx-2">Powrót</button>
           </router-link>
@@ -162,17 +161,6 @@ export default {
     },
     formatDateTime (time) {
       return moment(time, moment.ISO_8601).format('D MMM YYYY HH:mm')
-    },
-    ensureBuyingATicket () {
-      this.$validator.validateAll()
-        .then((result) => {
-          if (result) {
-            this.reserveTicket()
-          }
-        })
-        .then(() => {
-          // this.$router.push('/')
-        })
     },
     ensureBuyingAndPayingForTicket () {
       this.$validator.validateAll()

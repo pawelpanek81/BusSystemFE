@@ -11,7 +11,7 @@
           <th scope='col'>Bus</th>
         </tr>
         </thead>
-        <tbody v-if='timetablesLoaded && timetables.length != 0'>
+        <tbody v-if='timetablesLoaded && timetables.length !== 0'>
         <tr v-for='ride in timetables' v-bind:key='ride.id'>
           <th scope='row'>{{ride.id}}</th>
           <td>{{ride.busLine.name}}</td>
@@ -48,7 +48,6 @@ export default {
     getRides () {
       axios.get(api.DRIVER_RIDES)
         .then((response) => {
-          console.log(response.data)
           this.timetables = response.data
           this.timetablesLoaded = true
         })
@@ -71,7 +70,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
