@@ -1,19 +1,19 @@
 <template>
   <div>
     <div>
-      <table class='table table-hover text-center' id='rides'>
+      <table class="table table-hover text-center" id="rides">
         <thead>
         <tr>
-          <th scope='col'>#</th>
-          <th scope='col'>Linia</th>
-          <th scope='col'>Wyjazd </th>
-          <th scope='col'>Przyjazd</th>
-          <th scope='col'>Bus</th>
+          <th scope="col">#</th>
+          <th scope="col">Linia</th>
+          <th scope="col">Wyjazd </th>
+          <th scope="col">Przyjazd</th>
+          <th scope="col">Bus</th>
         </tr>
         </thead>
-        <tbody v-if='timetablesLoaded && timetables.length !== 0'>
-        <tr v-for='ride in timetables' v-bind:key='ride.id'>
-          <th scope='row'>{{ride.id}}</th>
+        <tbody v-if="timetablesLoaded && timetables.length !== 0">
+        <tr v-for="ride in timetables" v-bind:key="ride.id">
+          <th scope="row">{{ride.id}}</th>
           <td>{{ride.busLine.name}}</td>
           <td>{{formatIsoTime(ride.startDateTime)[0]}}
             <br/> {{formatIsoTime(ride.startDateTime)[1]}}
@@ -26,7 +26,7 @@
         </tbody>
       </table>
     </div>
-    <div v-if='timetablesLoaded && timetables.length === 0'
+    <div v-if="timetablesLoaded && timetables.length === 0"
          class="d-flex justify-content-center m-4">
       Brak pasujących wyników
     </div>

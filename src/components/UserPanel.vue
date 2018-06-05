@@ -45,8 +45,6 @@ export default {
     if (!this.selected) {
       this.selected = ''
     }
-    console.log(this.selected)
-
     $('.navbar>#verticalNavbar').on('click', function () {
       $('.navbar-collapse').collapse('hide')
     })
