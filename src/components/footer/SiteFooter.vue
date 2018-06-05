@@ -80,3 +80,9 @@
 
   </footer>
 </template>
+
+<style>
+  a, a:hover {
+    color: green;
+  }
+</style>

@@ -141,7 +141,6 @@ export default {
         .then((res) => {
           let tickets = res.data
           this.ticketsPaid = tickets
-          console.log(tickets)
         })
         .then(() => {
           return axios.get(API.ORDERS)
@@ -163,6 +162,9 @@ export default {
   },
   mounted () {
     this.getUserTickets()
+    this.interval = setInterval(function () {
+      this.getUserTickets()
+    }.bind(this), 5000)
   }
 }
 </script>

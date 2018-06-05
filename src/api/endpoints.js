@@ -14,5 +14,6 @@ export default {
   TICKETS: '/tickets',
   PAYMENTS: '/payments',
   USER_TICKETS: '/tickets/by-user',
-  ORDERS: '/orders'
+  ORDERS: '/orders',
+  DRIVER_RIDES: '/bus-rides/byDriver'
 }

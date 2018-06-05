@@ -70,18 +70,24 @@ export default {
       return ''
     }
   },
-  mounted () {
-    $('.navbar-nav>li').on('click', function () {
-      $('.navbar-collapse').collapse('hide')
-    })
-    $('.navbar-nav>#userSubmenu').on('click', function () {
-      $('.navbar-collapse').collapse('hide')
-    })
-  },
   methods: {
     logout () {
       this.$store.dispatch('logout')
+    },
+    collapseNavbar () {
+      $('.navbar-nav>li').on('click', function () {
+        $('.navbar-collapse').collapse('hide')
+      })
+      $('.navbar-nav>#userSubmenu').on('click', function () {
+        $('.navbar-collapse').collapse('hide')
+      })
     }
+  },
+  mounted () {
+    this.collapseNavbar()
+  },
+  updated () {
+    this.collapseNavbar()
   }
 }
 </script>
