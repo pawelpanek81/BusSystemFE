@@ -162,9 +162,6 @@ export default {
   },
   mounted () {
     this.getUserTickets()
-    this.interval = setInterval(function () {
-      this.getUserTickets()
-    }.bind(this), 5000)
   }
 }
 </script>

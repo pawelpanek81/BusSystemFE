@@ -202,7 +202,7 @@ export default {
           axios.post(API.PAYMENTS, paymentData)
             .then((res) => {
               window.open(res.headers.location, '_blank')
-              this.$router.push('/customer')
+              this.$router.push('/')
             })
         })
     }
