@@ -15,9 +15,6 @@
           <li class="nav-item">
               <router-link class="nav-link" to="/bus-lines">Linie autobusowe</router-link>
           </li>
-          <!--<li class="nav-item">-->
-              <!--<router-link class="nav-link" to="/time-tables">Rozkłady jazdy</router-link>-->
-          <!--</li>-->
           <li v-if="!isLogged" class="nav-item">
               <router-link class="nav-link" to="/login">Logowanie</router-link>
           </li>
