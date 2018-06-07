@@ -11,9 +11,9 @@ export default {
   },
   data: function () {
     var items = [
-      {name: 'Rezerwuj bilet', urlLink: '/bok'},
-      {name: 'Aktualności', urlLink: '/bok'},
-      {name: 'Zarządzaj kursami', urlLink: '/bok'}
+      {name: 'Rezerwuj bilet', urlLink: '/bok', routeName: ''},
+      {name: 'Aktualności', urlLink: '/bok/addnews', routeName: 'addnews'},
+      {name: 'Zarządzaj kursami', urlLink: '/bok', routeName: 'courses'}
     ]
     var panelName = 'BokPanel'
     return {items, panelName}

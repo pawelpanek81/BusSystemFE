@@ -5,7 +5,9 @@
         <transition name="fade">
           <div  v-if="newsLoaded">
           <single-news-component v-for="item in news" v-bind:key="item.id"
-            :title="item.title" :newsBody="item.body" :newsDateTime="item.dateTime"></single-news-component>
+            :title="item.title" :newsBody="item.body" :newsDateTime="item.dateTime" :newsId="item.id"
+            v-on:news-deleted="reloadNews()">
+          </single-news-component>
           </div>
         </transition>
         <pagination-component></pagination-component>
@@ -41,6 +43,12 @@ export default {
       } else {
         return 1
       }
+    }
+  },
+
+  methods: {
+    reloadNews () {
+      this.$store.dispatch('getNews', {page: 0, size: 3})
     }
   },
   created () {

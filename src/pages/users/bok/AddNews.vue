@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5" v-on:keyup.enter="validateForm">
+  <div class="container pb-5" v-on:keyup.enter="validateForm">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="row card-body pb-0 pt-0">
                   <div class="form-group col-md-12">
-                    <label for="inputBody">Treść<span class="required">*</span></label>
+                    <label for="inputBody">Treść <span class="required">*</span></label>
                     <textarea class="form-control" id="inputBody" placeholder="Treść newsa"
                               rows="8"
                               name="inputBody"
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -74,17 +75,24 @@ export default {
       this.$validator.validateAll()
         .then((result) => {
           if (result) {
-            this.news.date = '2013-02-08T09:30:26Z'
+            this.news.date = this.toLocalISOTime(moment())
             this.addNews(this.news)
           }
         })
     },
     addNews (data) {
       this.$store.dispatch('addNews', data)
+    },
+    toLocalISOTime (time) {
+      const tzoffset = (new Date()).getTimezoneOffset() * 60000
+      return (new Date(time - tzoffset)).toISOString().slice(0, -1)
     }
   }
 }
 </script>
 
 <style scoped>
+  .required {
+    color: red;
+  }
 </style>
