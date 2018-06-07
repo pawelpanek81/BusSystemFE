@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h3 class='mb-3'>Przejazdy</h3>
+    <div class="row mb-3">
+      <div class="col">
+        <h3 class="float-left">Przejazdy</h3>
+        <button type="button" id="registerBusButton" class="btn btn-sm btn-outline-danger float-right"
+                @click="removeInactive">Usuń nieaktywne</button>
+      </div>
+    </div>
     <div class="row mb-3" v-if="busLinesLoaded">
       <div class="col-3">
         <label class="m-0">Aktywne?</label>
@@ -134,6 +140,11 @@ export default {
       } else {
         return driver.name + ' ' + driver.surname
       }
+    },
+    removeInactive () {
+      axios.delete(api.BUS_RIDES + '?type=inactive')
+        .then(() => swal('Usunięto', 'Wszystkie nieaktywne przejazdy zostały usunięte', 'success'))
+        .catch(() => swal('Oops', 'Coś poszło nie tak… Nie udało sie usunąć nieaktywnych przejazdów', 'error'))
     }
   },
   mounted () {
