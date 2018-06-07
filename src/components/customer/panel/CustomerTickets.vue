@@ -92,6 +92,9 @@
           <th>
             Kwota, data płatności
           </th>
+          <th>
+            pdf
+          </th>
           </thead>
           <tbody v-if="ticketsPaid.length !== 0">
           <tr v-for="ticket in ticketsPaid" v-bind:key="ticket.id">
@@ -108,7 +111,9 @@
               {{formatIsoTime(ticket.busRide.endDateTime)}}
             </td>
             <td>
-              {{ticket.price}}zł <br> Bilet opłacony <br> {{formatIsoTime(ticket.dateTime)}}
+              <a class="btn btn-sm btn-outline-success" :href="baseUrl + ticket.id">
+                Pobierz
+              </a>
             </td>
           </tr>
           </tbody>
@@ -124,6 +129,7 @@
 <script>
 import axios from 'axios'
 import API from '../../../api/endpoints'
+import CFG from '../../../api/config'
 import moment from 'moment'
 
 export default {
@@ -132,7 +138,8 @@ export default {
       tickets: [],
       ticketsLoaded: false,
       ticketsPaid: [],
-      ticketsUnpaid: []
+      ticketsUnpaid: [],
+      baseUrl: CFG.API_BASE_URL + API.TICKETS + '/pdf/'
     }
   },
   methods: {
