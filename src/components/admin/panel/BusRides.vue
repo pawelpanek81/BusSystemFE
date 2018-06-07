@@ -4,7 +4,7 @@ import pagination from "../../../router/home/pagination";
     <div class="row mb-3">
       <div class="col">
         <h3 class="float-left">Przejazdy</h3>
-        <button type="button" id="registerBusButton" class="btn btn-sm btn-outline-danger float-right"
+        <button type="button" id="removeInactiveBtn" class="btn btn-sm btn-outline-danger float-right"
                 @click="removeInactive">Usuń nieaktywne</button>
       </div>
     </div>
