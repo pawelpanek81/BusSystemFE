@@ -52,7 +52,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getNews', {page: 0, size: 3})
+    this.$store.dispatch('getNews', {page: this.actualPage, size: 3})
   }
 }
 </script>
