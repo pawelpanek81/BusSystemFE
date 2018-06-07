@@ -111,11 +111,9 @@
               {{formatIsoTime(ticket.busRide.endDateTime)}}
             </td>
             <td>
-              <a :href="baseUrl + ticket.id">
-              <button type="button" id="downalodTicketPdf" class="btn btn-sm btn-outline-success">
+              <a class="btn btn-sm btn-outline-success" :href="baseUrl + ticket.id">
                 Pobierz
-              </button>
-            </a>
+              </a>
             </td>
           </tr>
           </tbody>
