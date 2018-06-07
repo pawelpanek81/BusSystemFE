@@ -42,7 +42,7 @@
         </transition>
       </div>
       <div class="col-3">
-        <label for="busSeats">Liczba miejsc siedzących </label>
+        <label for="busSeats">Liczba miejsc</label>
         <input type="number" min="0" max="300" class="form-control form-control-sm" id="busSeats"
                name="busSeats"
                v-validate="'required'"
