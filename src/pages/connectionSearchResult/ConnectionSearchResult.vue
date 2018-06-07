@@ -16,14 +16,14 @@
             <div class="d-flex justify-content-center mb-2">
               <h5>{{formatDate(startTime)}}</h5>
             </div>
-            <div v-if="searchResults.departurePossibilities.length != 0">
+            <div v-if="searchResults.departurePossibilities.length !== 0">
               <table class="table table-md-responsive text-center">
                 <thead>
                 <tr>
                   <th scope="col">Godzina odjazdu</th>
                   <th scope="col">Godzina przyjazdu</th>
                   <th scope="col">Cena</th>
-                  <th scope="col"></th>
+                  <th scope="col">Wybierz bilet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,12 @@
                   <td>{{formatTime(result.startDateTime)}}</td>
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
-                  <td><button class="btn btn-outline-success btn-sm">Rezerwuj</button></td>
+                  <td>
+                    <label>
+                      <input class="form-check-input" type="radio" v-model="ticketTo" name="ticketTo"
+                             v-bind:value="result">
+                    </label>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -51,14 +56,14 @@
             <div class="d-flex justify-content-center mb-2">
               <h5> {{formatDate(endTime)}}</h5>
             </div>
-            <div v-if="searchResults.returnPossibilities.length != 0">
+            <div v-if="searchResults.returnPossibilities.length !== 0">
               <table class="table table-md-responsive text-center">
                 <thead>
                 <tr>
                   <th scope="col">Godzina odjazdu</th>
                   <th scope="col">Godzina przyjazdu</th>
                   <th scope="col">Cena</th>
-                  <th scope="col"></th>
+                  <th scope="col">Wybierz bilet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,7 +71,12 @@
                   <td>{{formatTime(result.startDateTime)}}</td>
                   <td>{{formatTime(result.endDateTime)}}</td>
                   <td>{{result.price}}</td>
-                  <td><button class="btn btn-outline-success btn-sm">Rezerwuj</button></td>
+                  <td>
+                    <label>
+                      <input class="form-check-input" type="radio" v-model="ticketFrom" name="ticketFrom"
+                             v-bind:value="result">
+                    </label>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -75,11 +85,19 @@
               <p class="no-results"> Brak przejazdów powrotnych na wybranej trasie w określonym dniu </p>
             </div>
           </div>
-        </div>
-        <div v-if="!redirected">
-          <map-component/>
+          <div class="d-flex justify-content-center">
+            <router-link :to="{name: 'BuyTicket',
+                       params: {rideTo: ticketTo, rideFrom: ticketFrom, nrOfPassengers: nrOfPassengers, from: busStopFrom, to: busStopTo}}">
+              <button class="btn btn-success" :disabled="!atLeastOneTicketChosen">
+                Przejdź do podsumowania
+              </button>
+            </router-link>
+          </div>
         </div>
       </div>
+    </div>
+    <div v-if="!redirected">
+      <map-component/>
     </div>
   </div>
 </template>
@@ -103,12 +121,18 @@ export default {
       searchResults: [],
       searchResultsLoaded: false,
       busStopFrom: '',
-      busStopTo: ''
+      busStopTo: '',
+      ticketFrom: '',
+      ticketTo: '',
+      atLeastOneTicketChosen: false
     }
   },
   watch: {
     $route (data, oldData) {
       this.getConnections()
+    },
+    ticketTo: function () {
+      this.atLeastOneTicketChosen = this.ticketTo !== ''
     }
   },
   methods: {
@@ -130,12 +154,10 @@ export default {
       }
     },
     formatDate (time) {
-      let convertedTime = moment(time, 'YYYY-MM-DD').format('D MMM YYYY')
-      return convertedTime
+      return moment(time, 'YYYY-MM-DD').format('D MMM YYYY')
     },
     formatTime (time) {
-      let convertedTime = moment(time, moment.ISO_8601).format('HH:mm')
-      return convertedTime
+      return moment(time, moment.ISO_8601).format('HH:mm')
     }
   },
   mounted () {

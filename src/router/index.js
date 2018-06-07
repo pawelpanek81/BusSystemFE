@@ -14,7 +14,6 @@ export default new Router({
   mode: 'history',
   routes: [
     Navbar.HOME,
-    Navbar.BUYTICKET,
     Navbar.BUSSTOPS,
     Navbar.TIMETABLES,
     Navbar.LOGIN,
@@ -27,6 +26,7 @@ export default new Router({
     BOKPanel.BOKPANEL,
     Pagination.GO,
     Map.MAP,
-    ConnectionSearchResult.CONNECTION_SEARCH_RESULT
+    ConnectionSearchResult.CONNECTION_SEARCH_RESULT,
+    ConnectionSearchResult.BUY_TICKET
   ]
 })

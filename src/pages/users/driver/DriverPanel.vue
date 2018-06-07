@@ -11,8 +11,8 @@ export default {
   },
   data: function () {
     var items = [
-      {name: 'Moje dane', urlLink: '/driver'},
-      {name: 'Moje kursy', urlLink: '/driver'}
+      {name: 'Moje dane', urlLink: '/driver', routeName: ''},
+      {name: 'Moje kursy', urlLink: '/driver/myrides', routeName: 'myrides'}
     ]
     var panelName = 'DriverPanel'
     return {items, panelName}

@@ -83,3 +83,13 @@ export default {
   }
 }
 </script>
+
+<style>
+  .page-item.active .page-link {
+    background-color: green;
+    border-color: green;
+  }
+  .page-link, .page-link:hover {
+    color: green;
+  }
+</style>

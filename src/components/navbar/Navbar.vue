@@ -29,7 +29,7 @@
           <div class="dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user userIcon"></i>
           </div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="userSubmenu">
             <router-link v-if="getUserType === 'USER'"
               class="dropdown-item" to="/customer">Panel klienta</router-link>
             <router-link v-if="getUserType === 'DRIVER'"
@@ -37,7 +37,7 @@
             <router-link v-if="getUserType === 'BOK'"
                          class="dropdown-item" to="/bok">Panel BOK</router-link>
             <router-link v-if="getUserType === 'ADMIN'"
-                         class="dropdown-item" to="/admin">Panel administracyjny</router-link>
+                         class="dropdown-item" to="/admin/buslines">Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" @click="logout"> Wyloguj [{{username}}] </a>
           </div>
@@ -73,7 +73,21 @@ export default {
   methods: {
     logout () {
       this.$store.dispatch('logout')
+    },
+    collapseNavbar () {
+      $('.navbar-nav>li').on('click', function () {
+        $('.navbar-collapse').collapse('hide')
+      })
+      $('.navbar-nav>#userSubmenu').on('click', function () {
+        $('.navbar-collapse').collapse('hide')
+      })
     }
+  },
+  mounted () {
+    this.collapseNavbar()
+  },
+  updated () {
+    this.collapseNavbar()
   }
 }
 </script>
