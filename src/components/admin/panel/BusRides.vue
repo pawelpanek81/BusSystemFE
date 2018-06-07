@@ -1,3 +1,4 @@
+import pagination from "../../../router/home/pagination";
 <template>
   <div>
     <div class="row mb-3">
@@ -76,6 +77,7 @@
     </div>
     <div class="mt-5 d-flex">
       <pagination-panel
+                        ref="pagination"
                         :results-on-page="resultsOnPage"
                         :time-period="timePeriod"
                         :active="active"
@@ -143,7 +145,10 @@ export default {
     },
     removeInactive () {
       axios.delete(api.BUS_RIDES + '?type=inactive')
-        .then(() => swal('Usunięto', 'Wszystkie nieaktywne przejazdy zostały usunięte', 'success'))
+        .then(() => {
+          swal('Usunięto', 'Wszystkie nieaktywne przejazdy zostały usunięte', 'success')
+          this.$refs.pagination.reloadNews(this.$refs.pagination.actualPage)
+        })
         .catch(() => swal('Oops', 'Coś poszło nie tak… Nie udało sie usunąć nieaktywnych przejazdów', 'error'))
     }
   },
