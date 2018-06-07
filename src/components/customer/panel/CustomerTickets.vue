@@ -108,6 +108,9 @@
               {{formatIsoTime(ticket.busRide.startDateTime)}}
             </td>
             <td>
+              {{formatIsoTime(ticket.busRide.endDateTime)}}
+            </td>
+            <td>
               <a :href="baseUrl + ticket.id">
               <button type="button" id="downalodTicketPdf" class="btn btn-sm btn-outline-success">
                 Pobierz
