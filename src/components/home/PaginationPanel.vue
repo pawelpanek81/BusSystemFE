@@ -86,8 +86,8 @@ export default {
 
 <style>
   .page-item.active .page-link {
-    background-color: green;
-    border-color: green;
+    background-color: green !important;
+    border-color: green !important;
   }
   .page-link, .page-link:hover {
     color: green;

@@ -4,7 +4,9 @@
       <div class="card-body">
         <div class="card-title clearfix">
           <h5 class="float-left p-0"> {{this.title}} </h5>
-          <button v-show="getUserType === 'BOK'" @click="confirmDeleting(newsId)" class="btn btn-outline-danger float-right">Usuń wiadomość</button>
+          <button v-show="getUserType === 'BOK'"
+                  @click="confirmDeleting(newsId)"
+                  class="btn btn-sm btn-outline-danger float-right">Usuń wiadomość</button>
         </div>
         <p class="card-text card-height"> {{this.newsBody}}</p>
         <p class="card-text"><small class="text-muted"> {{formatIsoTime(this.newsDateTime)}}</small></p>
