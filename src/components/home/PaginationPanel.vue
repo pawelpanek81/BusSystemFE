@@ -90,6 +90,6 @@ export default {
     border-color: green !important;
   }
   .page-link, .page-link:hover {
-    color: green;
+    color: green !important;
   }
 </style>
