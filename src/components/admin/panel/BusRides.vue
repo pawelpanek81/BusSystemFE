@@ -59,7 +59,7 @@
             <td>{{handleEmptyDriverData(ride.primaryDriver)}}</td>
             <td>{{handleEmptyBusData(ride.bus)}}</td>
             <td><input type="checkbox" disabled :checked="ride.active"/></td>
-            <td><router-link :to="{name: componentName, params: {id: ride.id, ride: ride}}"><button class="btn btn-outline-success btn-sm">Więcej</button></router-link></td>
+            <td><router-link :to="{name: 'Ride', params: {id: ride.id, ride: ride}}"><button class="btn btn-outline-success btn-sm">Więcej</button></router-link></td>
           </tr>
         </tbody>
       </table>
@@ -86,7 +86,6 @@ import api from '../../../api/endpoints'
 import moment from 'moment'
 import PaginationPanel from './PaginationPanel'
 import swal from 'sweetalert'
-import {mapGetters} from 'vuex'
 
 export default {
   components: {
@@ -102,12 +101,6 @@ export default {
       timetablesLoaded: false,
       busLines: [],
       busLinesLoaded: false
-    }
-  },
-  computed: {
-    ...mapGetters(['getUserType']),
-    componentName: function () {
-      return this.getUserType === 'BOK' ? 'BokRide' : 'Ride'
     }
   },
   methods: {
