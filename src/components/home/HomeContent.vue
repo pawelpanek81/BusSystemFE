@@ -48,11 +48,11 @@ export default {
 
   methods: {
     reloadNews () {
-      this.$store.dispatch('getNews', {page: 0, size: 3})
+      this.$store.dispatch('getNews', {page: this.actualPage - 1, size: 3})
     }
   },
   created () {
-    this.$store.dispatch('getNews', {page: this.actualPage, size: 3})
+    this.$store.dispatch('getNews', {page: this.actualPage - 1, size: 3})
   }
 }
 </script>
