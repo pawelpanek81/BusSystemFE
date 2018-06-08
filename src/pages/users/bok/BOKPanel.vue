@@ -11,7 +11,7 @@ export default {
   },
   data: function () {
     var items = [
-      {name: 'Aktualności', urlLink: '/bok/addnews', routeName: 'addnews'}
+      {name: 'Dodawanie newsa', urlLink: '/bok/addnews', routeName: 'addnews'}
     ]
     var panelName = 'BokPanel'
     return {items, panelName}

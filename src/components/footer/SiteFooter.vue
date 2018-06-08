@@ -43,7 +43,7 @@
           <div class="collapse navbar-collapse d-sm-table justify-content-center" id="footerElem3">
             <div class="p-3 d-block">
               <h6 class="d-none d-sm-block mb-3"><b>Podróż</b></h6>
-              <p><router-link to="/map">Mapa przystanków</router-link></p>
+              <p><router-link to="/map" class="greenlink">Mapa przystanków</router-link></p>
               <p>FAQ</p>
               <p>Regulamin</p>
             </div>
@@ -82,7 +82,7 @@
 </template>
 
 <style>
-  a, a:hover {
+  .greenlink, .greenlink:hover {
     color: green;
   }
 </style>
