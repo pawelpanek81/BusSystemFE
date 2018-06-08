@@ -111,6 +111,9 @@
               {{formatIsoTime(ticket.busRide.endDateTime)}}
             </td>
             <td>
+              {{ticket.price}}zł, {{formatIsoTime(ticket.dateTime)}}
+            </td>
+            <td>
               <a class="btn btn-sm btn-outline-success" :href="baseUrl + ticket.id">
                 Pobierz
               </a>
