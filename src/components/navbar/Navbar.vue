@@ -32,7 +32,7 @@
             <router-link v-if="getUserType === 'DRIVER'"
                          class="dropdown-item" to="/driver">Panel kierowcy</router-link>
             <router-link v-if="getUserType === 'BOK'"
-                         class="dropdown-item" to="/bok">Panel BOK</router-link>
+                         class="dropdown-item" to="/bok/addnews">Panel BOK</router-link>
             <router-link v-if="getUserType === 'ADMIN'"
                          class="dropdown-item" to="/admin/buslines">Panel administracyjny</router-link>
             <div class="dropdown-divider"></div>
